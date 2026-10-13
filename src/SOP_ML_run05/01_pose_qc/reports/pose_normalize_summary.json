@@ -1,0 +1,16 @@
+{
+  "n_in": 4979,
+  "n_kept": 4979,
+  "n_dropped": 0,
+  "dropped_cids": [],
+  "dropped_detail": [],
+  "n_written_sdf": 4979,
+  "identity_class_counts_kept": {
+    "graph_mismatch": 8,
+    "identical": 4670,
+    "protonation_diff": 2,
+    "stereo_only": 299
+  },
+  "n_multifragment_in_pool": 0,
+  "positive_expectation_met": true
+}

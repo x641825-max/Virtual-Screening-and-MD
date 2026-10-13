@@ -1,0 +1,17 @@
+# 依赖（版本为 2026-09 实测冻结快照；按赛事附件 5 §一(1) 列明）
+# 运行环境：Python 3.12（实测 3.12.2）；纯 CPU，无 GPU / CUDA 依赖
+rdkit==2025.9.5
+pandas==2.3.3
+numpy==2.4.6
+scipy==1.15.3
+scikit-learn==1.9.1
+matplotlib==3.11.1
+openpyxl==3.1.5
+pillow==12.3.0
+
+# 说明
+# 1) 本包**不重跑**分子对接与 ADMET/hERG 预测：这些预测值由上游一次性生成后冻结为输入表
+#    （见 data/DATA_SOURCES.md）。因此不需要 gnina / chemprop / torch / admet_ai 运行时。
+# 2) numpy / pandas / scipy / rdkit 用于描述符、指纹、相似度与 MILP 选批；
+#    matplotlib 出图；openpyxl 写 results.xlsx。
+# 3) 无操作系统级二进制依赖；无外部数据库 / 网络调用（默认路径下全程离线）。

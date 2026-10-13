@@ -1,0 +1,127 @@
+{
+  "role": "hERG 阈值锚定与保留曲线（分析步 10c）：不改门（主口径仍 hERG<0.5），只产出决策证据",
+  "provenance": {
+    "raw_table": "03_gates/admet/raw/CNN_VS_ranking_49963_ADMET.csv",
+    "raw_sha256": "046e3ffba5b2e5d01ea67273e29079cbd0bd90bc5ca2971b22638558608955d6",
+    "library_rows": 4979,
+    "producer": "HPC 目录应用 admet-ai（job_id eade0be46cb14cbb8b33b0ca46f43bf9，2026-09-24）；运行输入 molecules_ml4979.csv（md5 1251c3a86c37e970b84eb7c595639fe1，4,979 行 cid,smiles）；原始输出 predictions.csv（md5 e726aecd4c622b5c2388f308e9817f28，4,979 行 × 106 列，空值 0）"
+  },
+  "params": {
+    "grid": [
+      0.3,
+      0.99,
+      0.01
+    ],
+    "round_step": 0.05,
+    "min_keep": 0.75,
+    "primary_top_k": 1000,
+    "alt_top_ks": [
+      100,
+      500,
+      1000,
+      5000
+    ],
+    "ref_percentiles": [
+      50,
+      75,
+      90
+    ]
+  },
+  "A1_library_relative": {
+    "library_f3": {
+      "0.5": 0.665957,
+      "0.75": 0.79248,
+      "0.9": 0.875021,
+      "0.95": 0.906469
+    },
+    "pool_4990": {
+      "0.5": 0.665957,
+      "0.75": 0.79248,
+      "0.9": 0.875021,
+      "0.95": 0.906469
+    },
+    "pre_herg_main_pool": {
+      "0.5": 0.613193,
+      "0.75": 0.749014,
+      "0.9": 0.844901,
+      "0.95": 0.888852
+    }
+  },
+  "A2_approved_drug_reference": {
+    "50": 0.294713,
+    "75": 0.743715,
+    "90": 0.931906
+  },
+  "A3_tradeoff": {
+    "library_head@K=1000": {
+      "strictest_t_0.01_grid": 0.81,
+      "feasible_t": 0.85,
+      "retention_at_feasible_pct": 86.0,
+      "head_n": 1000
+    },
+    "pack_main_pool": {
+      "strictest_t_0.01_grid": 0.75,
+      "feasible_t": 0.75,
+      "retention_at_feasible_pct": 75.2409,
+      "head_n": 2387
+    }
+  },
+  "decision": {
+    "frozen_gate_threshold": 0.5,
+    "soft_line": 0.743715,
+    "hard_line_candidate": 0.85,
+    "hard_line_candidate_pack_head": 0.75,
+    "sanity_window": [
+      0.294713,
+      0.931906
+    ],
+    "sanity_ok": true,
+    "resolution_branch": "none（A3 落在合理性窗口内）",
+    "bands": {
+      "low": "< 0.743715",
+      "mid": "[0.743715, 0.85)",
+      "high": ">= 0.85"
+    },
+    "band_counts": {
+      "pool_4990": {
+        "中": 592,
+        "低": 3226,
+        "高": 1161
+      },
+      "delivered_list_48": {
+        "低": 32
+      }
+    },
+    "note": "hERG 阈值锚定与保留曲线（分析步 10c）：不改门（主口径仍 hERG<0.5），只产出决策证据"
+  },
+  "retention_curve_file": "03_gates/admet/tables/herg_retention_curve.csv",
+  "anchors_file": "03_gates/admet/tables/herg_threshold_anchors.csv",
+  "repro_check": {
+    "soft_line_expected": 0.744,
+    "soft_line_observed": 0.743715,
+    "soft_line_ok": true,
+    "library_head_tradeoff_expected": 0.8,
+    "library_head_tradeoff_observed": 0.85,
+    "library_head_tradeoff_ok": false,
+    "library_head_at_0.01_grid": 0.81,
+    "note": "与外部 run（54,932 库）的数字对账；库内相对锚定（A1）因口径不同（本包 49,963 行 vs 外部 54,932 去重并集）允许小差异，不影响 A2/A3"
+  },
+  "gate_scope_gap": {
+    "gate_table": "03_gates/herg/herg_predictions.csv",
+    "gate_table_n": 4979,
+    "gate_table_sha256": "81e30ec27ce09550f0707cc05a5b668ee0b32d02507489297ce0cfc526204766",
+    "pool_n": 4979,
+    "in_scope": 4979,
+    "out_of_scope": 0,
+    "out_of_scope_frozen_below_gate": 0,
+    "out_of_scope_frozen_at_or_above_gate": 0,
+    "out_of_scope_below_gate_pct": null,
+    "overlap_n": 4979,
+    "overlap_max_abs_diff": 1e-06,
+    "note": "落门表只覆盖四臂并集（外部运行的作用域）；并集外池内分子无预测值 → 按规则保守判为不过门。本包冻结的 f3 全量表现已给出这些分子的 ADMET-AI hERG，故可量化该保守口径的代价；**门与名单不因此改动**（改作用域属口径变更，需重跑选名单与验收基线）。落门表与冻结表在同源交集内逐值一致（见 overlap 项）。"
+  },
+  "non_interference": {
+    "statement": "本步为分析步：不改变 hERG 门（主口径仍 <0.5）、不改池、不改名单；硬线候选仅供将来改门时决策引用",
+    "gate_threshold": 0.5
+  }
+}

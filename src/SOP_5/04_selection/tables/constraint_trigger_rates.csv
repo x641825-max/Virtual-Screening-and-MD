@@ -1,0 +1,7 @@
+arm,pool_n,selected,skip_scaffold_cap,skip_tc_pairwise,rate_scaffold_cap,rate_tc_pairwise,skip_chem_cap,rate_chem_cap,skip_risk_cap,rate_risk_cap
+main_QED0.50_anchor4,618,48,17,1,0.0275,0.0016,,,,
+sens_QED0.60_anchor4,413,48,16,1,0.0387,0.0024,,,,
+sens_QED0.40_anchor4,722,48,13,5,0.018,0.0069,1,0.0014,,
+sens_QED0.50_anchor3,1034,48,17,2,0.0164,0.0019,2,0.0019,,
+sens_QED0.60_anchor3,705,48,23,2,0.0326,0.0028,,,,
+sens_QED0.40_anchor3,1203,48,20,5,0.0166,0.0042,12,0.01,2,0.0017

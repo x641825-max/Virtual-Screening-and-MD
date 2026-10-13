@@ -1,0 +1,308 @@
+{
+  "pool_n": 751,
+  "main_list_n": 32,
+  "herg_status": "applied",
+  "novelty_excluded": 11,
+  "armA_score_perturbation": {
+    "rows": [
+      {
+        "sigma": 0.05,
+        "reps": 100,
+        "mean_overlap": 0.9247,
+        "min_overlap": 0.8438,
+        "p10_overlap": 0.875,
+        "mean_head20_overlap": 0.8995,
+        "min_head20_overlap": 0.75
+      },
+      {
+        "sigma": 0.1,
+        "reps": 100,
+        "mean_overlap": 0.8387,
+        "min_overlap": 0.7188,
+        "p10_overlap": 0.7812,
+        "mean_head20_overlap": 0.7735,
+        "min_head20_overlap": 0.6
+      },
+      {
+        "sigma": 0.15,
+        "reps": 100,
+        "mean_overlap": 0.7672,
+        "min_overlap": 0.6562,
+        "p10_overlap": 0.6875,
+        "mean_head20_overlap": 0.672,
+        "min_head20_overlap": 0.5
+      }
+    ],
+    "primary_sigma": 0.1,
+    "judge_mean_overlap_min": 0.8,
+    "pass_primary": true
+  },
+  "armB_threshold_matrix": {
+    "rows": [
+      {
+        "qed_min": 0.4,
+        "maxTc_upper": 0.7,
+        "pool_n": 726,
+        "list_n": 29,
+        "overlap_vs_main": 0.875
+      },
+      {
+        "qed_min": 0.4,
+        "maxTc_upper": 0.8,
+        "pool_n": 749,
+        "list_n": 32,
+        "overlap_vs_main": 1.0
+      },
+      {
+        "qed_min": 0.4,
+        "maxTc_upper": 0.9,
+        "pool_n": 751,
+        "list_n": 32,
+        "overlap_vs_main": 1.0
+      },
+      {
+        "qed_min": 0.4,
+        "maxTc_upper": null,
+        "pool_n": 751,
+        "list_n": 32,
+        "overlap_vs_main": 1.0
+      },
+      {
+        "qed_min": 0.5,
+        "maxTc_upper": 0.7,
+        "pool_n": 726,
+        "list_n": 29,
+        "overlap_vs_main": 0.875
+      },
+      {
+        "qed_min": 0.5,
+        "maxTc_upper": 0.8,
+        "pool_n": 749,
+        "list_n": 32,
+        "overlap_vs_main": 1.0
+      },
+      {
+        "qed_min": 0.5,
+        "maxTc_upper": 0.9,
+        "pool_n": 751,
+        "list_n": 32,
+        "overlap_vs_main": 1.0
+      },
+      {
+        "qed_min": 0.5,
+        "maxTc_upper": null,
+        "pool_n": 751,
+        "list_n": 32,
+        "overlap_vs_main": 1.0
+      },
+      {
+        "qed_min": 0.6,
+        "maxTc_upper": 0.7,
+        "pool_n": 519,
+        "list_n": 26,
+        "overlap_vs_main": 0.4375
+      },
+      {
+        "qed_min": 0.6,
+        "maxTc_upper": 0.8,
+        "pool_n": 531,
+        "list_n": 28,
+        "overlap_vs_main": 0.5
+      },
+      {
+        "qed_min": 0.6,
+        "maxTc_upper": 0.9,
+        "pool_n": 533,
+        "list_n": 28,
+        "overlap_vs_main": 0.5
+      },
+      {
+        "qed_min": 0.6,
+        "maxTc_upper": null,
+        "pool_n": 533,
+        "list_n": 28,
+        "overlap_vs_main": 0.5
+      },
+      {
+        "qed_min": 0.7,
+        "maxTc_upper": 0.7,
+        "pool_n": 316,
+        "list_n": 27,
+        "overlap_vs_main": 0.2812
+      },
+      {
+        "qed_min": 0.7,
+        "maxTc_upper": 0.8,
+        "pool_n": 327,
+        "list_n": 29,
+        "overlap_vs_main": 0.3438
+      },
+      {
+        "qed_min": 0.7,
+        "maxTc_upper": 0.9,
+        "pool_n": 328,
+        "list_n": 29,
+        "overlap_vs_main": 0.3438
+      },
+      {
+        "qed_min": 0.7,
+        "maxTc_upper": null,
+        "pool_n": 328,
+        "list_n": 29,
+        "overlap_vs_main": 0.3438
+      }
+    ],
+    "overlap_min": 0.2812,
+    "overlap_max": 1.0
+  },
+  "armC_one_axis": [
+    {
+      "axis": "hERG 门",
+      "change": "off→on<0.5",
+      "status": "measured",
+      "pool_n": 751,
+      "pool_n_off": 2387,
+      "list_n": 32,
+      "overlap_vs_main": 0.2188,
+      "head20_overlap_vs_main": 0.1,
+      "n_removed_by_gate": 1636,
+      "note": "关 hERG 门后重选（池 2387）与主名单（池 751）比较"
+    },
+    {
+      "axis": "anchor",
+      "change": "4→≥3",
+      "status": "measured",
+      "pool_n": 3186,
+      "list_n": 48,
+      "overlap_vs_main": 0.1875,
+      "head20_overlap_vs_main": 0.1,
+      "note": ""
+    },
+    {
+      "axis": "QED",
+      "change": "0.50→0.60",
+      "status": "measured",
+      "pool_n": 1456,
+      "list_n": 43,
+      "overlap_vs_main": 0.2188,
+      "head20_overlap_vs_main": 0.1,
+      "note": ""
+    },
+    {
+      "axis": "maxTc",
+      "change": "0.90→0.70",
+      "status": "measured",
+      "pool_n": 2295,
+      "list_n": 48,
+      "overlap_vs_main": 0.25,
+      "head20_overlap_vs_main": 0.05,
+      "note": ""
+    }
+  ],
+  "armD_fingerprint": [
+    {
+      "fingerprint": "ECFP6",
+      "list_n": 33,
+      "overlap_vs_main": 0.9375,
+      "head20_overlap_vs_main": 0.95,
+      "note": "仅替换成对相似度约束所用指纹，其余口径不变"
+    },
+    {
+      "fingerprint": "MACCS166",
+      "list_n": 22,
+      "overlap_vs_main": 0.1562,
+      "head20_overlap_vs_main": 0.15,
+      "note": "仅替换成对相似度约束所用指纹，其余口径不变"
+    }
+  ],
+  "armE_tie_band": {
+    "rows": [
+      {
+        "band": 0.01,
+        "reps": 100,
+        "mean_overlap": 0.7662,
+        "min_overlap": 0.6562,
+        "mean_head20_overlap": 0.6055,
+        "n_in_band": 35
+      },
+      {
+        "band": 0.05,
+        "reps": 100,
+        "mean_overlap": 0.6866,
+        "min_overlap": 0.5625,
+        "mean_head20_overlap": 0.486,
+        "n_in_band": 42
+      },
+      {
+        "band": 0.25,
+        "reps": 100,
+        "mean_overlap": 0.4822,
+        "min_overlap": 0.3438,
+        "mean_head20_overlap": 0.2045,
+        "n_in_band": 108
+      }
+    ],
+    "primary": 0.01
+  },
+  "armF_butina": {
+    "cutoff": 0.35,
+    "n_clusters": 482,
+    "largest_cluster": 66,
+    "n_singletons": 394,
+    "n_members": 751,
+    "expected": {
+      "n_clusters": 642,
+      "largest": 20,
+      "singletons": 446
+    },
+    "main_list_cluster_multiplicity_max": 1,
+    "overlap_rep_top50_vs_main": 0.6875,
+    "note": "代表 = 簇内 CNN_VS 最高的成员"
+  },
+  "armF_butina_full_pool": {
+    "impl_equivalence_check": {
+      "n": 600,
+      "identical_partition_vs_rdkit_official": true
+    },
+    "pool_n": 4979,
+    "n_clusters": 2938,
+    "largest_cluster": 125,
+    "n_singletons": 2417,
+    "reference_expected": {
+      "n_clusters": 642,
+      "largest": 20,
+      "singletons": 446
+    },
+    "note": "对去重后全池（≈4,990）聚类，与既有 642 簇口径可比",
+    "cutoff_scan": [
+      {
+        "dist_cutoff": 0.2,
+        "tc_neighbor_min": 0.8,
+        "n_clusters": 4491,
+        "largest_cluster": 13,
+        "n_singletons": 4186
+      },
+      {
+        "dist_cutoff": 0.3,
+        "tc_neighbor_min": 0.7,
+        "n_clusters": 3559,
+        "largest_cluster": 83,
+        "n_singletons": 3057
+      },
+      {
+        "dist_cutoff": 0.5,
+        "tc_neighbor_min": 0.5,
+        "n_clusters": 1115,
+        "largest_cluster": 561,
+        "n_singletons": 736
+      },
+      {
+        "dist_cutoff": 0.65,
+        "tc_neighbor_min": 0.35,
+        "n_clusters": 137,
+        "largest_cluster": 3182,
+        "n_singletons": 58
+      }
+    ]
+  }
+}

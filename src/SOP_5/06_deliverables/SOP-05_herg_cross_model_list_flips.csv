@@ -1,0 +1,3 @@
+cid,smiles,arm_membership,hERG_admet_ai,hERG_cross_rf,hERG_cross_lr,hERG_cross_knn,m1_pass,m2_pass_rf,m2_pass_lr,m2_pass_knn,hERG_cross_ens,m2_pass_ens
+ZINC000092920989,CC(C)c1nc2n(n1)CCC[C@@H]2Nc1cc(-n2cccn2)nc(N)n1,QED0.60_anchor4;QED0.50_anchor4;QED0.40_anchor4;QED0.60_anchor3,0.487879,0.362,0.933881,0.4,1,1,0,1,0.565294,0
+ZINC000008706207,Cc1oc2nc3c(c(=O)n(Cc4cccc(Cl)c4)c(=O)n3C)n2c1C,QED0.50_anchor4;QED0.40_anchor4,0.488385,0.432,0.689072,0.4,1,1,0,1,0.507024,0

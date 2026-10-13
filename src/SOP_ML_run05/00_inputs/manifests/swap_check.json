@@ -1,0 +1,133 @@
+{
+  "results": [
+    {
+      "level": "INFO",
+      "code": "E0",
+      "check": "读取成功",
+      "detail": "CNN_VS_ranking_49963_with_pKa_cLogD74.csv：4979 行 × 36 列"
+    },
+    {
+      "level": "PASS",
+      "code": "E2",
+      "check": "35 列齐备",
+      "detail": "列名逐一匹配（顺序不限）"
+    },
+    {
+      "level": "WARN",
+      "code": "E2b",
+      "check": "无多余列",
+      "detail": "多出 ['n_poses']（下游忽略，但请确认不是改名残留）"
+    },
+    {
+      "level": "PASS",
+      "code": "E1",
+      "check": "行数 ≥ 4979",
+      "detail": "4979 行（下限 4979）"
+    },
+    {
+      "level": "PASS",
+      "code": "E3",
+      "check": "cid 非空且唯一",
+      "detail": "4979 个"
+    },
+    {
+      "level": "PASS",
+      "code": "E4",
+      "check": "smiles 全部可解析（RDKit）",
+      "detail": "抽查至首个坏例为止"
+    },
+    {
+      "level": "PASS",
+      "code": "E4b",
+      "check": "smiles 无重复",
+      "detail": "0"
+    },
+    {
+      "level": "PASS",
+      "code": "E5",
+      "check": "rank 为 1..N 的排列",
+      "detail": "1..4979"
+    },
+    {
+      "level": "PASS",
+      "code": "E6",
+      "check": "20 个数值列非空可解析",
+      "detail": "全部通过"
+    },
+    {
+      "level": "INFO",
+      "code": "E6b",
+      "check": "允许为空的列",
+      "detail": "其中已有值的：无"
+    },
+    {
+      "level": "INFO",
+      "code": "E6c",
+      "check": "允许部分空的列",
+      "detail": "{'brenk': 4575}"
+    },
+    {
+      "level": "PASS",
+      "code": "E7",
+      "check": "|CNNscore×CNNaffinity − CNN_VS| ≤ 容差",
+      "detail": "max=4.74e-04 ≤ 0.0005"
+    },
+    {
+      "level": "PASS",
+      "code": "E8",
+      "check": "clogd 区间自洽",
+      "detail": "4979 行"
+    },
+    {
+      "level": "PASS",
+      "code": "E9",
+      "check": "pka_status ∈ {ok, no_basic_center}",
+      "detail": "分布 {'ok': 4979}"
+    },
+    {
+      "level": "PASS",
+      "code": "E10",
+      "check": "clogd_confidence ∈ (0,1]",
+      "detail": "const=[np.float64(0.8)]"
+    },
+    {
+      "level": "INFO",
+      "code": "E10c",
+      "check": "来源标识",
+      "detail": "pka=MolGpKa / clogd=cpLogD_v2.0_ChEMBL33"
+    },
+    {
+      "level": "PASS",
+      "code": "E11",
+      "check": "part 命名 part_NN",
+      "detail": "10 个分组"
+    },
+    {
+      "level": "PASS",
+      "code": "E12",
+      "check": "SDF 的 cid ⊆ 表的 cid",
+      "detail": "4979 个姿态全部命中"
+    },
+    {
+      "level": "PASS",
+      "code": "E13",
+      "check": "SDF 内嵌属性 vs 新表同源",
+      "detail": "逐值一致（≤1e-3）"
+    },
+    {
+      "level": "PASS",
+      "code": "E14",
+      "check": "hERG 落门表 cid ⊆ 表的 cid",
+      "detail": "4979 个全部命中"
+    },
+    {
+      "level": "PASS",
+      "code": "E15",
+      "check": "ADMET 冻结表 cid 集合一致",
+      "detail": "4979 个"
+    }
+  ],
+  "n_pass": 16,
+  "n_fail": 0,
+  "n_warn": 1
+}

@@ -1,0 +1,459 @@
+{
+  "herg_status": "applied",
+  "lists": {
+    "main_QED0.50_anchor4": {
+      "arm": "main_QED0.50_anchor4",
+      "qed_min": 0.5,
+      "anchor_min": 4,
+      "pool_n": 618,
+      "n_known_excluded_in_arm": 3,
+      "n_selected_candidates": 48,
+      "n_controls": 2,
+      "list_size": 50,
+      "anchor_all_4": true,
+      "anchor_hits_min": 4,
+      "max_pairwise_tc": 0.5672,
+      "pairwise_ok": true,
+      "n_distinct_scaffold": 48,
+      "n_distinct_scaffold_generic": 42,
+      "chemotype_max": 18,
+      "chem_cap": 20,
+      "risk_n": 6,
+      "risk_cap": 8,
+      "scaffold_cap": 1,
+      "CNN_VS_range": [
+        7.2576,
+        7.9914
+      ],
+      "QED_range": [
+        0.5072,
+        0.8813
+      ],
+      "maxTc_range": [
+        0.2286,
+        0.5439
+      ],
+      "herg_range": [
+        0.1218,
+        0.4956
+      ],
+      "herg_status": "applied",
+      "known_exact_hits": 0,
+      "head20_cids": [
+        "ZINC000071721614",
+        "MCULE-6739389520",
+        "ZINC002384414275",
+        "ZINC000005271235",
+        "ZINC000067458904",
+        "ZINC000079108700",
+        "ZINC000097636624",
+        "ZINC000097115238",
+        "MCULE-6579907902",
+        "ZINC002384416952",
+        "ZINC000024760279",
+        "ZINC000012607437",
+        "ZINC000057520614",
+        "ZINC000071738518",
+        "ZINC000013009716",
+        "MCULE-8604846994",
+        "ZINC000002782221",
+        "MCULE-3663854374",
+        "ZINC000032738752",
+        "MCULE-3423843622"
+      ],
+      "head20_CNN_VS_min": 7.4931,
+      "head20_mean_qed": 0.6421
+    },
+    "sens_QED0.60_anchor4": {
+      "arm": "sens_QED0.60_anchor4",
+      "qed_min": 0.6,
+      "anchor_min": 4,
+      "pool_n": 413,
+      "n_known_excluded_in_arm": 2,
+      "n_selected_candidates": 48,
+      "n_controls": 2,
+      "list_size": 50,
+      "anchor_all_4": true,
+      "anchor_hits_min": 4,
+      "max_pairwise_tc": 0.5763,
+      "pairwise_ok": true,
+      "n_distinct_scaffold": 48,
+      "n_distinct_scaffold_generic": 38,
+      "chemotype_max": 17,
+      "chem_cap": 20,
+      "risk_n": 6,
+      "risk_cap": 8,
+      "scaffold_cap": 1,
+      "CNN_VS_range": [
+        7.1175,
+        7.8416
+      ],
+      "QED_range": [
+        0.6018,
+        0.9004
+      ],
+      "maxTc_range": [
+        0.2286,
+        0.5254
+      ],
+      "herg_range": [
+        0.2098,
+        0.4946
+      ],
+      "herg_status": "applied",
+      "known_exact_hits": 0,
+      "head20_cids": [
+        "ZINC000067458904",
+        "ZINC000097636624",
+        "ZINC000097115238",
+        "MCULE-6579907902",
+        "ZINC002384416952",
+        "ZINC000012607437",
+        "ZINC000057520614",
+        "MCULE-8604846994",
+        "MCULE-3663854374",
+        "MCULE-3423843622",
+        "MCULE-6424137862",
+        "ZINC001875350464",
+        "ZINC000092920989",
+        "ZINC000014973606",
+        "ZINC000069739030",
+        "ZINC000064965958",
+        "ZINC000823577388",
+        "ZINC001776011322",
+        "ZINC000096336701",
+        "ZINC002384426722"
+      ],
+      "head20_CNN_VS_min": 7.3209,
+      "head20_mean_qed": 0.7155
+    },
+    "sens_QED0.40_anchor4": {
+      "arm": "sens_QED0.40_anchor4",
+      "qed_min": 0.4,
+      "anchor_min": 4,
+      "pool_n": 722,
+      "n_known_excluded_in_arm": 3,
+      "n_selected_candidates": 48,
+      "n_controls": 2,
+      "list_size": 50,
+      "anchor_all_4": true,
+      "anchor_hits_min": 4,
+      "max_pairwise_tc": 0.5854,
+      "pairwise_ok": true,
+      "n_distinct_scaffold": 48,
+      "n_distinct_scaffold_generic": 44,
+      "chemotype_max": 20,
+      "chem_cap": 20,
+      "risk_n": 6,
+      "risk_cap": 8,
+      "scaffold_cap": 1,
+      "CNN_VS_range": [
+        7.2958,
+        7.9914
+      ],
+      "QED_range": [
+        0.425,
+        0.8813
+      ],
+      "maxTc_range": [
+        0.2286,
+        0.5439
+      ],
+      "herg_range": [
+        0.1218,
+        0.4956
+      ],
+      "herg_status": "applied",
+      "known_exact_hits": 0,
+      "head20_cids": [
+        "ZINC000071721614",
+        "MCULE-6739389520",
+        "ZINC002384414275",
+        "ZINC000005271235",
+        "ZINC000067458904",
+        "ZINC000079108700",
+        "ZINC000097636624",
+        "ZINC000097115238",
+        "MCULE-6579907902",
+        "ZINC002384416952",
+        "ZINC000024760279",
+        "ZINC000012607437",
+        "ZINC000009953510",
+        "ZINC000057520614",
+        "ZINC000071738518",
+        "ZINC000225434685",
+        "ZINC000008991054",
+        "ZINC000013009716",
+        "MCULE-8604846994",
+        "ZINC000071896242"
+      ],
+      "head20_CNN_VS_min": 7.5602,
+      "head20_mean_qed": 0.5988
+    },
+    "sens_QED0.50_anchor3": {
+      "arm": "sens_QED0.50_anchor3",
+      "qed_min": 0.5,
+      "anchor_min": 3,
+      "pool_n": 1034,
+      "n_known_excluded_in_arm": 6,
+      "n_selected_candidates": 48,
+      "n_controls": 2,
+      "list_size": 50,
+      "anchor_all_4": false,
+      "anchor_hits_min": 3,
+      "max_pairwise_tc": 0.5833,
+      "pairwise_ok": true,
+      "n_distinct_scaffold": 48,
+      "n_distinct_scaffold_generic": 42,
+      "chemotype_max": 20,
+      "chem_cap": 20,
+      "risk_n": 8,
+      "risk_cap": 8,
+      "scaffold_cap": 1,
+      "CNN_VS_range": [
+        7.3342,
+        7.9914
+      ],
+      "QED_range": [
+        0.5008,
+        0.8473
+      ],
+      "maxTc_range": [
+        0.2267,
+        0.5439
+      ],
+      "herg_range": [
+        0.1218,
+        0.4884
+      ],
+      "herg_status": "applied",
+      "known_exact_hits": 0,
+      "head20_cids": [
+        "ZINC000071721614",
+        "MCULE-6739389520",
+        "ZINC002384414275",
+        "ZINC000005271235",
+        "ZINC000067458904",
+        "ZINC000079108700",
+        "ZINC000097636624",
+        "ZINC000097115238",
+        "MCULE-6579907902",
+        "ZINC002384416952",
+        "ZINC000071754421",
+        "ZINC000024760279",
+        "ZINC000012607437",
+        "ZINC000057520614",
+        "ZINC000071738518",
+        "ZINC000096336706",
+        "ZINC000013009716",
+        "MCULE-8604846994",
+        "ZINC000002782221",
+        "MCULE-3663854374"
+      ],
+      "head20_CNN_VS_min": 7.5559,
+      "head20_mean_qed": 0.6566
+    },
+    "sens_QED0.60_anchor3": {
+      "arm": "sens_QED0.60_anchor3",
+      "qed_min": 0.6,
+      "anchor_min": 3,
+      "pool_n": 705,
+      "n_known_excluded_in_arm": 4,
+      "n_selected_candidates": 48,
+      "n_controls": 2,
+      "list_size": 50,
+      "anchor_all_4": false,
+      "anchor_hits_min": 3,
+      "max_pairwise_tc": 0.6333,
+      "pairwise_ok": true,
+      "n_distinct_scaffold": 48,
+      "n_distinct_scaffold_generic": 37,
+      "chemotype_max": 19,
+      "chem_cap": 20,
+      "risk_n": 8,
+      "risk_cap": 8,
+      "scaffold_cap": 1,
+      "CNN_VS_range": [
+        7.2294,
+        7.8416
+      ],
+      "QED_range": [
+        0.6005,
+        0.8473
+      ],
+      "maxTc_range": [
+        0.2267,
+        0.4444
+      ],
+      "herg_range": [
+        0.1367,
+        0.4879
+      ],
+      "herg_status": "applied",
+      "known_exact_hits": 0,
+      "head20_cids": [
+        "ZINC000067458904",
+        "ZINC000097636624",
+        "ZINC000097115238",
+        "MCULE-6579907902",
+        "ZINC002384416952",
+        "ZINC000071754421",
+        "ZINC002384428808",
+        "ZINC000012607437",
+        "ZINC000057520614",
+        "ZINC000096336706",
+        "MCULE-8604846994",
+        "MCULE-3663854374",
+        "MCULE-3423843622",
+        "MCULE-6424137862",
+        "ZINC000012516437",
+        "MCULE-5079531375",
+        "ZINC001875350464",
+        "ZINC000426552428",
+        "ZINC000036810967",
+        "ZINC000092920989"
+      ],
+      "head20_CNN_VS_min": 7.3679,
+      "head20_mean_qed": 0.7032
+    },
+    "sens_QED0.40_anchor3": {
+      "arm": "sens_QED0.40_anchor3",
+      "qed_min": 0.4,
+      "anchor_min": 3,
+      "pool_n": 1203,
+      "n_known_excluded_in_arm": 6,
+      "n_selected_candidates": 48,
+      "n_controls": 2,
+      "list_size": 50,
+      "anchor_all_4": false,
+      "anchor_hits_min": 3,
+      "max_pairwise_tc": 0.6056,
+      "pairwise_ok": true,
+      "n_distinct_scaffold": 48,
+      "n_distinct_scaffold_generic": 42,
+      "chemotype_max": 20,
+      "chem_cap": 20,
+      "risk_n": 8,
+      "risk_cap": 8,
+      "scaffold_cap": 1,
+      "CNN_VS_range": [
+        7.331,
+        7.9914
+      ],
+      "QED_range": [
+        0.425,
+        0.8473
+      ],
+      "maxTc_range": [
+        0.2267,
+        0.5439
+      ],
+      "herg_range": [
+        0.1218,
+        0.4906
+      ],
+      "herg_status": "applied",
+      "known_exact_hits": 0,
+      "head20_cids": [
+        "ZINC000071721614",
+        "MCULE-6739389520",
+        "ZINC002384414275",
+        "ZINC000005271235",
+        "ZINC000067458904",
+        "ZINC000079108700",
+        "ZINC000097636624",
+        "ZINC000097115238",
+        "MCULE-6579907902",
+        "ZINC002384416952",
+        "ZINC000071754421",
+        "ZINC000024760279",
+        "ZINC000012607437",
+        "ZINC000009953510",
+        "ZINC000057520614",
+        "ZINC000071738518",
+        "ZINC000225434685",
+        "ZINC000096336706",
+        "ZINC000008991054",
+        "ZINC000013009716"
+      ],
+      "head20_CNN_VS_min": 7.5833,
+      "head20_mean_qed": 0.6218
+    },
+    "sens_scaffoldcap3_QED0.50_anchor4": {
+      "arm": "sens_scaffoldcap3_QED0.50_anchor4",
+      "pool_n": 618,
+      "scaffold_cap": 3,
+      "n_selected_candidates": 48,
+      "max_pairwise_tc": 0.6418,
+      "n_distinct_scaffold": 44,
+      "herg_status": "applied",
+      "overlap_with_main": 0.9167,
+      "note": "骨架封顶敏感性档（主口径池）"
+    },
+    "sens_scaffoldcap5_QED0.50_anchor4": {
+      "arm": "sens_scaffoldcap5_QED0.50_anchor4",
+      "pool_n": 618,
+      "scaffold_cap": 5,
+      "n_selected_candidates": 48,
+      "max_pairwise_tc": 0.6418,
+      "n_distinct_scaffold": 43,
+      "herg_status": "applied",
+      "overlap_with_main": 0.8958,
+      "note": "骨架封顶敏感性档（主口径池）"
+    },
+    "unconstrained_top48": {
+      "pool_n": 618,
+      "chemotype_max": 22,
+      "n_distinct_scaffold": 36,
+      "note": "无任何名单层约束时的 CNN_VS 前 48 名（量化约束咬合度）"
+    }
+  },
+  "novelty_gate": {
+    "n_exact_known_in_base": 6,
+    "excluded_cids": [
+      "ZINC000019373955",
+      "ZINC000019707370",
+      "ZINC000019708474",
+      "ZINC000019805507",
+      "ZINC000020841526",
+      "ZINC000118633318"
+    ],
+    "ungated_diagnostic": {
+      "n_different_from_main": 1,
+      "cids_only_in_ungated": [
+        "ZINC000118633318"
+      ],
+      "ungated_rank_of_known": {
+        "ZINC000118633318": 3
+      },
+      "n_known_in_ungated_list": 1,
+      "known_molecule_in_ungated": true,
+      "note": "未设 novelty 门时的主口径名单（仅用于诊断，非交付名单）"
+    }
+  },
+  "negative_controls": [
+    {
+      "cid": "C09462894",
+      "control_role": "NEG1",
+      "rule": "诱饵中 CNN_VS 最高且锚点 4/4（高可信假阳性）",
+      "cnn_vs": 8.109,
+      "vina_affinity": -9.9435,
+      "smiles": "Cc1cc(C)cc(OCCCn2cc(/C=N/Nc3nc4ccccc4s3)c3ccccc32)c1",
+      "activity_label": 0,
+      "anchor_hits_4A": 4
+    },
+    {
+      "cid": "C60359994",
+      "control_role": "NEG2",
+      "rule": "诱饵中 Vina 最强且锚点 4/4（两引擎共识诱饵）",
+      "cnn_vs": 6.7758,
+      "vina_affinity": -12.6843,
+      "smiles": "CC(C)[C@H](NC(=O)c1cccc(N2NC(=O)[C@H]3CC=CC[C@H]3C2=O)c1)c1nnc2ccccn12",
+      "activity_label": 0,
+      "anchor_hits_4A": 4
+    }
+  ],
+  "chem_cap_rule": "round(8N/20)，N=名单总数(=50) → 20",
+  "risk_cap_rule": "round(3N/20)，N=50 → 8",
+  "scaffold_cap_primary": 1
+}

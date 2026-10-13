@@ -1,0 +1,167 @@
+{
+  "role": "注释层（分析步 10b）：只产出标注列与交叉核验证据，不改门、不改池、不改名单",
+  "provenance": {
+    "raw_table": "03_gates/admet/raw/CNN_VS_ranking_49963_ADMET.csv",
+    "raw_sha256": "046e3ffba5b2e5d01ea67273e29079cbd0bd90bc5ca2971b22638558608955d6",
+    "rows": 4979,
+    "columns": 124,
+    "admet_columns": 105,
+    "producer": "HPC 目录应用 admet-ai（job_id eade0be46cb14cbb8b33b0ca46f43bf9，2026-09-24）；运行输入 molecules_ml4979.csv（md5 1251c3a86c37e970b84eb7c595639fe1，4,979 行 cid,smiles）；原始输出 predictions.csv（md5 e726aecd4c622b5c2388f308e9817f28，4,979 行 × 106 列，空值 0）",
+    "regenerate_script": "03_gates/scripts/10b0_admet_regenerate.py（手工执行、不入链，与 08b0 同规格）"
+  },
+  "coverage": {
+    "pool_n": 4979,
+    "covered": 4979,
+    "not_covered": [],
+    "note": "本表覆盖 run05 批次（＝本包上游排名表同 4,979 行，cid 与 CNN_VS 逐值一致）；池 = 4,979 全覆盖；2 个阴性对照来自 run01 5,098 富集库，无预测值 → admet_coverage=not_covered（不写空值）"
+  },
+  "cutpoints_recalibrated_on_pool": {
+    "herg": 0.819144,
+    "DILI": 0.995284,
+    "solubility": -5.748336,
+    "AMES": 0.5,
+    "ClinTox": 0.5,
+    "Carcinogens_Lagunin": 0.5
+  },
+  "cutpoints_reference_from_external_run": {
+    "herg": 0.8,
+    "DILI": 0.99,
+    "AMES": 0.5,
+    "ClinTox": 0.5,
+    "Carcinogens_Lagunin": 0.5,
+    "solubility": -6.0,
+    "note": "外部 run 的库内相对切点（其库 54,932 分子）；本批为 run05 的 4,979 分子库，口径不同，仅作对照列出，不作为判据"
+  },
+  "trigger_rates_pct": {
+    "herg": 20.2049,
+    "DILI": 11.8096,
+    "AMES": 23.7598,
+    "ClinTox": 2.39,
+    "Carc": 0.0,
+    "struct_alert": 8.4957
+  },
+  "tier_counts": {
+    "优先跟进": 783,
+    "建议淘汰": 688,
+    "需警惕": 3508
+  },
+  "herg_band_counts_pool": {
+    "中": 592,
+    "低": 3226,
+    "高": 1161
+  },
+  "herg_gate_semantics": {
+    "gate_threshold": 0.5,
+    "library_pct_at_or_above_gate": 75.959,
+    "pool_pct_at_or_above_gate": 75.959,
+    "pool_empirical_percentile_of_gate": 24.041,
+    "approved_drug_percentile_at_gate_pool_near": 62.8471,
+    "approved_drug_percentile_at_gate_library_near": 62.8471,
+    "margin_tight_threshold": 0.05,
+    "delivered_margin_min": 0.003303,
+    "delivered_margin_median": 0.078737,
+    "delivered_n_margin_lt_tight": 10,
+    "delivered_n_margin_lt_0.10": 18,
+    "delivered_n_in_half_band_0.40_0.50": 18,
+    "note": "0.5 是未校准的模型分诊线：库内 66% 的分子在线上，并非化学上的安全界；它大致对应已上市药在 ADMET-AI hERG 头下的中上段（≈ 62.8 百分位），因此「过门」不得转述为「已判定安全」，只能转述为「ADMET-AI 口径下低风险标记」。"
+  },
+  "liability_count_distribution": {
+    "0": 2674,
+    "1": 1773,
+    "2": 473,
+    "3": 59
+  },
+  "delivered_list": {
+    "n_candidates": 32,
+    "md_precheck_n": 10,
+    "md_precheck_cids": [
+      "SCALE-108881",
+      "SCALE-111400",
+      "SCALE-017223",
+      "SCALE-111230",
+      "SCALE-011389",
+      "SCALE-034377",
+      "SCALE-056230",
+      "SCALE-053529",
+      "SCALE-047375",
+      "SCALE-014010"
+    ],
+    "tier_counts": {
+      "优先跟进": 22,
+      "建议淘汰": 2,
+      "需警惕": 8
+    },
+    "herg_band_counts": {
+      "低": 32
+    },
+    "herg_margin_min": 0.003303,
+    "herg_margin_median": 0.078737,
+    "n_margin_lt_tight": 10,
+    "n_margin_lt_0.10": 18,
+    "margin_tight_cids": [
+      "SCALE-011389",
+      "SCALE-014010",
+      "SCALE-031523",
+      "SCALE-032087",
+      "SCALE-038222",
+      "SCALE-047375",
+      "SCALE-085022",
+      "SCALE-099595",
+      "SCALE-108881",
+      "SCALE-116071"
+    ],
+    "herg_median": 0.421264
+  },
+  "annotation_columns": [
+    "admet_coverage",
+    "admet_hERG",
+    "admet_herg_drugbank_pct",
+    "admet_herg_band",
+    "admet_flag_herg",
+    "admet_flag_DILI",
+    "admet_flag_AMES",
+    "admet_flag_ClinTox",
+    "admet_flag_Carc",
+    "admet_struct_alert",
+    "admet_liability_count",
+    "admet_dev_ok",
+    "admet_tier",
+    "admet_md_precheck",
+    "admet_solubility_gate",
+    "admet_DILI",
+    "admet_AMES",
+    "admet_ClinTox",
+    "admet_Carcinogens",
+    "admet_BBB",
+    "admet_Pgp",
+    "admet_Solubility",
+    "admet_Bioavailability",
+    "admet_HIA",
+    "admet_Caco2",
+    "admet_PPBR",
+    "admet_Clearance_Hepatocyte",
+    "admet_Half_Life",
+    "admet_VDss",
+    "admet_CYP2D6_Veith",
+    "admet_CYP3A4_Veith",
+    "admet_CYP2D6_Substrate",
+    "admet_CYP3A4_Substrate",
+    "admet_HBD",
+    "admet_HBA",
+    "admet_Lipinski",
+    "admet_QED",
+    "admet_MW",
+    "admet_logP",
+    "admet_tpsa",
+    "admet_PAINS_alert",
+    "admet_BRENK_alert",
+    "admet_NIH_alert",
+    "admet_herg_margin",
+    "admet_herg_margin_tight"
+  ],
+  "non_interference": {
+    "statement": "本步为分析步：不修改任何门（含 hERG<0.5）、候选池与名单成员；注释列仅在交付层以追加列形式出现",
+    "gate_threshold": 0.5,
+    "list_size_main": 50
+  }
+}

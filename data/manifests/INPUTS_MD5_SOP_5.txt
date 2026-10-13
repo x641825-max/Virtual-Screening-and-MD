@@ -1,0 +1,5 @@
+444f07fbe92cd15572ea459e6e955c66  raw/inputs/CNN_VS_ranking_49963_with_pKa_cLogD74.csv
+0ed679e1d61d7f562b27bfcdd1c7e956  raw/inputs/top5000_best_pose.sdf
+cac648447c54f688562ddafed90dcf65  raw/archives/redocking.zip
+82a64a41b06f49dc4327b6bd7fcb135e  raw/archives/run01_redock_enrichment.zip
+ff5902239a51536d6bc34e42599ceac3  raw/archives/screening_kit.zip

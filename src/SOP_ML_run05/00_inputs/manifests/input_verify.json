@@ -1,0 +1,74 @@
+{
+  "all_ok": true,
+  "rules_sha256": "8e71187653eb21269695d4e80bb1506002db8edb729c5a14e1e9acf5fec63881",
+  "n_inputs": 5,
+  "entries": [
+    {
+      "file": "00_inputs/raw/inputs/top5000_best_pose.sdf",
+      "role": "4,979 个 gnina 最优姿态（run05 · ML 生成分子 · CNN 口径工作池）",
+      "md5_expected": "0ac1353fa852fd49ce2f34d1e4e148a0",
+      "md5_got": "0ac1353fa852fd49ce2f34d1e4e148a0",
+      "sha256_got": "f5d8f2075626f060ce048b0dbe44b4e48dff270a4bd4d95aed98598d316842eb",
+      "match": true,
+      "size": 13632313
+    },
+    {
+      "file": "00_inputs/raw/inputs/CNN_VS_ranking_49963_with_pKa_cLogD74.csv",
+      "role": "全库 CNN_VS 排名 + 上游描述符 + MolGpKa 碱性 pKa + cpLogD7.4",
+      "md5_expected": "d9c600d9cbaf5019b359cbc7ce128a92",
+      "md5_got": "d9c600d9cbaf5019b359cbc7ce128a92",
+      "sha256_got": "f7ed93c2f4e7ae0fc43fad8d1487d38807070b9d0a6fc03576a59cffc201d9e2",
+      "match": true,
+      "size": 2009123
+    },
+    {
+      "file": "00_inputs/raw/archives/run01_redock_enrichment.zip",
+      "role": "run01 归档：受体 4EIY、5,098 带标签富集库、富集基线、重对接验证",
+      "md5_expected": "82a64a41b06f49dc4327b6bd7fcb135e",
+      "md5_got": "82a64a41b06f49dc4327b6bd7fcb135e",
+      "sha256_got": "dc439580ea71d1320a36969a9618e4685fd91201bbcebda447b33a291b2d9fd9",
+      "match": true,
+      "size": 26145096
+    },
+    {
+      "file": "00_inputs/raw/archives/screening_kit.zip",
+      "role": "筛选套件：ChEMBL 独立已知配体集、模型卡、受体副本",
+      "md5_expected": "ff5902239a51536d6bc34e42599ceac3",
+      "md5_got": "ff5902239a51536d6bc34e42599ceac3",
+      "sha256_got": "21e859f7a03c5693ca9b9595bf769fcfe20297d05ba43ea16b486f2a64182e6e",
+      "match": true,
+      "size": 66874924
+    },
+    {
+      "file": "00_inputs/raw/archives/redocking.zip",
+      "role": "3EML/SOP-02 重对接与诱饵基准（协议溯源与对照物来源）",
+      "md5_expected": "cac648447c54f688562ddafed90dcf65",
+      "md5_got": "cac648447c54f688562ddafed90dcf65",
+      "sha256_got": "562d40fecb692a1aefcd2018808eb3b9f41815b199566cf5a97dae09212a1ea8",
+      "match": true,
+      "size": 39948370
+    },
+    {
+      "file": "00_inputs/extracted/run01/01_redocking/receptor/4EIY_protein.pdb",
+      "role": "派生输入（解包产物）",
+      "md5_expected": "aef775ee83735af8a878d42ca1e5fa85",
+      "md5_got": "aef775ee83735af8a878d42ca1e5fa85",
+      "sha256_got": "f99fa728691229d40a1f251909c93ec2a0891634224c2d045f8a8778284f6a06",
+      "match": true,
+      "size": 251509
+    }
+  ],
+  "tagged_library_rows": 5100,
+  "chembl_known_rows": 9130,
+  "external_interface_inputs": {
+    "hERG": {
+      "path": "03_gates/herg/herg_predictions.csv",
+      "present": true,
+      "registered_sha256": "81e30ec27ce09550f0707cc05a5b668ee0b32d02507489297ce0cfc526204766",
+      "registered_md5": "b22514dfbfcdbb98aa12fec9073a4e3e",
+      "sha256": "81e30ec27ce09550f0707cc05a5b668ee0b32d02507489297ce0cfc526204766",
+      "md5": "b22514dfbfcdbb98aa12fec9073a4e3e",
+      "match": true
+    }
+  }
+}

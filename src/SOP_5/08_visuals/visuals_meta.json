@@ -1,0 +1,61 @@
+{
+ "figures": [
+  "fig01_md_structure_cards.png",
+  "fig02_pipeline_flow.png",
+  "fig03_gate_cascade.png",
+  "fig04_pose_identity.png",
+  "fig05_druglikeness.png",
+  "fig06_herg_safety.png",
+  "fig07_robustness.png",
+  "fig08_list_and_batch.png",
+  "fig09_status_board.png"
+ ],
+ "generated_utc": "2026-09-23 19:14 UTC",
+ "notes": {
+  "fig01_md_structure_cards": {
+   "n_cards": 20,
+   "n_cns": 13,
+   "n_flagged": 2,
+   "n_peripheral": 5
+  },
+  "fig02_pipeline_flow": {
+   "cascade": [
+    4990,
+    4600,
+    4471,
+    2949,
+    2942,
+    1989,
+    621
+   ],
+   "stages": 7
+  },
+  "fig03_gate_cascade": {
+   "cascade": [
+    4990,
+    4600,
+    4471,
+    2949,
+    2942,
+    1989,
+    621,
+    50,
+    20
+   ]
+  },
+  "fig04_pose_identity": {},
+  "fig05_druglikeness": {},
+  "fig06_herg_safety": {},
+  "fig07_robustness": {},
+  "fig08_list_and_batch": {},
+  "fig09_status_board": {
+   "all_pass": false,
+   "det_ok": true,
+   "hard_fail": 1,
+   "hard_pass": 6,
+   "hard_pending": 2
+  }
+ },
+ "rule_version": "1.7.0",
+ "rules_sha256": "a983c4985ebf1fde6afd0bb1c414a50febd8bcb77dd08dddc97b8b8658a8395e"
+}

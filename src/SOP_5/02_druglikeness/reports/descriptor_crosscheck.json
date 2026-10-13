@@ -1,0 +1,165 @@
+{
+  "descriptor_crosscheck": [
+    {
+      "descriptor": "MW",
+      "upstream_col": "mw",
+      "max_abs_diff": 0.005,
+      "mean_abs_diff": 0.0025,
+      "n_exact": 503,
+      "n": 4929,
+      "scope": "单片段分子（严格对比）"
+    },
+    {
+      "descriptor": "MW",
+      "upstream_col": "mw",
+      "max_abs_diff": 192.214,
+      "mean_abs_diff": 53.5894,
+      "n_exact": 0,
+      "n": 61,
+      "scope": "多片段分子（含反离子口径，预期不等）"
+    },
+    {
+      "descriptor": "cLogP",
+      "upstream_col": "logp",
+      "max_abs_diff": 0.005,
+      "mean_abs_diff": 0.0025,
+      "n_exact": 37,
+      "n": 4929,
+      "scope": "单片段分子（严格对比）"
+    },
+    {
+      "descriptor": "cLogP",
+      "upstream_col": "logp",
+      "max_abs_diff": 2.9996,
+      "mean_abs_diff": 0.4764,
+      "n_exact": 0,
+      "n": 61,
+      "scope": "多片段分子（含反离子口径，预期不等）"
+    },
+    {
+      "descriptor": "HBD",
+      "upstream_col": "hbd",
+      "max_abs_diff": 0.0,
+      "mean_abs_diff": 0.0,
+      "n_exact": 4929,
+      "n": 4929,
+      "scope": "单片段分子（严格对比）"
+    },
+    {
+      "descriptor": "HBD",
+      "upstream_col": "hbd",
+      "max_abs_diff": 2.0,
+      "mean_abs_diff": 0.623,
+      "n_exact": 24,
+      "n": 61,
+      "scope": "多片段分子（含反离子口径，预期不等）"
+    },
+    {
+      "descriptor": "HBA",
+      "upstream_col": "hba",
+      "max_abs_diff": 0.0,
+      "mean_abs_diff": 0.0,
+      "n_exact": 4929,
+      "n": 4929,
+      "scope": "单片段分子（严格对比）"
+    },
+    {
+      "descriptor": "HBA",
+      "upstream_col": "hba",
+      "max_abs_diff": 4.0,
+      "mean_abs_diff": 0.6721,
+      "n_exact": 24,
+      "n": 61,
+      "scope": "多片段分子（含反离子口径，预期不等）"
+    },
+    {
+      "descriptor": "TPSA",
+      "upstream_col": "tpsa",
+      "max_abs_diff": 0.05,
+      "mean_abs_diff": 0.0257,
+      "n_exact": 410,
+      "n": 4929,
+      "scope": "单片段分子（严格对比）"
+    },
+    {
+      "descriptor": "TPSA",
+      "upstream_col": "tpsa",
+      "max_abs_diff": 108.69,
+      "mean_abs_diff": 24.0779,
+      "n_exact": 0,
+      "n": 61,
+      "scope": "多片段分子（含反离子口径，预期不等）"
+    },
+    {
+      "descriptor": "RotB",
+      "upstream_col": "rotb",
+      "max_abs_diff": 0.0,
+      "mean_abs_diff": 0.0,
+      "n_exact": 4929,
+      "n": 4929,
+      "scope": "单片段分子（严格对比）"
+    },
+    {
+      "descriptor": "RotB",
+      "upstream_col": "rotb",
+      "max_abs_diff": 0.0,
+      "mean_abs_diff": 0.0,
+      "n_exact": 61,
+      "n": 61,
+      "scope": "多片段分子（含反离子口径，预期不等）"
+    }
+  ],
+  "mpo_regression_vs_paper": {
+    "cases": [
+      {
+        "name": "PF-02545920 (PDE10)",
+        "recomputed": 4.6179,
+        "reported": 4.6,
+        "abs_diff": 0.0179
+      },
+      {
+        "name": "PF-03654746 (H3)",
+        "recomputed": 4.8483,
+        "reported": 4.9,
+        "abs_diff": 0.0517
+      },
+      {
+        "name": "PF-04447943 (PDE9)",
+        "recomputed": 5.1838,
+        "reported": 5.2,
+        "abs_diff": 0.0162
+      }
+    ],
+    "max_abs_diff": 0.0517
+  },
+  "pains_recount_hits": 0,
+  "pains_upstream_nonnull": 0,
+  "pains_note": "上游 pains 列全为空值 → 本包以 RDKit FilterCatalog 重算为唯一口径",
+  "n_molecules": 4990,
+  "main_fragment_redundancy": {
+    "n_groups": 38,
+    "n_molecules": 76,
+    "n_groups_involving_multi_fragment": 38,
+    "note": "去盐后同一物种在池内出现两个条目（盐 / 游离碱）。上游去重键是含盐 SMILES 的 InChIKey，抓不到这类冗余。本包不重新去重（会改变池规模口径，属独立的口径决定），只登记冗余；选序的骨架 ≤1 与成对 Tc<0.65 约束已使其不会同时出现在同一名单内（实测 0 例）。"
+  },
+  "standardization": {
+    "method": "largest_fragment（保留原电荷态，不中和）",
+    "n_multi_fragment": 61,
+    "n_standardized_mol_changed": 61,
+    "mw_inflation_median": -46.025,
+    "mw_inflation_max": -35.453,
+    "qed_shift_max_abs": 0.247913,
+    "impact_table": "02_druglikeness/tables/standardization_impact.csv",
+    "note": "描述符与门所描述的物种 = 对接/模拟所处理的物种；含反离子的输入会把MW/cLogP/TPSA/QED 与 Ro5/Veber/BRENK 判定污染（例如甲酸反离子会命中BRENK aldehyde 而误报）"
+  },
+  "chemotype_counts": {
+    "无氨基烟腈母核 + 无碱性胺": 2325,
+    "无氨基烟腈母核 + 碱性胺": 1576,
+    "氨基烟腈母核 + 碱性胺": 1082,
+    "氨基烟腈母核 + 无碱性胺": 7
+  },
+  "scaffold_unique": 2460,
+  "brenk_hits": 1027,
+  "cns_mpo_ge4": 3486,
+  "tpsa_in_band": 2562
+}

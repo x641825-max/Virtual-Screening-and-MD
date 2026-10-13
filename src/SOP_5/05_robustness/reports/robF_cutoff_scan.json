@@ -1,0 +1,30 @@
+[
+ {
+  "dist_cutoff": 0.2,
+  "tc_neighbor_min": 0.8,
+  "n_clusters": 3978,
+  "largest_cluster": 31,
+  "n_singletons": 3472
+ },
+ {
+  "dist_cutoff": 0.3,
+  "tc_neighbor_min": 0.7,
+  "n_clusters": 2884,
+  "largest_cluster": 86,
+  "n_singletons": 2199
+ },
+ {
+  "dist_cutoff": 0.5,
+  "tc_neighbor_min": 0.5,
+  "n_clusters": 1152,
+  "largest_cluster": 358,
+  "n_singletons": 650
+ },
+ {
+  "dist_cutoff": 0.65,
+  "tc_neighbor_min": 0.35,
+  "n_clusters": 450,
+  "largest_cluster": 643,
+  "n_singletons": 189
+ }
+]

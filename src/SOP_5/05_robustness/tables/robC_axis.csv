@@ -1,0 +1,5 @@
+axis,change,status,pool_n,pool_n_off,list_n,overlap_vs_main,head20_overlap_vs_main,n_removed_by_gate,note
+hERG 门,off→on<0.5,measured,618,1980,48,0.2292,0.2,1362,关 hERG 门后重选（池 1980）与主名单（池 618）比较
+anchor,4→≥3,measured,3113,,48,0.2292,0.15,,
+QED,0.50→0.60,measured,1277,,48,0.1667,0.1,,
+maxTc,0.90→0.70,measured,1973,,48,0.2292,0.2,,

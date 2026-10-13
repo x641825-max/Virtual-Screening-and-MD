@@ -1,0 +1,4 @@
+sigma,reps,mean_overlap,min_overlap,p10_overlap,mean_head20_overlap,min_head20_overlap
+0.05,100,0.9247,0.8438,0.875,0.8995,0.75
+0.1,100,0.8387,0.7188,0.7812,0.7735,0.6
+0.15,100,0.7672,0.6562,0.6875,0.672,0.5

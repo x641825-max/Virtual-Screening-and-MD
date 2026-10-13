@@ -1,0 +1,141 @@
+{
+  "gate_chain": {
+    "0_去重后池": 4990,
+    "1_类药性硬门（PAINS/Ro5/Veber）": 4600,
+    "2_姿态闸门 pass": 4471,
+    "3_anchor=4": 2949,
+    "4_maxTc<0.9": 2942,
+    "5_QED>=0.50（主池）": 1989,
+    "6_hERG<0.5": 621
+  },
+  "arm_pools": [
+    {
+      "arm": "QED0.40_anchor4",
+      "qed_min": 0.4,
+      "anchor_min": 4,
+      "pool_n": 2491,
+      "herg_status": "applied",
+      "pool_n_herg_pass": 725
+    },
+    {
+      "arm": "QED0.40_anchor3",
+      "qed_min": 0.4,
+      "anchor_min": 3,
+      "pool_n": 3887,
+      "herg_status": "applied",
+      "pool_n_herg_pass": 1209
+    },
+    {
+      "arm": "QED0.50_anchor4",
+      "qed_min": 0.5,
+      "anchor_min": 4,
+      "pool_n": 1989,
+      "herg_status": "applied",
+      "pool_n_herg_pass": 621
+    },
+    {
+      "arm": "QED0.50_anchor3",
+      "qed_min": 0.5,
+      "anchor_min": 3,
+      "pool_n": 3125,
+      "herg_status": "applied",
+      "pool_n_herg_pass": 1040
+    },
+    {
+      "arm": "QED0.60_anchor4",
+      "qed_min": 0.6,
+      "anchor_min": 4,
+      "pool_n": 1284,
+      "herg_status": "applied",
+      "pool_n_herg_pass": 415
+    },
+    {
+      "arm": "QED0.60_anchor3",
+      "qed_min": 0.6,
+      "anchor_min": 3,
+      "pool_n": 2051,
+      "herg_status": "applied",
+      "pool_n_herg_pass": 709
+    },
+    {
+      "arm": "QED0.70_anchor4",
+      "qed_min": 0.7,
+      "anchor_min": 4,
+      "pool_n": 866,
+      "herg_status": "applied",
+      "pool_n_herg_pass": 266
+    },
+    {
+      "arm": "QED0.70_anchor3",
+      "qed_min": 0.7,
+      "anchor_min": 3,
+      "pool_n": 1367,
+      "herg_status": "applied",
+      "pool_n_herg_pass": 440
+    }
+  ],
+  "novelty_gate": {
+    "rule": "选序层剔除 InChIKey 与 ChEMBL 已知 A2A 配体精确重合者",
+    "n_pool_exact_known": 17,
+    "pool_exact_known_cids": [
+      "MCULE-3317195282",
+      "MCULE-4458488252",
+      "MCULE-8015898361",
+      "MCULE-9162513429",
+      "MCULE-9362772678",
+      "ZINC000000003602",
+      "ZINC000000006170",
+      "ZINC000003977757",
+      "ZINC000004475274",
+      "ZINC000019373955",
+      "ZINC000019707370",
+      "ZINC000019708474",
+      "ZINC000019805507",
+      "ZINC000019815853",
+      "ZINC000020841526",
+      "ZINC000053006839",
+      "ZINC000118633318"
+    ]
+  },
+  "union_four_arms": 3258,
+  "hERG": {
+    "status": "applied",
+    "n_pending": 0
+  },
+  "known_ligand_check": {
+    "n_known_smiles": 9130,
+    "exact_inchikey_hits": 17,
+    "n_tc_ge_0.9": 20,
+    "max_tc": 1.0,
+    "top": [
+      {
+        "cid": "MCULE-1817568523",
+        "max_tc_known": 1.0
+      },
+      {
+        "cid": "MCULE-8015898361",
+        "max_tc_known": 1.0
+      },
+      {
+        "cid": "MCULE-9162513429",
+        "max_tc_known": 1.0
+      },
+      {
+        "cid": "MCULE-9362772678",
+        "max_tc_known": 1.0
+      },
+      {
+        "cid": "ZINC000000003602",
+        "max_tc_known": 1.0
+      }
+    ]
+  },
+  "chemotype_pool_distribution": {
+    "无氨基烟腈母核 + 无碱性胺": 2325,
+    "无氨基烟腈母核 + 碱性胺": 1576,
+    "氨基烟腈母核 + 碱性胺": 1082,
+    "氨基烟腈母核 + 无碱性胺": 7
+  },
+  "n_risk_am1bcc_pool": 404,
+  "n_pose_warn_kept_out": 138
+}

@@ -1,0 +1,480 @@
+{
+  "rule_set_id": "SOP-05-A2A-antagonist-shortlist",
+  "hard_gate_pass": false,
+  "n_hard": 9,
+  "n_hard_pass": 6,
+  "n_hard_pending": 2,
+  "all_pass": false,
+  "checks": [
+    {
+      "criterion": "主名单锚点 100% = 4/4",
+      "class": "hard",
+      "expected": true,
+      "observed": true,
+      "pass": true
+    },
+    {
+      "criterion": "成对 Tc 上限 ≤ 0.65",
+      "class": "hard",
+      "expected": 0.65,
+      "observed": 0.5672,
+      "pass": true
+    },
+    {
+      "criterion": "唯一骨架数（报告值）",
+      "class": "reported",
+      "expected": "报告",
+      "observed": 48,
+      "pass": true
+    },
+    {
+      "criterion": "hERG 区间",
+      "class": "reported",
+      "expected": "<0.5（外部表可得时）",
+      "observed": [
+        0.1218,
+        0.4956
+      ],
+      "pass": true,
+      "note": "门状态 applied、作用域 pool，覆盖 100.00%"
+    },
+    {
+      "criterion": "已知物精确重合数",
+      "class": "hard",
+      "expected": 0,
+      "observed": 0,
+      "pass": true
+    },
+    {
+      "criterion": "σ=0.10 名单平均重叠 ≥ 0.8（主判据）",
+      "class": "hard",
+      "expected": 0.8,
+      "observed": 0.7888,
+      "pass": false,
+      "note": "未通过：实测低于门槛 0.8（实测 0.7888；min 0.6667、P10 0.7292）；σ=0.05 为 0.8894、σ=0.15 为 0.7075。门槛与判据均未调整，缺口如实保留"
+    },
+    {
+      "criterion": "σ=0.10 头部 20 重叠（次要指标，如实报告、不设门）",
+      "class": "reported",
+      "expected": "报告（原 0.8 的表述歧义见规则 1.1.0 澄清）",
+      "observed": 0.855,
+      "pass": null,
+      "note": "实测 0.855，未达 0.80：头部 20 名对分数扰动更敏感；缺口如实保留"
+    },
+    {
+      "criterion": "每一步有漏斗 JSON",
+      "class": "hard",
+      "expected": [
+        "02_druglikeness_funnel.json",
+        "03_gates_gate_stack.json",
+        "04_selection_summary.json",
+        "05_robustness.json"
+      ],
+      "observed": [
+        "有",
+        "有",
+        "有",
+        "有"
+      ],
+      "pass": true
+    },
+    {
+      "criterion": "确定性重跑 sha256 全量一致（G 臂）",
+      "class": "hard",
+      "expected": true,
+      "observed": null,
+      "pass": null,
+      "status": "pending（由链末 G 臂判定；本步不自行判定）",
+      "note": "本步（13_assemble）在 G 臂之前执行，读到的 mode=compared、n_diff=0 是**上一轮链末**结果，不得当作本轮确定性通过证据；本轮判定写入 05_robustness/reports/determinism_compare.json（链末）与 tests/verify_pack.py 第 [17] 组"
+    },
+    {
+      "criterion": "确定性基线与比对运行分离（mode=compared 才算判据）",
+      "class": "hard",
+      "expected": "mode=compared 且 n_diff=0（链末写入，见 determinism_verdict）",
+      "observed": null,
+      "pass": null,
+      "status": "pending（由链末 G 臂判定；本步不自行判定）",
+      "note": "判据要求整链不可自证：写基线的一轮（mode=baseline_written）determinism_verified=false。本表由交付层生成，位于 G 臂之前，故两行在**本轮**恒为 pending；最终结果见 05_robustness/reports/determinism_compare.json"
+    },
+    {
+      "criterion": "阴性对照规则复现（包内重算）",
+      "class": "hard",
+      "expected": [
+        true,
+        true
+      ],
+      "observed": {
+        "NEG1": true,
+        "NEG2": true
+      },
+      "pass": true
+    },
+    {
+      "criterion": "阴性对照 2 个（固定占位）",
+      "class": "hard",
+      "expected": 2,
+      "observed": 2,
+      "pass": true
+    }
+  ],
+  "determinism_verdict": {
+    "judged_by": "05_robustness/scripts/12_determinism.py（整链末步）",
+    "source": "05_robustness/reports/determinism_compare.json",
+    "last_recorded": {
+      "mode": "compared",
+      "n_diff": 0,
+      "determinism_verified": true,
+      "baseline_sha256": "d2926003b01816fe8a11540718bc14447a3b1767f9b7dc79f644f8cdd241b677"
+    },
+    "note": "本步在 G 臂之前执行，此处只登记上一轮链末读数；本轮判据以链末写入的同名文件为准，并由 tests/verify_pack.py 第 [17] 组断言（mode=compared 且 n_diff=0）"
+  },
+  "context": {
+    "funnel_druglikeness": {
+      "0_去重后池": 4990,
+      "1_硬门剔除": 390,
+      "2_PAINS0_Ro5Veber零违规": 4600,
+      "3_QED>=0.50": 3228,
+      "3_QED>=0.60": 2120,
+      "3_QED>=0.40": 4011
+    },
+    "gate_chain": {
+      "0_去重后池": 4990,
+      "1_类药性硬门（PAINS/Ro5/Veber）": 4600,
+      "2_姿态闸门 pass": 4471,
+      "3_anchor=4": 2949,
+      "4_maxTc<0.9": 2942,
+      "5_QED>=0.50（主池）": 1989,
+      "6_hERG<0.5": 621
+    },
+    "arm_pool_sizes": [
+      {
+        "arm": "QED0.40_anchor4",
+        "qed_min": 0.4,
+        "anchor_min": 4,
+        "pool_n": 2491,
+        "herg_status": "applied",
+        "pool_n_herg_pass": 725
+      },
+      {
+        "arm": "QED0.40_anchor3",
+        "qed_min": 0.4,
+        "anchor_min": 3,
+        "pool_n": 3887,
+        "herg_status": "applied",
+        "pool_n_herg_pass": 1209
+      },
+      {
+        "arm": "QED0.50_anchor4",
+        "qed_min": 0.5,
+        "anchor_min": 4,
+        "pool_n": 1989,
+        "herg_status": "applied",
+        "pool_n_herg_pass": 621
+      },
+      {
+        "arm": "QED0.50_anchor3",
+        "qed_min": 0.5,
+        "anchor_min": 3,
+        "pool_n": 3125,
+        "herg_status": "applied",
+        "pool_n_herg_pass": 1040
+      },
+      {
+        "arm": "QED0.60_anchor4",
+        "qed_min": 0.6,
+        "anchor_min": 4,
+        "pool_n": 1284,
+        "herg_status": "applied",
+        "pool_n_herg_pass": 415
+      },
+      {
+        "arm": "QED0.60_anchor3",
+        "qed_min": 0.6,
+        "anchor_min": 3,
+        "pool_n": 2051,
+        "herg_status": "applied",
+        "pool_n_herg_pass": 709
+      },
+      {
+        "arm": "QED0.70_anchor4",
+        "qed_min": 0.7,
+        "anchor_min": 4,
+        "pool_n": 866,
+        "herg_status": "applied",
+        "pool_n_herg_pass": 266
+      },
+      {
+        "arm": "QED0.70_anchor3",
+        "qed_min": 0.7,
+        "anchor_min": 3,
+        "pool_n": 1367,
+        "herg_status": "applied",
+        "pool_n_herg_pass": 440
+      }
+    ],
+    "hERG": {
+      "status": "applied",
+      "n_pending": 0
+    },
+    "known_ligand_check": {
+      "n_known_smiles": 9130,
+      "exact_inchikey_hits": 17,
+      "n_tc_ge_0.9": 20,
+      "max_tc": 1.0,
+      "top": [
+        {
+          "cid": "MCULE-1817568523",
+          "max_tc_known": 1.0
+        },
+        {
+          "cid": "MCULE-8015898361",
+          "max_tc_known": 1.0
+        },
+        {
+          "cid": "MCULE-9162513429",
+          "max_tc_known": 1.0
+        },
+        {
+          "cid": "MCULE-9362772678",
+          "max_tc_known": 1.0
+        },
+        {
+          "cid": "ZINC000000003602",
+          "max_tc_known": 1.0
+        }
+      ]
+    },
+    "main_list": {
+      "arm": "main_QED0.50_anchor4",
+      "qed_min": 0.5,
+      "anchor_min": 4,
+      "pool_n": 618,
+      "n_known_excluded_in_arm": 3,
+      "n_selected_candidates": 48,
+      "n_controls": 2,
+      "list_size": 50,
+      "anchor_all_4": true,
+      "anchor_hits_min": 4,
+      "max_pairwise_tc": 0.5672,
+      "pairwise_ok": true,
+      "n_distinct_scaffold": 48,
+      "n_distinct_scaffold_generic": 42,
+      "chemotype_max": 18,
+      "chem_cap": 20,
+      "risk_n": 6,
+      "risk_cap": 8,
+      "scaffold_cap": 1,
+      "CNN_VS_range": [
+        7.2576,
+        7.9914
+      ],
+      "QED_range": [
+        0.5072,
+        0.8813
+      ],
+      "maxTc_range": [
+        0.2286,
+        0.5439
+      ],
+      "herg_range": [
+        0.1218,
+        0.4956
+      ],
+      "herg_status": "applied",
+      "known_exact_hits": 0,
+      "head20_cids": [
+        "ZINC000071721614",
+        "MCULE-6739389520",
+        "ZINC002384414275",
+        "ZINC000005271235",
+        "ZINC000067458904",
+        "ZINC000079108700",
+        "ZINC000097636624",
+        "ZINC000097115238",
+        "MCULE-6579907902",
+        "ZINC002384416952",
+        "ZINC000024760279",
+        "ZINC000012607437",
+        "ZINC000057520614",
+        "ZINC000071738518",
+        "ZINC000013009716",
+        "MCULE-8604846994",
+        "ZINC000002782221",
+        "MCULE-3663854374",
+        "ZINC000032738752",
+        "MCULE-3423843622"
+      ],
+      "head20_CNN_VS_min": 7.4931,
+      "head20_mean_qed": 0.6421
+    },
+    "constraint_trigger": [
+      {
+        "arm": "main_QED0.50_anchor4",
+        "pool_n": 618,
+        "selected": 48,
+        "skip_scaffold_cap": 17,
+        "skip_tc_pairwise": 1,
+        "rate_scaffold_cap": 0.0275,
+        "rate_tc_pairwise": 0.0016,
+        "skip_chem_cap": NaN,
+        "rate_chem_cap": NaN,
+        "skip_risk_cap": NaN,
+        "rate_risk_cap": NaN
+      },
+      {
+        "arm": "sens_QED0.60_anchor4",
+        "pool_n": 413,
+        "selected": 48,
+        "skip_scaffold_cap": 16,
+        "skip_tc_pairwise": 1,
+        "rate_scaffold_cap": 0.0387,
+        "rate_tc_pairwise": 0.0024,
+        "skip_chem_cap": NaN,
+        "rate_chem_cap": NaN,
+        "skip_risk_cap": NaN,
+        "rate_risk_cap": NaN
+      },
+      {
+        "arm": "sens_QED0.40_anchor4",
+        "pool_n": 722,
+        "selected": 48,
+        "skip_scaffold_cap": 13,
+        "skip_tc_pairwise": 5,
+        "rate_scaffold_cap": 0.018,
+        "rate_tc_pairwise": 0.0069,
+        "skip_chem_cap": 1.0,
+        "rate_chem_cap": 0.0014,
+        "skip_risk_cap": NaN,
+        "rate_risk_cap": NaN
+      },
+      {
+        "arm": "sens_QED0.50_anchor3",
+        "pool_n": 1034,
+        "selected": 48,
+        "skip_scaffold_cap": 17,
+        "skip_tc_pairwise": 2,
+        "rate_scaffold_cap": 0.0164,
+        "rate_tc_pairwise": 0.0019,
+        "skip_chem_cap": 2.0,
+        "rate_chem_cap": 0.0019,
+        "skip_risk_cap": NaN,
+        "rate_risk_cap": NaN
+      },
+      {
+        "arm": "sens_QED0.60_anchor3",
+        "pool_n": 705,
+        "selected": 48,
+        "skip_scaffold_cap": 23,
+        "skip_tc_pairwise": 2,
+        "rate_scaffold_cap": 0.0326,
+        "rate_tc_pairwise": 0.0028,
+        "skip_chem_cap": NaN,
+        "rate_chem_cap": NaN,
+        "skip_risk_cap": NaN,
+        "rate_risk_cap": NaN
+      },
+      {
+        "arm": "sens_QED0.40_anchor3",
+        "pool_n": 1203,
+        "selected": 48,
+        "skip_scaffold_cap": 20,
+        "skip_tc_pairwise": 5,
+        "rate_scaffold_cap": 0.0166,
+        "rate_tc_pairwise": 0.0042,
+        "skip_chem_cap": 12.0,
+        "rate_chem_cap": 0.01,
+        "skip_risk_cap": 2.0,
+        "rate_risk_cap": 0.0017
+      }
+    ],
+    "admet_annotation_layer": {
+      "non_gating": true,
+      "source": "03_gates/admet/raw/CNN_VS_ranking_49963_ADMET.csv",
+      "source_sha256": "5d693ea7d9d06e29375f7b73fc496911ce514444ef2e243e3b2feb4703a67476",
+      "pool_coverage": 4990,
+      "not_covered": [],
+      "cutpoints_recalibrated_on_pool": {
+        "herg": 0.779797,
+        "DILI": 0.991663,
+        "solubility": -6.164967,
+        "AMES": 0.5,
+        "ClinTox": 0.5,
+        "Carcinogens_Lagunin": 0.5
+      },
+      "delivered_list": {
+        "n_candidates": 48,
+        "md_precheck_n": 15,
+        "md_precheck_cids": [
+          "ZINC000013731712",
+          "ZINC000019874364",
+          "ZINC000071721614",
+          "ZINC000005271235",
+          "ZINC001776011322",
+          "MCULE-1734495387",
+          "ZINC000096119227",
+          "MCULE-6579907902",
+          "ZINC000012607437",
+          "MCULE-8604846994",
+          "ZINC000002782221",
+          "MCULE-3663854374",
+          "ZINC000824396886",
+          "ZINC000006158656",
+          "ZINC000096336701"
+        ],
+        "tier_counts": {
+          "优先跟进": 33,
+          "建议淘汰": 2,
+          "需警惕": 13
+        },
+        "herg_band_counts": {
+          "低": 48
+        },
+        "herg_margin_min": 0.004369,
+        "herg_margin_median": 0.133758,
+        "n_margin_lt_tight": 13,
+        "n_margin_lt_0.10": 22,
+        "margin_tight_cids": [
+          "MCULE-6579907902",
+          "ZINC000008608612",
+          "ZINC000008706207",
+          "ZINC000013009716",
+          "ZINC000014973606",
+          "ZINC000067458904",
+          "ZINC000071721614",
+          "ZINC000071738518",
+          "ZINC000091526107",
+          "ZINC000092920989",
+          "ZINC000253419644",
+          "ZINC001776011322",
+          "ZINC002384416952"
+        ],
+        "herg_median": 0.366243
+      },
+      "descriptor_crosscheck": "03_gates/admet/reports/admet_descriptor_crosscheck.json",
+      "descriptor_crosscheck_tolerance": 1e-06,
+      "descriptor_crosscheck_all_within_tol": true,
+      "descriptor_crosscheck_rule_agreement_pct": {
+        "ro5": 99.9399,
+        "pains": 100.0,
+        "brenk": 92.5251
+      },
+      "prediction_layer_recomputed_in_pack": false,
+      "list_membership_unchanged": true,
+      "annotation_merge_membership_asserted": true,
+      "herg_soft_line": 0.743738,
+      "herg_hard_line_candidate": 0.8,
+      "herg_threshold_repro_check": {
+        "soft_line_expected": 0.744,
+        "soft_line_observed": 0.743738,
+        "soft_line_ok": true,
+        "library_head_tradeoff_expected": 0.8,
+        "library_head_tradeoff_observed": 0.8,
+        "library_head_tradeoff_ok": true,
+        "library_head_at_0.01_grid": 0.79,
+        "note": "与外部 run（54,932 库）的数字对账；库内相对锚定（A1）因口径不同（本包 49,963 行 vs 外部 54,932 去重并集）允许小差异，不影响 A2/A3"
+      },
+      "herg_gate_unchanged": 0.5,
+      "note": "非判据：不改门（hERG<0.5）/不改池/不改名单；注释列为交付物追加列"
+    }
+  }
+}

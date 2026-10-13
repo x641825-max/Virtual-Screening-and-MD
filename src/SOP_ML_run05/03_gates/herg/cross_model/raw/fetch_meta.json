@@ -1,0 +1,25 @@
+{
+  "source": "ChEMBL REST API（EBI）",
+  "url_base": "https://www.ebi.ac.uk/chembl/api/data/activity.json",
+  "query": {
+    "target_chembl_id": "CHEMBL240 (KCNH2 / hERG, Homo sapiens)",
+    "standard_type": [
+      "IC50",
+      "Ki"
+    ],
+    "standard_relation": "=",
+    "pchembl_value": "not null"
+  },
+  "fetched_utc": "2026-09-23T06:47:45Z",
+  "n_rows": 13521,
+  "api_total_count": {
+    "IC50": 11709,
+    "Ki": 1812
+  },
+  "n_requests": 14,
+  "first_url": "https://www.ebi.ac.uk/chembl/api/data/activity.json?target_chembl_id=CHEMBL240&standard_type=IC50&standard_relation=%3D&pchembl_value__isnull=false&only=molecule_chembl_id,canonical_smiles,standard_type,standard_relation,standard_value,standard_units,pchembl_value,assay_chembl_id,potential_duplicate&limit=1000&offset=0",
+  "retrieved_by": "ATLAS 手工执行（联网步骤不入链）",
+  "file": "chembl_herg_kcnh2_activities.csv",
+  "md5": "b7b3b959b228a732afb312c7e8291275",
+  "sha256": "71b1852e9e5548fc81457ff0f1e677f3a26f676a22bcf6bfa290edd2775fcb8e"
+}

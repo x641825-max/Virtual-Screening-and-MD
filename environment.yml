@@ -1,0 +1,20 @@
+# conda 等价环境（与 requirements.txt 同版本快照）
+#   conda env create -f environment.yml
+#   conda activate a2a-md-candidates
+name: a2a-md-candidates
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12.2
+  - numpy=2.4.6
+  - pandas=2.3.3
+  - scipy=1.15.3
+  - scikit-learn=1.9.1
+  - matplotlib=3.11.1
+  - openpyxl=3.1.5
+  - pillow=12.3.0
+  - pip
+  - pip:
+      - rdkit==2025.9.5
+# 硬件：x86_64 CPU 即可（实测 4 核 8 GB 足够跑默认模式与 Notebook）；
+#       无 GPU / CUDA / 系统级二进制依赖；默认路径下全程离线。

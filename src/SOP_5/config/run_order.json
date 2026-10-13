@@ -1,0 +1,226 @@
+{
+  "package": "SOP_5",
+  "title": "A2A 腺苷受体拮抗剂 · MD 候选名单 SOP（自包含可复现工程包）",
+  "entry": "run_all.py",
+  "options": {
+    "extract_large": true,
+    "note": "extract_large=false 时跳过大体积姿态文件（5,098 集 poses.sdf），带标签集 IFP 与阴性对照来源将不可得，相关步骤会显式报错而非静默降级"
+  },
+  "steps": [
+    {
+      "id": "00_unpack",
+      "script": "00_inputs/scripts/00_unpack_inputs.py",
+      "desc": "按白名单解包三个归档到 00_inputs/extracted/，生成解包清单",
+      "outputs": [
+        "00_inputs/manifests/EXTRACTED_MANIFEST.md5",
+        "00_inputs/manifests/extracted_manifest.json"
+      ],
+      "order": 1
+    },
+    {
+      "id": "01_verify_inputs",
+      "script": "00_inputs/scripts/01_verify_inputs.py",
+      "desc": "输入固化：md5/sha256 与 frozen_rule 对账，登记归档内关键成员哈希",
+      "outputs": [
+        "00_inputs/manifests/INPUT_MANIFEST.md",
+        "00_inputs/manifests/input_verify.json"
+      ],
+      "order": 2
+    },
+    {
+      "id": "02_pose_identity_qc",
+      "script": "01_pose_qc/scripts/02_pose_identity_qc.py",
+      "desc": "步骤1a：姿态属性一致性 + 结构身份分级 + 坐标往返偏差",
+      "outputs": [
+        "01_pose_qc/tables/pose_identity_qc.csv",
+        "01_pose_qc/reports/pose_identity_summary.json"
+      ],
+      "order": 3
+    },
+    {
+      "id": "03_pose_normalize",
+      "script": "01_pose_qc/scripts/03_pose_normalize.py",
+      "desc": "步骤1b：InChIKey 去重 + 规范化 SDF + 标注列（stereo_source/n_fragments/protonation_note）",
+      "outputs": [
+        "01_pose_qc/outputs/SOP-05_poses_normalized.sdf",
+        "01_pose_qc/tables/pose_pool.csv",
+        "01_pose_qc/tables/pose_dedup_map.csv"
+      ],
+      "order": 4
+    },
+    {
+      "id": "04_pose_gate",
+      "script": "01_pose_qc/scripts/04_pose_gate.py",
+      "desc": "步骤1c：16 残基接触指纹 + 4 锚点命中 + 盒子几何 → 姿态闸门，并与 run01 top200 对齐校验",
+      "outputs": [
+        "01_pose_qc/tables/pose_gate.csv",
+        "01_pose_qc/tables/contact_fp_16res.csv",
+        "01_pose_qc/tables/labeled5098_contact_fp.csv",
+        "01_pose_qc/reports/pose_gate_summary.json"
+      ],
+      "order": 5
+    },
+    {
+      "id": "05_descriptors",
+      "script": "02_druglikeness/scripts/05_descriptors.py",
+      "desc": "步骤2a：RDKit 重算描述符/PAINS/Brenk/Ro5/Veber/QED/CNS MPO/化学型/骨架/指纹，并与上游列交叉校验",
+      "outputs": [
+        "02_druglikeness/tables/descriptors.csv",
+        "02_druglikeness/tables/fingerprints_ecfp4.npz",
+        "02_druglikeness/reports/descriptor_crosscheck.json"
+      ],
+      "order": 6
+    },
+    {
+      "id": "06_funnel",
+      "script": "02_druglikeness/scripts/06_funnel.py",
+      "desc": "步骤2b：类药性漏斗（PAINS/Ro5/Veber 硬门 + QED 三档 + CNS MPO/TPSA 标注）",
+      "outputs": [
+        "02_druglikeness/reports/druglikeness_funnel.json",
+        "02_druglikeness/tables/druglikeness_columns.csv"
+      ],
+      "order": 7
+    },
+    {
+      "id": "07_maxTc",
+      "script": "03_gates/scripts/07_maxTc_gate.py",
+      "desc": "步骤3a：对 479 个已知活性算最大 ECFP4 Tanimoto（maxTc）并落门",
+      "outputs": [
+        "03_gates/tables/maxTc_actives.csv",
+        "03_gates/reports/maxTc_summary.json"
+      ],
+      "order": 8
+    },
+    {
+      "id": "08_herg",
+      "script": "03_gates/scripts/08_herg_interface.py",
+      "desc": "步骤3b：hERG 外部接口——生成四臂并集补算清单；若表存在则落门，否则显式 pending",
+      "outputs": [
+        "03_gates/herg/SOP-05_herg_input_union.csv",
+        "03_gates/herg/HERG_INTERFACE.md",
+        "03_gates/reports/herg_status.json"
+      ],
+      "order": 9
+    },
+    {
+      "id": "09_gate_stack",
+      "script": "03_gates/scripts/09_gate_stack.py",
+      "desc": "步骤3c：合并候选主表 + 各臂池 + 门叠加统计 + 已知物核验",
+      "outputs": [
+        "03_gates/tables/candidate_universe.csv",
+        "03_gates/tables/gate_stack.csv",
+        "03_gates/reports/gate_stack.json"
+      ],
+      "order": 10
+    },
+    {
+      "id": "10_select_lists",
+      "script": "04_selection/scripts/10_select_lists.py",
+      "desc": "步骤4：6 组名单（3 QED 档 × 2 锚点档）+ 约束触发率 + 决策卡 + 2 阴性对照",
+      "outputs": [
+        "04_selection/tables/list_main.csv",
+        "04_selection/reports/selection_summary.json",
+        "04_selection/tables/constraint_trigger_rates.csv"
+      ],
+      "order": 11
+    },
+    {
+      "id": "08b_herg_cross_model",
+      "script": "03_gates/scripts/08b_herg_cross_model.py",
+      "role": "分析步（只产出证据，不改门与名单）；用 ChEMBL CHEMBL240 活性自建 RF/LR/kNN；**位置在选名单之后**（本步需要主名单作输入，见 order_note）",
+      "desc": "步骤4‴（分析步，置于 10_select_lists 之后）：hERG 第二模型交叉验证——量化单模型 0.5 阈值结论的模型依赖度，并给出对并集/前主池/交付名单的实测影响；不修改任何门/名单",
+      "outputs": [
+        "03_gates/herg/cross_model/reports/herg_cross_model.json",
+        "03_gates/herg/cross_model/HERG_CROSS_MODEL.md",
+        "03_gates/herg/cross_model/tables/herg_cross_model_predictions.csv"
+      ],
+      "order": 12
+    },
+    {
+      "id": "10b_admet_annotation",
+      "script": "03_gates/scripts/10b_admet_annotation.py",
+      "role": "分析步（只产出标注列与证据，不改门与名单）；读包内冻结的 ADMET-AI f3 库表",
+      "desc": "步骤4′（分析步）：ADMET 注释层——池级标注列（毒性/ADME/CYP/百分位）+ 池内重标定切点 + 描述符独立复算交叉核验 + MD 前置复核清单",
+      "outputs": [
+        "03_gates/admet/tables/admet_annotation_pool.csv",
+        "03_gates/admet/tables/admet_annotation_cards.csv",
+        "03_gates/admet/reports/admet_annotation.json",
+        "03_gates/admet/ADMET_LAYER.md"
+      ],
+      "order": 13
+    },
+    {
+      "id": "10c_herg_threshold",
+      "script": "03_gates/scripts/10c_herg_threshold.py",
+      "role": "分析步（不改门与名单）；三锚定 + 保留曲线 + 冲突消解",
+      "desc": "步骤4″（分析步）：hERG 阈值三锚定（库内相对 / 已上市药参照 / 取舍驱动）+ 0.01 步长保留曲线 + 名单档位标注，主口径 hERG<0.5 不变",
+      "outputs": [
+        "03_gates/admet/reports/herg_threshold_analysis.json",
+        "03_gates/admet/tables/herg_retention_curve.csv",
+        "03_gates/admet/HERG_THRESHOLD_SOP.md"
+      ],
+      "order": 14
+    },
+    {
+      "id": "11_robustness",
+      "script": "05_robustness/scripts/11_robustness.py",
+      "desc": "步骤5：A–F 六臂稳健性（打分扰动/阈值矩阵/单轴/指纹/并列带宽/Butina）",
+      "outputs": [
+        "05_robustness/reports/robustness.json",
+        "05_robustness/tables/robA_sigma_sweep.csv"
+      ],
+      "order": 15
+    },
+    {
+      "id": "15_md_batch_select",
+      "script": "07_md_batch/scripts/15_md_batch_select.py",
+      "desc": "步骤6：MD 批次选择——从主口径 50 名单挑 20 个进 MD 一级批次；v1.7.0 起用 MILP 按目标函数 objective（字典序：分位覆盖下限 t → CNN_VS 跨度 → Σ CNN_VS → 规范并列打破）求可证明最优解，并出具 gap=0 最优性证书；旧贪心填充降为对照留痕（不改名单与门）",
+      "outputs": [
+        "07_md_batch/tables/md_batch20.csv",
+        "07_md_batch/tables/md_batch_excluded.csv",
+        "07_md_batch/reports/md_batch.json",
+        "07_md_batch/MD_BATCH.md"
+      ],
+      "role": "机时分配层（分析步）：只做取舍与留痕，不改门与名单；「最优」限定在 step6_md_batch.objective 口径内",
+      "order": 16
+    },
+    {
+      "id": "13_assemble",
+      "script": "06_deliverables/scripts/13_assemble.py",
+      "desc": "交付层：汇总 6 组名单矩阵、对照与决策卡、规范性 SDF、图、MANIFEST",
+      "outputs": [
+        "06_deliverables/SOP-05_MD_shortlist_main.csv",
+        "06_deliverables/MANIFEST.sha256",
+        "06_deliverables/INDEX.md"
+      ],
+      "order": 17
+    },
+    {
+      "id": "14_report",
+      "script": "06_deliverables/scripts/14_report.py",
+      "desc": "生成最终 Markdown 报告（含漏斗表、名单画像、稳健性、验收对账、下游 MD 接口）",
+      "outputs": [
+        "06_deliverables/SOP-05_report.md",
+        "06_deliverables/SOP-05_downstream_MD_plan.md"
+      ],
+      "order": 18
+    },
+    {
+      "id": "12_determinism",
+      "script": "05_robustness/scripts/12_determinism.py",
+      "desc": "步骤5G：全量产物 sha256 比对（确定性重跑判据）——置于整链末尾，使哈希范围覆盖 13/14 交付层产物",
+      "outputs": [
+        "05_robustness/determinism/sha256_current.json",
+        "05_robustness/reports/determinism_compare.json"
+      ],
+      "phase": "G（整链末尾）",
+      "order": 19
+    }
+  ],
+  "verification": {
+    "pack_selfcheck": "tests/verify_pack.py",
+    "isolation_check": "tests/check_isolation.py",
+    "index": "tests/make_index.py"
+  },
+  "order_note": "10b/10c 为分析步（置于 10 之后、11 之前：既能看到池与名单，其产物又能进入交付层）；08b 同属分析步，但**必须晚于 10_select_lists**（它要读主名单算名单级影响，早期版本读交付副本/上游表导致“读下游产物”与冷启动中止，见 SOP_5_review/SOP-05_运行逻辑审查_2026-09-23.md D1）；12_determinism 仍在整链末尾，其哈希范围覆盖新增产物与交付层"
+}

@@ -1,0 +1,54 @@
+{
+  "n_poses": 4979,
+  "identity_class_counts": {
+    "graph_mismatch": 8,
+    "identical": 4670,
+    "protonation_diff": 2,
+    "stereo_only": 299
+  },
+  "qc_class_counts_technical": {
+    "graph_mismatch": 8,
+    "identical_fixed": 4670,
+    "protonation_diff": 2,
+    "stereo_only_fixed": 299
+  },
+  "stereo_source_counts": {
+    "": 8,
+    "pose3D(修正键级后)": 4969,
+    "pose3D(未在输入中指定)": 2
+  },
+  "n_multifragment_template": 0,
+  "n_fragments_template_dist": {
+    "1": 4979
+  },
+  "cnn_vs_x_affinity_violations": 0,
+  "cnn_vs_x_affinity_tolerance": 0.0005,
+  "coord_max_dev_max": 0.0,
+  "prop_max_abs_diff_vs_upstream": {
+    "CNN_VS": 0.0,
+    "CNNscore": 0.0,
+    "CNNaffinity": 0.0,
+    "CNNaffinity_variance": 0.0,
+    "minimizedAffinity": 0.0,
+    "rank_score": 0.0,
+    "n_fragments": null
+  },
+  "heavy_atom_delta_counts": {
+    "0": 4979
+  },
+  "protonation_diff_cids": [
+    "SCALE-039600",
+    "SCALE-094844"
+  ],
+  "graph_mismatch_cids": [
+    "SCALE-034731",
+    "SCALE-045302",
+    "SCALE-050461",
+    "SCALE-068838",
+    "SCALE-073684",
+    "SCALE-078502",
+    "SCALE-081292",
+    "SCALE-087802"
+  ],
+  "pass": true
+}

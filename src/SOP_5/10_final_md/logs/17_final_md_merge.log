@@ -1,0 +1,16 @@
+
+==== === 17_final_md_merge === ====
+[17_final_md_merge] SOP_5（目录 ZINC/MCULE）：MD 一级批次 20 行（候选 18 + 对照 2）
+[17_final_md_merge] SOP_ML_run05（ML 生成 SCALE-）：MD 一级批次 19 行（候选 17 + 对照 2）
+[17_final_md_merge] 合并候选池 35 个（目录 18 + 生成 17）；共用阴性对照 2 个
+[17_final_md_merge] 第二 hERG 模型不过门：5 个 → 保留入池并逐分子标注「模型依赖」
+[17_final_md_merge] 资格池 33 个（通用骨架去重剔除 2 个）
+[17_final_md_merge] 名额 20 候选 + 2 对照 = 22 行；化学型 ≤8、风险档 ≤3、骨架 ≤1、成对 Tc <0.65；CNN_VS 中位（相对合并候选池 35）=7.6359，下半区下限 5 个；分位 3 轴 × 4 层 = 12 格
+[17_final_md_merge] 分位边界（资格池自分布）：CNN_VS [7.3069, 7.6359, 7.8544]；cLogP [1.954, 2.6306, 3.1775]；CNS MPO [4.0779, 4.5, 5.0413]；有效分位格 12（空格 0）
+[17_final_md_merge] 资格池成对 ECFP4 Tc 最大 0.5849；Tc ≥ 0.65 的冲突对 0
+[17_final_md_merge] 最优解：t*=5（占据 12/12 个分位格）、CNN_VS 跨度 3.5015、Σ CNN_VS 150.4726；四阶段 status 全 0、mip_gap=0、重解一致
+[17_final_md_merge] 对照（v1.6.0 贪心）：t=0、跨度 0.7917、Σ CNN_VS 155.5976；与最优解重叠 14 席、互换 6 席
+[17_final_md_merge] 席位角色（留一法）：跨度端点 2、覆盖下限 18、质量兜底 0；反事实重解：覆盖不可替代 0、跨度不可替代 2、可替代 18
+[17_final_md_merge] 敏感性对照（来源池内百分位口径）：t=5、与主名册重叠 13/20 席、互换 7 席
+[17_final_md_merge] 名册来源构成：{'SOP_5（目录 ZINC/MCULE）': 13, 'SOP_ML_run05（ML 生成 SCALE-）': 7}；可合成性分诊：{'绿 常规合成': 16, '黄 需确认路线': 4}
+[17_final_md_merge] 写出 tables/final_md_20.csv（22 行）、tables/final_md_excluded.csv（15 行）、reports/final_md.json、reports/FINAL_MD_20.md

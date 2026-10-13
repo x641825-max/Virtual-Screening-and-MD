@@ -1,0 +1,9 @@
+arm,qed_min,anchor_min,pool_n,herg_status,pool_n_herg_pass
+QED0.40_anchor4,0.4,4,2870,applied,788
+QED0.40_anchor3,0.4,3,3831,applied,1011
+QED0.50_anchor4,0.5,4,2404,applied,762
+QED0.50_anchor3,0.5,3,3203,applied,977
+QED0.60_anchor4,0.6,4,1473,applied,544
+QED0.60_anchor3,0.6,3,1897,applied,698
+QED0.70_anchor4,0.7,4,832,applied,335
+QED0.70_anchor3,0.7,3,1082,applied,429

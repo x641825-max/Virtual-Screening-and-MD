@@ -1,0 +1,9 @@
+head,min_keep,head_n,strictest_t,feasible_t_rounded,retention_pct
+library_head@K=1000,0.75,1000,0.81,0.85,86
+pack_main_pool,0.75,2387,0.75,0.75,75.2409
+library_head@K=1000,0.75,1000,0.81,0.85,86
+pack_main_pool,0.75,2387,0.75,0.75,75.2409
+library_head@K=1000,0.8,1000,0.83,0.85,86
+pack_main_pool,0.8,2387,0.78,0.8,83.6615
+library_head@K=1000,0.9,1000,0.88,0.9,95.2
+pack_main_pool,0.9,2387,0.85,0.85,90.6996

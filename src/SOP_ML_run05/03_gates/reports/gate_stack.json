@@ -1,0 +1,141 @@
+{
+  "gate_chain": {
+    "0_去重后池": 4979,
+    "1_类药性硬门（PAINS/Ro5/Veber）": 4061,
+    "2_姿态闸门 pass": 3962,
+    "3_anchor=4": 2971,
+    "4_maxTc<0.9": 2955,
+    "5_QED>=0.50（主池）": 2404,
+    "6_hERG<0.5": 762
+  },
+  "arm_pools": [
+    {
+      "arm": "QED0.40_anchor4",
+      "qed_min": 0.4,
+      "anchor_min": 4,
+      "pool_n": 2870,
+      "herg_status": "applied",
+      "pool_n_herg_pass": 788
+    },
+    {
+      "arm": "QED0.40_anchor3",
+      "qed_min": 0.4,
+      "anchor_min": 3,
+      "pool_n": 3831,
+      "herg_status": "applied",
+      "pool_n_herg_pass": 1011
+    },
+    {
+      "arm": "QED0.50_anchor4",
+      "qed_min": 0.5,
+      "anchor_min": 4,
+      "pool_n": 2404,
+      "herg_status": "applied",
+      "pool_n_herg_pass": 762
+    },
+    {
+      "arm": "QED0.50_anchor3",
+      "qed_min": 0.5,
+      "anchor_min": 3,
+      "pool_n": 3203,
+      "herg_status": "applied",
+      "pool_n_herg_pass": 977
+    },
+    {
+      "arm": "QED0.60_anchor4",
+      "qed_min": 0.6,
+      "anchor_min": 4,
+      "pool_n": 1473,
+      "herg_status": "applied",
+      "pool_n_herg_pass": 544
+    },
+    {
+      "arm": "QED0.60_anchor3",
+      "qed_min": 0.6,
+      "anchor_min": 3,
+      "pool_n": 1897,
+      "herg_status": "applied",
+      "pool_n_herg_pass": 698
+    },
+    {
+      "arm": "QED0.70_anchor4",
+      "qed_min": 0.7,
+      "anchor_min": 4,
+      "pool_n": 832,
+      "herg_status": "applied",
+      "pool_n_herg_pass": 335
+    },
+    {
+      "arm": "QED0.70_anchor3",
+      "qed_min": 0.7,
+      "anchor_min": 3,
+      "pool_n": 1082,
+      "herg_status": "applied",
+      "pool_n_herg_pass": 429
+    }
+  ],
+  "novelty_gate": {
+    "rule": "选序层剔除 InChIKey 与 ChEMBL 已知 A2A 配体精确重合者",
+    "n_pool_exact_known": 18,
+    "pool_exact_known_cids": [
+      "SCALE-004769",
+      "SCALE-006591",
+      "SCALE-011569",
+      "SCALE-011754",
+      "SCALE-013451",
+      "SCALE-020492",
+      "SCALE-021465",
+      "SCALE-023658",
+      "SCALE-025249",
+      "SCALE-043463",
+      "SCALE-054729",
+      "SCALE-055397",
+      "SCALE-065608",
+      "SCALE-069613",
+      "SCALE-070018",
+      "SCALE-070808",
+      "SCALE-093429",
+      "SCALE-113626"
+    ]
+  },
+  "union_four_arms": 3294,
+  "hERG": {
+    "status": "applied",
+    "n_pending": 0
+  },
+  "known_ligand_check": {
+    "n_known_smiles": 9130,
+    "exact_inchikey_hits": 18,
+    "n_tc_ge_0.9": 19,
+    "max_tc": 1.0,
+    "top": [
+      {
+        "cid": "SCALE-004769",
+        "max_tc_known": 1.0
+      },
+      {
+        "cid": "SCALE-006591",
+        "max_tc_known": 1.0
+      },
+      {
+        "cid": "SCALE-011569",
+        "max_tc_known": 1.0
+      },
+      {
+        "cid": "SCALE-011754",
+        "max_tc_known": 1.0
+      },
+      {
+        "cid": "SCALE-013451",
+        "max_tc_known": 1.0
+      }
+    ]
+  },
+  "chemotype_pool_distribution": {
+    "无氨基烟腈母核 + 碱性胺": 4701,
+    "氨基烟腈母核 + 碱性胺": 250,
+    "无氨基烟腈母核 + 无碱性胺": 28
+  },
+  "n_risk_am1bcc_pool": 1824,
+  "n_pose_warn_kept_out": 116
+}

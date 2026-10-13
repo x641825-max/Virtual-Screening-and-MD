@@ -1,0 +1,77 @@
+{
+  "n_in": 5000,
+  "n_kept": 4990,
+  "n_dropped": 10,
+  "dropped_cids": [
+    "MCULE-1406420066",
+    "MCULE-2062709432",
+    "MCULE-2481926174",
+    "MCULE-2775189955",
+    "MCULE-4101476629",
+    "MCULE-4140540731",
+    "MCULE-4180441833",
+    "MCULE-6113678937",
+    "MCULE-6396758911",
+    "MCULE-7252704400"
+  ],
+  "dropped_detail": [
+    {
+      "cid": "MCULE-1406420066",
+      "ik_upstream": "JSIJGBPIQSCNPD-UHFFFAOYSA-N",
+      "CNN_VS": 7.16658
+    },
+    {
+      "cid": "MCULE-7252704400",
+      "ik_upstream": "LYKAJYLCIDLVPL-UHFFFAOYSA-N",
+      "CNN_VS": 6.99156
+    },
+    {
+      "cid": "MCULE-6396758911",
+      "ik_upstream": "MMMGUVYMTXDZSG-UHFFFAOYSA-N",
+      "CNN_VS": 6.89698
+    },
+    {
+      "cid": "MCULE-2062709432",
+      "ik_upstream": "WCBAYCWLLAUONJ-UHFFFAOYSA-N",
+      "CNN_VS": 6.88879
+    },
+    {
+      "cid": "MCULE-6113678937",
+      "ik_upstream": "IIAUTQCMQDRHDU-UHFFFAOYSA-N",
+      "CNN_VS": 6.85917
+    },
+    {
+      "cid": "MCULE-4101476629",
+      "ik_upstream": "RKCVCIOSNCSNMS-UHFFFAOYSA-N",
+      "CNN_VS": 6.84657
+    },
+    {
+      "cid": "MCULE-2775189955",
+      "ik_upstream": "IQHWXKJPMHMBNF-UHFFFAOYSA-N",
+      "CNN_VS": 6.76519
+    },
+    {
+      "cid": "MCULE-2481926174",
+      "ik_upstream": "IFYAMNUIMUZNHF-UHFFFAOYSA-N",
+      "CNN_VS": 6.70033
+    },
+    {
+      "cid": "MCULE-4140540731",
+      "ik_upstream": "PVNZWZPQYRXHEI-UHFFFAOYSA-N",
+      "CNN_VS": 6.69271
+    },
+    {
+      "cid": "MCULE-4180441833",
+      "ik_upstream": "LYHYWCQVHQADOU-UHFFFAOYSA-N",
+      "CNN_VS": 6.58838
+    }
+  ],
+  "n_written_sdf": 4990,
+  "identity_class_counts_kept": {
+    "identical": 4851,
+    "protonation_diff": 4,
+    "stereo_only": 135
+  },
+  "n_multifragment_in_pool": 61,
+  "positive_expectation_met": true
+}

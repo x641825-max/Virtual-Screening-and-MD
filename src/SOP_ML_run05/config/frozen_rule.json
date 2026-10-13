@@ -1,0 +1,785 @@
+{
+  "rule_set_id": "SOP-05-A2A-antagonist-shortlist",
+  "rule_version": "1.7.0",
+  "frozen_on": "2026-09-23",
+  "description": "A2A 腺苷受体拮抗剂 MD 候选择优的冻结规则集：输入固化、姿态核验、类药性、结构与毒性门、名单层选序、稳健性检验的全部阈值与算法口径。本文件是唯一的口径来源，脚本不得内嵌阈值。",
+  "conventions": {
+    "float_rounding_for_reports": 6,
+    "tie_break": "分数并列时按 cid 字典序升序（保证确定性）",
+    "randomness": "仅稳健性臂使用 numpy PCG64(seed) 显式随机源；主链全确定性",
+    "fingerprint_primary": "ECFP4 = Morgan radius 2, 2048 bit"
+  },
+  "seeds": {
+    "PROJECT_SEED": 20260905,
+    "PYTHONHASHSEED": "0",
+    "robustness_reps": 100
+  },
+  "inputs": {
+    "top5000_best_pose.sdf": {
+      "md5": "0ac1353fa852fd49ce2f34d1e4e148a0",
+      "sha256": "f5d8f2075626f060ce048b0dbe44b4e48dff270a4bd4d95aed98598d316842eb",
+      "role": "4,979 个 gnina 最优姿态（run05 · ML 生成分子 · CNN 口径工作池）",
+      "swap_note": "run05：VS_run05_best_poses.zip 解包 best_poses_run05.sdf（每分子 9 姿态取 CNN_VS 最大者；4,979/4,979 与排名表同源，max|Δ|=5e-5 = CSV 四位小数舍入）",
+      "swapped_on": "2026-09-24"
+    },
+    "CNN_VS_ranking_49963_with_pKa_cLogD74.csv": {
+      "md5": "d9c600d9cbaf5019b359cbc7ce128a92",
+      "sha256": "f7ed93c2f4e7ae0fc43fad8d1487d38807070b9d0a6fc03576a59cffc201d9e2",
+      "role": "全库 CNN_VS 排名 + 上游描述符 + MolGpKa 碱性 pKa + cpLogD7.4",
+      "swap_note": "run05：4,979 个 ML 生成分子（SCALE-*）的 gnina 排名表 + MolGpKa/cpLogD74 15 列（pKa/cLogD 由上游重算提供）",
+      "swapped_on": "2026-09-24"
+    },
+    "run01_redock_enrichment.zip": {
+      "md5": "82a64a41b06f49dc4327b6bd7fcb135e",
+      "sha256": "dc439580ea71d1320a36969a9618e4685fd91201bbcebda447b33a291b2d9fd9",
+      "role": "run01 归档：受体 4EIY、5,098 带标签富集库、富集基线、重对接验证"
+    },
+    "screening_kit.zip": {
+      "md5": "ff5902239a51536d6bc34e42599ceac3",
+      "sha256": "21e859f7a03c5693ca9b9595bf769fcfe20297d05ba43ea16b486f2a64182e6e",
+      "role": "筛选套件：ChEMBL 独立已知配体集、模型卡、受体副本"
+    },
+    "redocking.zip": {
+      "md5": "cac648447c54f688562ddafed90dcf65",
+      "sha256": "562d40fecb692a1aefcd2018808eb3b9f41815b199566cf5a97dae09212a1ea8",
+      "role": "3EML/SOP-02 重对接与诱饵基准（协议溯源与对照物来源）"
+    }
+  },
+  "input_extraction": {
+    "note": "解包白名单由脚本 00_inputs/scripts/00_unpack_inputs.py 固化；除白名单成员外不读归档内其他文件",
+    "large_member": "02_enrichment_5098/poses_raw/poses.sdf（约 130 MB，用于 5,098 带标签集 IFP 与阴性对照姿态）",
+    "config_switch": "extract_large=true（config/run_order.json 的 options）"
+  },
+  "receptor": {
+    "pdb": "00_inputs/extracted/run01/01_redocking/receptor/4EIY_protein.pdb",
+    "md5_expected": "aef775ee83735af8a878d42ca1e5fa85",
+    "chain": "A",
+    "co_crystal_ligand": "ZMA",
+    "pdb_id": "4EIY",
+    "box": {
+      "center": [
+        -0.471,
+        8.935,
+        17.159
+      ],
+      "edge_A": 23.042
+    },
+    "pocket_residues_16": [
+      "V84",
+      "L85",
+      "F168",
+      "E169",
+      "M174",
+      "M177",
+      "N181",
+      "W246",
+      "L249",
+      "H250",
+      "N253",
+      "H264",
+      "L267",
+      "M270",
+      "Y271",
+      "I274"
+    ],
+    "anchor_residues_4": [
+      "N253",
+      "E169",
+      "F168",
+      "W246"
+    ],
+    "contact_rule": "配体重原子与残基重原子最近距离 < 4.0 Å"
+  },
+  "rule_changelog": [
+    {
+      "version": "1.1.0",
+      "changes": [
+        "新增 novelty 硬门（选序层剔除 InChIKey 与 ChEMBL 已知 A2A 配体精确重合者）",
+        "修复 external_table 路径值误含括号注释（导致表即使存在也无法被载入）",
+        "登记外部 hERG 预测表（路径/来源/md5/sha256），并在 01 步校验其哈希",
+        "验收字段澄清：原『head20_overlap_min_under_sigma0.10 = 0.8』表述歧义，按 SOP 主判据拆为『mean_list_overlap_min_under_sigma0.10 = 0.8』（主门，阈值不变）与『head20_overlap_reported = true』（次要指标，如实报告不设门）"
+      ]
+    },
+    {
+      "version": "1.3.0",
+      "changes": [
+        "固化 f3 库 ADMET-AI 全量表（49,963 × 124，105 个 ADMET 列）为包内冻结输入，登记 md5/sha256 与生产者（HPC 应用 admet-ai，job f610251d9cdb473aa346a94c0e7c4331）",
+        "新增分析步 10b（ADMET 注释层 + 描述符独立复算交叉核验）与 10c（hERG 阈值三锚定 + 保留曲线）：只产出标注列与证据，不改门、不改池、不改名单",
+        "交付层在主名单、6 组敏感性/骨架档名单、决策卡与阴性对照卡上追加 admet_* 注释列（列追加、行序与成员不变）；新增注释全表与层说明交付件",
+        "库内相对切点（hERG/DILI/溶解度）按本包池（4,990）重标定，并在报告中列出外部库原值对照；绝对线（AMES/ClinTox/致癌性 0.5）沿用并在包内记录触发率",
+        "hERG 主口径保持 <0.5；新增软线（已上市药 75 分位）与硬线候选（库级头部取舍线）仅作标注与决策证据，标注为「非判据」"
+      ]
+    },
+    {
+      "version": "1.4.0",
+      "changes": [
+        "新增执行序第 16 步 15_md_batch_select（步骤 6：MD 批次选择）：从主口径 50 名单（48 候选 + 2 对照）中挑 20 个进入 MD 一级批次，规则块见 step6_md_batch",
+        "资格：剔除第二 hERG 模型（集成口径）不过门的候选（MD 不回答安全性）+ Bemis-Murcko 通用骨架去重（保留 CNN_VS 高者）",
+        "配额：沿用名单口径的成对 Tc<0.65 与骨架 ≤1，并按 N=20 缩放化学型 round(8N/20)=8、AM1-BCC 风险档 round(3N/20)=3",
+        "分层：≥5 个候选来自 CNN_VS 下半区（相对 48 候选的中位数），使一级 MD 能检验「对接分数 ⇒ 结合稳定性」",
+        "固定 2 位阴性对照；该步为分析步：只做机时分配与留痕，不改名单、不改门"
+      ]
+    },
+    {
+      "version": "1.4.1",
+      "changes": [
+        "交付层 hERG 表述与分诊量修订（评审 P0-2a，不改门、不改池、不改名单）：三档 band 在交付名单上恒为「低」（软线 0.744 > 门 0.5），信息量为 0；新增距门边距列 admet_herg_margin = 0.5 − ADMET_hERG 与紧边距标记 admet_herg_margin_tight（阈值 herg_margin_tight），注释列追加到交付件",
+        "hERG 门作用域披露（评审 P0-1a，不改口径）：herg_status.json 新增 scope_coverage / n_not_evaluated；并集外分子的门状态明确记为 not_evaluated（未评估），废止「保守判为不过门」这一会把「未评估」冒名为「不合格」的表述",
+        "姿态判据补正对照（评审 P0-3 L1①）：步骤 04 以 4EIY 共晶配体 ZMA 为参照重算锚点距离 / 真实接触集 / 盒子余量，写入 pose_gate_summary.json 的 cocrystal_reference 块，并对每个上传姿态追加 contact_jaccard_cocrystal（与共晶接触集的 Jaccard）与 n_cocrystal_contacts_hit 两列；该项为参照读数，不参与落门",
+        "确定性基线的写入语义澄清（评审 P1）：--freeze 与 --refreeze 显式区分，12_determinism 的 compare JSON 新增 mode/n_files/baseline_sha256 字段，其中 mode=baseline_written 不得被记为「确定性通过」；确定性哈希范围纳入 07_md_batch（此前该目录不在范围内）"
+      ]
+    },
+    {
+      "version": "1.5.0",
+      "changes": [
+        "hERG 门作用域改为**全池**（评审 P0-1B）：落门依据换成包内已冻结的 ADMET-AI 全量表（4,990/4,990 覆盖，零新计算），外部落门表降为对账件；门状态三态化 pass/fail/not_evaluated，禁止把缺值写成 fail；作用域覆盖率写入 herg_status.json 并进验收",
+        "受影响并如实报告：两条 anchor≥3 敏感性臂池扩大（QED0.50_anchor3 894→1017、QED0.40_anchor3 1000→1189），其与主名单的重叠率相应下降；主口径名单（48 候选 + 2 对照）与四臂并集不变",
+        "描述符结构规范化（评审 P0-4）：step2_druglikeness.standardization 固定为最大片段（不中和），描述符/类药性门/指纹/骨架/化学型/novelty 全部改按规范化物种计算；新增影响面留痕 standardization_impact.csv；ADMET-AI 交叉核验按单/多片段分列口径",
+        "读法：本版口径变更后，v1.4.x 的臂池数字不再可比；名单层成员与顺序若发生变化，以本次重跑产物为准",
+        "随本版重跑观测到的名单变化（已登记，非新增口径）：主口径 48 候选替换 2 个 —— MCULE-6579907902 进（去甲酸后 QED 0.457→0.618 越过 0.50 门槛）、MCULE-8604846994 进（与 MCULE-8153594520 去盐后为同一物种，选序按 CNN_VS 保留其一）、MCULE-8153594520 与 ZINC000069812064 出；step6_md_batch 的登记值同步 3→2"
+      ]
+    },
+    {
+      "version": "1.6.0",
+      "changes": [
+        "姿态正对照与质量档（评审 P0-3 L1②）：步骤 04 引入 4EIY 共晶配体 ZMA 的参照读数（锚点距离/真实接触集/盒子余量/极性方向角）与 contact_jaccard_cocrystal、pose_quality_tier、angle_deg_* 列；**不改变 pose_gate 语义**（改档位会清空 anchor≥3 敏感性臂池）",
+        "方向性诊断的诚实结论：重原子近似角 θ=∠(X–D–A) 以共晶自身读数（≈126–134°）为参照；实测该量**不区分** anchor=4 与 anchor=3，有区分度的是接触集 Jaccard（0.714 vs 0.571）。该项不落门，仅作诊断列",
+        "MD 判据参照系修正（评审 P0-3 L1③）：一级判据改为「对**晶体样结合模式**的 RMSD（口袋坐标系）+ 接触指纹保留率 + 锚点保留 + 方向性接触保留」，取代与姿态闸门同源同参照的「对上传姿态 RMSD < 0.3 nm」",
+        "MD 对照设计补全（评审 P0-3 L1③）：正对照 = ZMA（共晶配体）；硬负例 = CHEMBL5852598（实测 10 µM 弱活性、对名单候选 Tc=0.628 的最相似近邻）；NEG1/NEG2 降为次要对照。硬负例姿态需按包内对接协议先生成",
+        "MD 批次资格改「保留 + 标注」（评审 P0-2b）：第二模型（集成）不过门者不再被剔除出资格池，改为逐分子标注「模型依赖」；机时代价 +0.2 卡日量级。该层为机时分配，不产生安全性结论"
+      ]
+    },
+    {
+      "version": "1.7.0",
+      "changes": [
+        "MD 批次选择改为**可证明最优**（评审「20 个 MD 候选应是最优子集」+ 一次精确求解分析）：step6_md_batch.objective 定义字典序目标——① 分层覆盖下限 t（CNN_VS/cLogP/CNS MPO 三轴各 4 分位，max-min 均衡）→ ② CNN_VS 跨度 → ③ Σ CNN_VS 兜底 → ④ 规范并列打破；用 scipy.optimize.milp（HiGHS）求解并出具 gap=0 证书",
+        "实测口径变化：最优解 t*=4（12 个分位每层 ≥4 席，旧批次 CNN_VS 最低分位为 0 席）、跨度 0.6234→0.7337（池内全量程）、下半区席位 5→8、批内最大成对 Tc 0.5672→0.4658；代价 Σ CNN_VS 138.1033→136.5031（−1.16%），名册 6 换 6",
+        "旧贪心填充降为对照实现并写入报告：精确求解显示它正是「max Σ CNN_VS」口径的全局最优解（与旧名册 18/18 重合），故本版修的是**目标**而非算法",
+        "机时不变（仍 18 候选 + 2 对照）；本层仍为机时分配，不产生安全性/有效性结论；对外表述加限定「最优 = 在 step6_md_batch.objective 口径下最优」",
+        "自检新增第 [21] 组：从 md_batch20.csv 独立复算 t/跨度/Σ 与四条硬约束、断言与证书一致且 status=0/mip_gap=0、并断言重解一致（确定性）"
+      ]
+    }
+  ],
+  "step1_pose_qc": {
+    "identity_classes": [
+      "identical",
+      "stereo_only",
+      "protonation_diff",
+      "graph_mismatch"
+    ],
+    "stereo_source_rule": "姿态 3D 指派（AssignStereochemistryFrom3D），输入 SMILES 未指定的手性记为 pose3D 来源",
+    "prop_consistency": {
+      "rule": "|CNNscore × CNNaffinity − CNN_VS| ≤ 5e-4 且 SDF 属性与上游排名表逐值一致（CNN_VS/CNNscore/CNNaffinity/CNNaffinity_variance/minimizedAffinity）",
+      "tolerance": 0.0005
+    },
+    "coord_roundtrip": "姿态块坐标 → RDKit 读入 → 重写 molblock → 再读入，逐原子最大偏差（期望 0.0000 Å）",
+    "annotation_columns": [
+      "stereo_source",
+      "n_fragments",
+      "protonation_note",
+      "qc_class",
+      "pose_gate",
+      "warn_or_reject_reason"
+    ],
+    "dedup": {
+      "key": "InChIKey(上游 SMILES 全串)",
+      "keep": "CNN_VS 最大；并列取 cid 字典序最小",
+      "expected_kept": 4979
+    },
+    "gate_rule": "reject if outside_box==1 or anchor_hits_4A<=1；warn if anchor_hits_4A==2；否则 pass",
+    "warn_policy": "warn 分子保留在池中但不进主名单（进留档）",
+    "pose_quality": {
+      "role": "姿态质量档与方向性诊断（评审 P0-3 L1②）：只报告、只用于排序与优先级，**不参与落门**",
+      "jaccard_threshold": 0.6,
+      "tier_rule": "A = anchor=4 且与共晶接触集 Jaccard ≥ jaccard_threshold；B = anchor=4 但 Jaccard < 阈值；C = anchor=3；D = anchor ≤2",
+      "cocrystal_reference": "4EIY 共晶配体 ZMA（锚点 4/4：N253 2.79 / E169 2.79 / F168 3.41 / W246 3.55 Å；真实接触残基 12 个；盒子余量 4.00 Å），由步骤 04 在同一受体副本上重算，写入 pose_gate_summary.json 的 cocrystal_reference 块",
+      "directionality": "极性锚点重原子近似角 θ=∠(X–D–A)，参照系取共晶配体自身读数（ZMA ≈126–134°），不得用理想氢键角 180° 作参照。**实测该量不区分 anchor=4 与 anchor=3**（A 档中位 118.9°、C 档 125.6°），真正有区分度的是 contact_jaccard_cocrystal（0.714 vs 0.571）；该项仅作 MD 前人工复核的诊断列",
+      "why_not_gate": "不把 anchor=3 降级为 warn：敏感性臂 {QED≥0.6 / ≥0.5 / ≥0.4}×anchor≥3 依赖 pose_gate=pass 的口径，改档位会把这些臂池清空（口径连锁），故质量档与 pose_gate 分离维护"
+    }
+  },
+  "step2_druglikeness": {
+    "descriptor_engine": "RDKit 2025.09.5（MolWt / Crippen.MolLogP / Lipinski / CalcTPSA，不预先圆整）",
+    "pains": {
+      "engine": "RDKit FilterCatalog PAINS (A+B+C) 重算",
+      "rule": "hits == 0"
+    },
+    "ro5": {
+      "thresholds": {
+        "MW": 500,
+        "cLogP": 5,
+        "HBD": 5,
+        "HBA": 10
+      },
+      "comparison": "strict >",
+      "gate": "violations == 0"
+    },
+    "veber": {
+      "thresholds": {
+        "RotB": 10,
+        "TPSA": 140
+      },
+      "comparison": "strict >",
+      "gate": "violations == 0"
+    },
+    "qed": {
+      "primary": 0.5,
+      "sensitivity": [
+        0.6,
+        0.4
+      ]
+    },
+    "cns_mpo": {
+      "threshold": 4.0,
+      "source": "Wager 2010 Table 1（DOI 10.1021/cn100008c）",
+      "role": "标注列 + 报告进池率；不构成主门。80% 区间界定的 lo80/hi80 同为标注列，用于量化 cLogD 预测不确定性对 CNS MPO 的影响",
+      "pka_input": {
+        "column": "basic_pka",
+        "definition": "MolGpKa 预测的最强碱性中心的 pKa（点值；MolGpKa 不提供预测区间）",
+        "provider": "MolGpKa",
+        "provider_version": "4dc835219baad18c2e705274ac54d49597703966",
+        "no_basic_center": "上游以 basic_pka=0 + pka_status='no_basic_center' 编码（SOP_5 全表 49,963 行中 192 个；run05 全表 4,979 行中 0 个，pka_status 全为 ok）：按 pKa≤8 档取满分 T0=1.0，与 Wager 原意一致（无碱性中心 → 该轴不构成风险）"
+      },
+      "clogd_input": {
+        "column": "clogd74",
+        "definition": "cpLogD v2.0 的 cLogD7.4 点估计",
+        "provider": "cpLogD_v2.0_ChEMBL33",
+        "provider_version": "sha256:281338b9b99dede22782bfdf72170680b6dcafc4669d1f508034bc93e0224a72",
+        "interval": "clogd74_lower_80 / clogd74_upper_80 = 80% 预测区间（clogd_confidence=0.8，全域一致）；run05 池内区间宽度中位 0.396 log、最大 13.653 log（SOP_5 池内为 0.373 / 2.16）"
+      },
+      "pi80_convention": "cns_mpo_lo80 = 悲观下界（cLogD 取 80% 区间上界）；cns_mpo_hi80 = 乐观上界（cLogD 取区间下界）；cns_mpo_pi80_span = hi80 − lo80；pKa 轴无区间，按点值"
+    },
+    "tpsa_band": {
+      "range": [
+        90,
+        140
+      ],
+      "role": "标注列（血脑屏障倾向）"
+    },
+    "brenk": {
+      "role": "标注列（catalog 命中名，不删分子）"
+    },
+    "annotation_columns": [
+      "cns_mpo",
+      "cns_mpo_ge4",
+      "cns_mpo_lo80",
+      "cns_mpo_hi80",
+      "cns_mpo_pi80_span",
+      "basic_pka",
+      "clogd74",
+      "clogd74_lower_80",
+      "clogd74_upper_80",
+      "pka_status",
+      "tpsa_in_band",
+      "brenk"
+    ],
+    "standardization": {
+      "method": "largest_fragment",
+      "neutralize": false,
+      "applied_to": [
+        "descriptors",
+        "druglikeness_gates",
+        "fingerprints",
+        "scaffold",
+        "chemotype",
+        "novelty"
+      ],
+      "columns": [
+        "smiles_input",
+        "mw_input",
+        "qed_input",
+        "pains_input",
+        "brenk_input",
+        "n_fragments_standardized",
+        "counter_ion_smiles"
+      ],
+      "impact_table": "02_druglikeness/tables/standardization_impact.csv",
+      "rationale": "描述符与门所描述的物种必须等于对接/模拟所处理的物种。含反离子的输入会把 MW/cLogP/TPSA/QED 与 Ro5/Veber/BRENK 判定污染（SOP_5 实测池内 61 个多片段分子：MW 虚高中位 +46.0 Da、最大 +192.2 Da；QED 偏移最大 0.248；甲酸反离子会命中 BRENK aldehyde 而误报）。run05 池内多片段分子 0 个 → 该规范化对本批为恒等变换（已实测）",
+      "scaffold_generic_input": "规范化后的规范 SMILES（此前用上游含盐 SMILES）"
+    }
+  },
+  "step3_gates": {
+    "structure": {
+      "pose_gate": "pass",
+      "anchor_primary": 4,
+      "anchor_sensitivity": 3,
+      "combined_rule": "pose_gate == pass 且 anchor_hits_4A == 4（主）；anchor>=3（敏感）"
+    },
+    "maxTc_actives": {
+      "primary": 0.9,
+      "sensitivity": [
+        0.7
+      ],
+      "reference_set": "run01 5,098 带标签富集库中 activity_label==1 的 479 个已知活性（ECFP4 最大 Tanimoto）",
+      "rule": "maxTc < 阈值"
+    },
+    "herg": {
+      "threshold": 0.5,
+      "mode": "auto",
+      "scope_rule": "**全池**：落门依据是包内已冻结的 ADMET-AI 全量表（step3_gates.admet_layer.raw_table，覆盖池 4,979 个 100%），外部落门表（external_table）保留为对账件；四臂并集（{QED≥0.6, ≥0.5, ≥0.4}×anchor=4 ∪ {QED≥0.6}×anchor≥3）降级为审计件。旧口径（scope=union4）只覆盖四臂并集，池内并集外的分子没有预测值，其门状态是 not_evaluated（未评估），此前被写作「保守判为不过门」——把「没测」冒名为「测出不合格」，并静默裁小两条 anchor≥3 敏感性臂池（实测 894→1017、1000→1189（run05：四臂并集 3,294））",
+      "expected_scope_size": 3294,
+      "external_table": "03_gates/herg/herg_predictions.csv",
+      "external_table_columns": "cid,hERG（可选 source/weight_sha256；也接受 herg_prob 列名，大小写不敏感）",
+      "external_source": "ADMET-AI（HPC 应用 admet-ai，2026-09-24 运行，输入 molecules.csv md5 1251c3a86c37e970b84eb7c595639fe1；权重哈希不可得，故仅登记输出表哈希）",
+      "external_md5": "b22514dfbfcdbb98aa12fec9073a4e3e",
+      "external_sha256": "81e30ec27ce09550f0707cc05a5b668ee0b32d02507489297ce0cfc526204766",
+      "degradation": "无外部表时该门记为 pending：不删分子，名单标注 herg_gate=pending，并在报告与决策卡显式标注偏差",
+      "external_run": "HPC 目录应用 admet-ai；job_id eade0be46cb14cbb8b33b0ca46f43bf9；输入 03_gates/herg/hpc_herg/molecules.csv（4,979 行 cid,smiles）；原始输出 03_gates/herg/hpc_herg/predictions.csv（4,979 行 × 106 列）；落门表 = external_table（hERG 概率保留 6 位小数；本批覆盖全 4,979，与 scope=pool 对齐）",
+      "cross_model": {
+        "role": "第二模型交叉验证（分析步 08b）：量化 hERG<0.5 硬落门结论的模型依赖度；不修改门与名单",
+        "data_source": "ChEMBL REST API，target CHEMBL240 (KCNH2/hERG)，standard_type ∈ {IC50, Ki}，standard_relation '='，pchembl_value 非空；potential_duplicate=1 剔除",
+        "raw_table": "03_gates/herg/cross_model/raw/chembl_herg_kcnh2_activities.csv",
+        "raw_md5": "b7b3b959b228a732afb312c7e8291275",
+        "raw_sha256": "71b1852e9e5548fc81457ff0f1e677f3a26f676a22bcf6bfa290edd2775fcb8e",
+        "fetched_utc": "2026-09-23T06:47:45Z",
+        "n_raw_records": 13521,
+        "fetch_script": "03_gates/scripts/08b0_herg_cross_model_fetch.py（联网、手工执行、不入链）",
+        "label": {
+          "blocker_pchembl_ge": 6.0,
+          "nonblocker_pchembl_le": 5.0,
+          "ambiguous_band": "(5.0, 6.0) 丢弃",
+          "dedup": "InChIKey 取 pChEMBL 中位数"
+        },
+        "models": [
+          "随机森林(n=500)",
+          "逻辑回归",
+          "Tanimoto kNN(k=5)"
+        ],
+        "features": "ECFP4 2048 bit（RDKit），不含 ADMET-AI 的权重/特征",
+        "cv": "随机分层 5 折 + Bemis-Murcko 通用骨架分组 5 折",
+        "independence_caveat": "ADMET-AI 的 hERG 头同样基于公开 hERG 数据（含 TDC hERG 集，多源自 ChEMBL）训练，故本步量化的是算法/训练管道依赖度，不构成数据独立的外部验证"
+      },
+      "scope": "pool",
+      "missing_policy": "not_evaluated：缺预测值的分子门状态为 herg_gate_state='not_evaluated'，禁止写作 fail / 不过门 / 高风险；全池口径下缺值数应为 0",
+      "expected_gate_scope_n": 4979,
+      "gate_source": "包内冻结 ADMET 全量表（scope=pool 时）；外部 hERG 落门表仅作逐值对账（交集 max|Δ| 登记于 herg_status.json）"
+    },
+    "known_compound_novelty": {
+      "reference_set": "screening_kit 07_independent_validation/independent_a2a_chembl.csv（ChEMBL A2A 已知配体 9,130 条）",
+      "hard": "名单与已知配体的 InChIKey 精确重合数 == 0",
+      "soft_reported": "与已知配体的最大 Tanimoto（ECFP4），≥0.9 记 1 次相似命中",
+      "hard_filter": "选序层剔除 InChIKey 与已知配体精确重合的分子（池层仍完整保留与计数）；该门与 hERG 门相互独立",
+      "rationale": "验收判据要求名单内已知物为 0；若不设该门，实测会有 1 个恰为 ChEMBL 已知 A2A 拮抗剂（CHEMBL4594442，Ki/IC50 级 1.7 nM）的分子进入主名单第 14 位，与『新化学型优先』的名单目标冲突"
+    },
+    "admet_layer": {
+      "role": "注释层（分析步 10b）：只产出标注列与交叉核验证据，不改门、不改池、不改名单",
+      "raw_table": "03_gates/admet/raw/CNN_VS_ranking_49963_ADMET.csv",
+      "raw_md5": "c03e3866d357f28d64f9f725ae77fc3f",
+      "raw_sha256": "046e3ffba5b2e5d01ea67273e29079cbd0bd90bc5ca2971b22638558608955d6",
+      "n_rows_expected": 4979,
+      "n_admet_columns_expected": 105,
+      "expected_pool_coverage": 4979,
+      "producer": "HPC 目录应用 admet-ai（job_id eade0be46cb14cbb8b33b0ca46f43bf9，2026-09-24）；运行输入 molecules_ml4979.csv（md5 1251c3a86c37e970b84eb7c595639fe1，4,979 行 cid,smiles）；原始输出 predictions.csv（md5 e726aecd4c622b5c2388f308e9817f28，4,979 行 × 106 列，空值 0）",
+      "regenerate_script": "03_gates/scripts/10b0_admet_regenerate.py（手工执行、不入链，与 08b0 同规格）",
+      "coverage_note": "本表覆盖 run05 批次（＝本包上游排名表同 4,979 行，cid 与 CNN_VS 逐值一致）；池 = 4,979 全覆盖；2 个阴性对照来自 run01 5,098 富集库，无预测值 → admet_coverage=not_covered（不写空值）",
+      "cutpoint_recalibration": {
+        "basis": "库内相对切点按本包池（4,979）重标定，避免照搬外部 54,932 库的切点",
+        "hERG_pool_percentile": 79.8,
+        "DILI_pool_percentile": 88.2,
+        "solubility_pool_percentile": 10.0,
+        "absolute": {
+          "AMES": 0.5,
+          "ClinTox": 0.5,
+          "Carcinogens_Lagunin": 0.5,
+          "hERG_tier_pass": 0.5
+        },
+        "struct_alert": "BRENK/NIH/PAINS 任一命中",
+        "dev_gate": "Lipinski 满足数 ≥ 3 且无结构警报且溶解度 ≥ 池 P10",
+        "tier_rule": "建议淘汰 = 核心警报 ≥2 或 Lipinski ≤2 或（有结构警报且有 ≥1 项核心警报）；优先跟进 = 无核心警报 且 hERG < 0.5 且通过可开发性门槛；其余为需警惕",
+        "md_precheck_rule": "核心警报 ≥1 或有结构警报 或未通过可开发性门槛 → 进入 MD 前置复核清单（不删分子）",
+        "herg_margin_tight": 0.05
+      },
+      "reference_cutpoints_from_external_run": {
+        "herg": 0.8,
+        "DILI": 0.99,
+        "AMES": 0.5,
+        "ClinTox": 0.5,
+        "Carcinogens_Lagunin": 0.5,
+        "solubility": -6.0,
+        "note": "外部 run 的库内相对切点（其库 54,932 分子）；本批为 run05 的 4,979 分子库，口径不同，仅作对照列出，不作为判据"
+      },
+      "crosscheck": {
+        "tolerance": 1e-06,
+        "columns": [
+          "MW",
+          "cLogP",
+          "TPSA",
+          "HBD",
+          "HBA",
+          "qed",
+          "ro5",
+          "pains",
+          "brenk"
+        ],
+        "expected_differences": {
+          "BRENK": "外部 ADMET-AI 的 BRENK 命中集是包内 RDKit FilterCatalog 集的子集（口径版本差异），差异登记为已知且已解释，不判失败",
+          "multi_fragment": "本包 05 步已按最大片段去盐，ADMET-AI 未去盐 → 多片段分子的 MW/logP/TPSA/QED 预期不等（本包更小）；该组在 admet_descriptor_crosscheck.json 的 numeric_multi_fragment 块与 02_druglikeness/tables/standardization_impact.csv 中逐分子留痕，不判失败"
+        },
+        "note": "本包描述符按「最大片段」口径，ADMET-AI 侧按其输入 SMILES（含反离子）口径：多片段分子的逐列差值预期非零，单列报告，不参与严格容差判定"
+      },
+      "annotation_columns": [
+        "admet_coverage",
+        "admet_hERG",
+        "admet_herg_drugbank_pct",
+        "admet_herg_band",
+        "admet_flag_herg",
+        "admet_flag_DILI",
+        "admet_flag_AMES",
+        "admet_flag_ClinTox",
+        "admet_flag_Carc",
+        "admet_struct_alert",
+        "admet_liability_count",
+        "admet_dev_ok",
+        "admet_tier",
+        "admet_md_precheck",
+        "admet_solubility_gate",
+        "admet_DILI",
+        "admet_AMES",
+        "admet_ClinTox",
+        "admet_Carcinogens",
+        "admet_BBB",
+        "admet_Pgp",
+        "admet_Solubility",
+        "admet_Bioavailability",
+        "admet_HIA",
+        "admet_Caco2",
+        "admet_PPBR",
+        "admet_Clearance_Hepatocyte",
+        "admet_Half_Life",
+        "admet_VDss",
+        "admet_CYP2D6_Veith",
+        "admet_CYP3A4_Veith",
+        "admet_CYP2D6_Substrate",
+        "admet_CYP3A4_Substrate",
+        "admet_HBD",
+        "admet_HBA",
+        "admet_Lipinski",
+        "admet_QED",
+        "admet_MW",
+        "admet_logP",
+        "admet_tpsa",
+        "admet_PAINS_alert",
+        "admet_BRENK_alert",
+        "admet_NIH_alert",
+        "admet_herg_margin",
+        "admet_herg_margin_tight"
+      ],
+      "herg_margin_role": "距门边距 admet_herg_margin = 0.5 − ADMET_hERG，是交付层的可排序分诊量；三档 band（软线 0.744 / 硬线候选 0.80）在交付名单上恒为「低」，不构成区分度。admet_herg_margin_tight = 1 表示边距 < 0.05（MD 前置复核优先组）"
+    },
+    "herg_threshold_analysis": {
+      "role": "hERG 阈值锚定与保留曲线（分析步 10c）：不改门（主口径仍 hERG<0.5），只产出决策证据",
+      "grid": [
+        0.3,
+        0.99,
+        0.01
+      ],
+      "round_step": 0.05,
+      "primary_top_k": 1000,
+      "min_keep": 0.75,
+      "alt_top_ks": [
+        100,
+        500,
+        1000,
+        5000
+      ],
+      "ref_percentiles": [
+        50,
+        75,
+        90
+      ],
+      "soft_line": 0.744,
+      "library_head_tradeoff_expected": 0.85,
+      "bands": {
+        "low": "< 软线",
+        "mid": "[软线, 硬线候选)",
+        "high": ">= 硬线候选"
+      },
+      "heads": {
+        "library": "f3 rank ≤ primary_top_k（库级对接头部）",
+        "pack_main_pool": "类药性 ∧ 姿态 pass ∧ anchor=4 ∧ maxTc<0.9 ∧ novelty ∧ QED≥0.50（主池 pre-hERG，run05 剔除已知物后 1,003 个；SOP_5 同口径为 1,960 个）"
+      },
+      "repro_check": {
+        "soft_line_expected": 0.744,
+        "library_head_tradeoff_expected": 0.85,
+        "tol": 0.005,
+        "note": "软线（A2@75）仍与外部 run 对账（0.744，run05 实测 0.743715，ok）；**库级取舍线（A3）按本批库重登记**：0.80 是外部 54,932 分子库的读数，run05 的 4,979 分子库实测 0.85。A3 是证据/对账量（「库头部保留 ≥75% 的最高阈值」），**不是门**——门仍为 hERG < 0.5。"
+      }
+    }
+  },
+  "step4_selection": {
+    "score": "CNN_VS 降序",
+    "list_size": 50,
+    "n_negative_controls": 2,
+    "pairwise_tc_max": 0.65,
+    "scaffold_cap": {
+      "primary": 1,
+      "sensitivity": [
+        3,
+        5
+      ],
+      "definition": "Bemis-Murcko 骨架（MurckoScaffoldSmiles，无手性）在名单中的最大出现次数"
+    },
+    "chem_cap_rule": "round(8N/20)，N=名单总数(=50) → 20",
+    "risk_cap_rule": "round(3N/20)，N=50 → 8",
+    "chemotype": {
+      "definition": "两标志组合（各加 1 位）→ 4 类：氨基烟腈母核 [NX3]c1ncccc1C#N ；碱性胺 [NX3;H2,H1;!$(N-C=O);!$(N-S(=O)=O)]",
+      "labels": [
+        "氨基烟腈母核 + 碱性胺",
+        "氨基烟腈母核 + 无碱性胺",
+        "无氨基烟腈母核 + 碱性胺",
+        "无氨基烟腈母核 + 无碱性胺"
+      ]
+    },
+    "risk_rule": "芳香 N ≥ 4 且 N/重原子 ≥ 0.25（AM1-BCC 参数化风险启发式）",
+    "controls": {
+      "negative_1": {
+        "rule": "run01 5,098 库中 DUD-E 诱饵里 CNN_VS 最高且锚点 4/4",
+        "expected_cid": "C09462894"
+      },
+      "negative_2": {
+        "rule": "DUD-E 诱饵中 Vina 最优且锚点 4/4（两引擎共识诱饵）",
+        "expected_cid": "C60359994"
+      },
+      "role": "噪声基线 / 假阳性压力测试，不占候选名额逻辑（固定占名单 2 位）"
+    },
+    "sensitivity_matrix": {
+      "arms": [
+        "QED0.50_anchor4（主）",
+        "QED0.60_anchor4",
+        "QED0.40_anchor4",
+        "QED0.50_anchor3",
+        "QED0.60_anchor3",
+        "QED0.40_anchor3"
+      ],
+      "note": "6 组名单共用同一选序与约束；主口径 = QED≥0.50 ∧ anchor=4"
+    },
+    "realized_candidates": 32,
+    "realized_list_size": 34,
+    "realized_note": "run05（4,979 个 ML 生成分子）：主口径最多选出 **32 个候选**（+2 对照 = 34）。咬合点是**化学型帽**（≤20 = round(8×50/20)）：主口径池 751 个过门分子中被化学型帽跳过 702、成对 Tc 5、骨架 6、风险档 6。list_size=50 与 20/8 帽值仍按**设计目标**口径（不随实测规模重算——否则帽值会随结果逐轮缩小、约束不收敛）；实际名单规模由池与约束共同决定。**披露**：主化学型（无氨基烟腈母核 + 碱性胺）占名单 20/32 = 62.5%，高于 40% 设计意图；池内该化学型占 4,701/4,979 = 94.4%。SOP_5 同口径为 48 + 2 = 50。"
+  },
+  "step5_robustness": {
+    "A_score_sigma": {
+      "sigmas": [
+        0.05,
+        0.1,
+        0.15
+      ],
+      "reps": 100,
+      "judge_mean_overlap_min": 0.8,
+      "note": "σ=0.10 为主判据；σ=0.05 为按边界间距标定的紧档"
+    },
+    "B_threshold_matrix": {
+      "qed": [
+        0.4,
+        0.5,
+        0.6,
+        0.7
+      ],
+      "maxTc_actives": [
+        0.7,
+        0.8,
+        0.9,
+        null
+      ],
+      "note": "4×4 矩阵；null = 不设 maxTc 上限"
+    },
+    "C_one_axis": {
+      "axes": {
+        "hERG": [
+          "off",
+          "on<0.5"
+        ],
+        "anchor": [
+          4,
+          3
+        ],
+        "QED": [
+          0.5,
+          0.6
+        ],
+        "maxTc": [
+          0.9,
+          0.7
+        ]
+      },
+      "note": "一次只动一轴，报与主名单重叠"
+    },
+    "D_fingerprint": {
+      "primary": "ECFP4",
+      "alternatives": [
+        "ECFP6",
+        "MACCS166"
+      ],
+      "note": "只报重叠率，不替换主口径"
+    },
+    "E_tie_band": {
+      "bands": [
+        0.01,
+        0.05,
+        0.25
+      ],
+      "reps": 100,
+      "primary": 0.01
+    },
+    "F_butina": {
+      "cutoff": 0.35,
+      "representative_rule": "簇内 CNN_VS 最高",
+      "expected_clusters": 2938,
+      "expected_largest": 125,
+      "expected_singletons": 2417,
+      "reference_note": "642 / 20 / 446 是 SOP_5 库（4,990 池）的读数；run05（4,979 池）实测 2,938 / 125 / 2,417。该组为库级描述量，随库变化属预期，不是判据。"
+    },
+    "G_determinism": {
+      "method": "全量产物 sha256 逐文件比对（两次运行）",
+      "baseline": "05_robustness/determinism/sha256_baseline.json"
+    }
+  },
+  "acceptance": {
+    "anchor_all_4_in_main_list": true,
+    "pairwise_tc_max_le": 0.65,
+    "distinct_scaffolds_main_reported": true,
+    "herg_range_reported": true,
+    "known_compound_exact_hits": 0,
+    "mean_list_overlap_min_under_sigma0.10": 0.8,
+    "head20_overlap_reported": true,
+    "funnel_json_per_step": true,
+    "manifest_generated": true,
+    "annotation_layer_non_gating": true
+  },
+  "downstream_interface": {
+    "md_engine": "GROMACS + CHARMM-GUI POPC 膜体系（custom membrane builder）",
+    "binding_free_energy": "gmx_MMPBSA 不可用 → 判据降级为口袋保留度 + 配体重原子 RMSD + 关键锚点接触保留率",
+    "two_tier_md_budget": "两级判据与机时预算单列于 06_deliverables/SOP-05_downstream_MD_plan.md",
+    "md_criteria_frame": "判据参照物 = **晶体样结合模式**（口袋坐标系：16 残基 Cα 对 4EIY 副本叠合），不是上传姿态本身。旧判据「锚点保留 ≥3/4 且对上传姿态 RMSD < 0.3 nm」与姿态闸门同源同参照，错误起始位姿原地不动即通过；新判据与闸门互为独立检验",
+    "md_criteria_level1": "① 对晶体样模式的重原子 RMSD < 0.3 nm；② 对共晶 12 残基接触集的接触指纹保留率 ≥70%；③ 锚点 4/4 帧 ≥3/4；④ 方向性接触（N253/E169 氢键角、F168/W246 芳香堆积）至少 1 项保留 ≥80% 帧；配体自身 RMSD 仅作辅助",
+    "md_controls": {
+      "positive": "ZMA（ZM241385，4EIY 共晶配体，坐标见 00_inputs/extracted/run01/01_redocking/receptor/4EIY_ligand.pdb；锚点 4/4、Jaccard=1.00、盒子余量 4.00 Å）。预期一级判据全通过；正对照漂出则该批结果全部作废",
+      "hard_negative": "CHEMBL406935：取自 independent_a2a_chembl.csv 的 label=0 子集（best_potency_nM 缺失），且对 run05 交付 32 候选的最大 ECFP4 Tc = 0.5469（最近候选 SCALE-094272）——本批最相似的「近邻但不结合」。备选（活性已实测 ≥10 µM 者中 Tc 最高）：CHEMBL4454608，Tc = 0.4310、38,018.9 nM，最近候选 SCALE-014010。预期一级判据不通过；它通过则判据过松。3D 起始姿态不在包内，需按 screening_kit/12_docking_validation 协议先对接生成",
+      "negative_secondary": "NEG1/NEG2（沿用；仅具假定标签，作为次要对照）",
+      "selection_rule": "hard_negative 选取规则（可复算）：label=0 ∧（best_potency_nM 缺失 或 ≥10000 nM）∧ 对**交付候选名单**的最大 ECFP4 Tanimoto 最高（随名单重算）",
+      "why": "只有正/负对照都在批内，才能区分「判据失效」与「分子本身不结合」；仅用对接诱饵作阴性对照无法发现判据过松"
+    }
+  },
+  "rules_sha256": "PENDING",
+  "step6_md_batch": {
+    "role": "MD 批次选择（执行序第 16 步）：从主口径名单中挑出进入 MD 一级批次的分子；只做取舍与留痕，不改名单与门",
+    "list": {
+      "main_arm": "QED0.50_anchor4（主口径）",
+      "source": "04_selection/tables/list_main_QED0.50_anchor4.csv",
+      "n_candidates": 32,
+      "n_negative_controls": 2
+    },
+    "batch_size": 19,
+    "n_candidates": 17,
+    "score_axis": "CNN_VS（与名单选序一致）",
+    "eligibility": {
+      "exclude_hERG_cross_model_fail": false,
+      "hERG_cross_model_column": "hERG_cross_ens",
+      "hERG_cross_model_source": "03_gates/herg/cross_model/tables/herg_cross_model_predictions.csv（分析步 08b 产物）",
+      "expected_n_hERG_cross_model_fail": 8,
+      "rationale": "该判定来自与主模型 κ≈0（近乎随机一致）的第二模型；用一个未校准信号决定机时分配在纪律上最弱，而保留的机时代价仅 +0.2 卡日量级（一级 10 ns/分子）。本层为机时分配，**不产生安全性结论**；优先复核对象是两个模型一致判高风险者",
+      "dedupe_generic_scaffold": "Bemis-Murcko 通用骨架（scaffold_generic）在批次内 ≤1，重复时保留 CNN_VS 高者",
+      "expected_n_hERG_cross_model_fail_note": "登记值而非门（用于断言上游未漂移），名单变化时必须同步复核。SOP_5：3→2（v1.5.0 规范化后）。run05（32 个候选）：实测 8 个在第二模型（集成）下不过门——与主模型 κ=0.068（近乎不相关）一致，故按 retain_and_annotate 保留入池并逐分子标注「模型依赖」。",
+      "hERG_cross_model_policy": "retain_and_annotate：第二模型（集成口径）不过门者**保留入池**并逐分子写 md_eligibility_note=「模型依赖」；不再用它决定机时分配"
+    },
+    "caps": {
+      "pairwise_tc_max": 0.65,
+      "scaffold_cap": 1,
+      "chem_cap_rule": "round(8N/20)，N=批次总数(=20) → 8",
+      "chem_cap_value": 8,
+      "risk_cap_rule": "round(3N/20)，N=20 → 3",
+      "risk_cap_value": 3,
+      "risk_rule": "芳香 N ≥ 4 且 N/重原子 ≥ 0.25（AM1-BCC 参数化风险启发式，同 step4_selection.risk_rule）",
+      "chem_cap_note": "run05 实批 19，帽值仍按设计目标 20 计（8/3）——不随实测规模重算"
+    },
+    "stratification": {
+      "reference_median": "候选名单（run05 实测 32 个候选）的 CNN_VS 中位数（不含对照）",
+      "min_below_median_candidates": 5,
+      "rationale": "纯分数截断会把批次 CNN_VS 跨度压到 0.5 以内（48 候选仅跨 7.257–7.991），使一级 MD 无法检验「对接分数 ⇒ 结合稳定性」；分层是为结论可检验性付费"
+    },
+    "fill_order": [
+      "每个化学型类的最高分者（化学型覆盖锚点）",
+      "分数分层：补齐至 ≥ min_below_median_candidates 个下半区候选",
+      "CNN_VS 降序填满，受 caps 限制"
+    ],
+    "controls": "沿用主名单 NEG1/NEG2（claim 固定占批次 2 位，不占候选名额）",
+    "md_cost": {
+      "derived_from": "06_deliverables/SOP-05_downstream_MD_plan.md §3（单分子卡时）",
+      "level1_10ns_cardday_per_molecule": 0.1,
+      "level2_150ns_cardday_per_molecule": 1.5,
+      "note": "仅供预算参考；二级实际卡时随通过率线性放大"
+    },
+    "outputs": [
+      "07_md_batch/tables/md_batch20.csv",
+      "07_md_batch/tables/md_batch_excluded.csv",
+      "07_md_batch/reports/md_batch.json",
+      "07_md_batch/MD_BATCH.md",
+      "07_md_batch/figures/fig_md_batch.png"
+    ],
+    "note": "本步仍是**机时分配层**：不产生安全性/有效性结论，不改名单、不改门。v1.7.0 起「最优」的限定口径是 step6_md_batch.objective（信息量/设计优先）：最优解的 Σ CNN_VS 反而略低（−1.16%），其价值在于让一级 MD 能检验分数-稳定性关系并覆盖性质空间；低分位分子入批后失败概率更高，这是**要测量的量**，不得事后解读为「选坏了」。MD 后若需换人，须改规则并重跑整链",
+    "objective": {
+      "kind": "信息量/设计优先（v0，2026-09-23 批准并进链）",
+      "problem": "从主口径候选名单（run05 实测 32 个候选；设计目标 48）中选 n_candidates 个进 MD 一级批次（阴性对照固定 2 位，不占候选名额）",
+      "solver": "scipy.optimize.milp（HiGHS 后端）；每阶段必须 status=0（optimal）且 mip_gap=0，否则显式失败",
+      "lexicographic": [
+        {
+          "stage": 1,
+          "name": "分层覆盖下限 t",
+          "goal": "max t，t = min 各分位席位数",
+          "why": "设计点必须铺满性质空间，否则「对接分数 ⇒ 结合稳定性」只能在局部分位检验"
+        },
+        {
+          "stage": 2,
+          "name": "CNN_VS 跨度",
+          "goal": "在 t=t* 的解集内 max(max_S z − min_S z)",
+          "why": "拉开分数轴量程，使斜率估计不被截断",
+          "encoding": "独热指派：y_i ≤ x_i、Σy=1、u = Σ z_i y_i、u ≥ z_j − M(1−x_j) ⇒ u = max_S z；w/l 同理取 min。禁止只用单侧下界式（会把 u 顶到上界得到与名册无关的假跨度）"
+        },
+        {
+          "stage": 3,
+          "name": "Σ CNN_VS",
+          "goal": "仍并列时 max Σ_S CNN_VS",
+          "why": "同信息量下偏好对接质量更好的分子（质量兜底，不作主判据）"
+        },
+        {
+          "stage": 4,
+          "name": "规范并列打破",
+          "goal": "仍并列时 max Σ w_i x_i，w_i = (n − i)（按 CNN_VS 降序的索引）",
+          "why": "保证与求解器内部 tie-break 无关的确定性名册（配合自检的「重解一致」断言）"
+        }
+      ],
+      "coverage_axes": [
+        {
+          "column": "CNN_VS",
+          "label": "CNN_VS",
+          "role": "对接分数轴"
+        },
+        {
+          "column": "cLogP",
+          "label": "cLogP",
+          "role": "亲脂性轴"
+        },
+        {
+          "column": "cns_mpo",
+          "label": "CNS MPO",
+          "role": "CNS 类药性轴"
+        }
+      ],
+      "n_bins_per_axis": 4,
+      "bin_reference": "eligible_pool — 按资格池自身分布的 25/50/75 分位（线性插值）切 4 层；空层自动跳过并记入证书",
+      "hard_constraints": "沿用本块 caps 与 stratification：化学型 ≤ chem_cap_value、AM1-BCC 风险档 ≤ risk_cap_value、骨架 ≤1（资格层已去重）、成对 ECFP4 Tc < pairwise_tc_max、下半区 ≥ min_below_median_candidates",
+      "certificate": "07_md_batch/reports/md_batch.json → optimality（含分位边界、每层席位、四阶段目标值与 mip_gap、重解一致性）；交付证书同时落 06_deliverables/SOP-05_md_batch.json",
+      "reference_impl": "旧口径（v1.6.0 贪心填充：化学型锚点 → 下半区补齐 → 高分填充）自 v1.7.0 起**降为对照实现**，仍在同一步内计算并写入报告（heuristic_reference）；实测该贪心恰是「max Σ CNN_VS」口径的全局最优解（与本版最优解 18 席中重合 12 席）"
+    },
+    "fill_order_status": "v1.6.0 的 fill_order 自 v1.7.0 起**不再驱动选批**，仅作为对照实现（heuristic_reference）保留，用于量化「质量最优 vs 信息量最优」的代价",
+    "expected_certificate": {
+      "n_bins": 12,
+      "bins_per_axis": 4,
+      "t_star": 3,
+      "span": 3.5015,
+      "sum_CNN_VS": 119.7563,
+      "n_swaps_vs_heuristic": 5,
+      "note": "登记值（run05 换数据后实测），用于「上游是否漂移」的断言；名单/描述符/规则任一变化使这些数字改变时，必须显式复核并同步本块与本版说明。SOP_5 值：t*=4、跨度 0.7337、Σ 136.5031（48 候选 + 18 席批次）；run05：32 候选 + 17 席批次。"
+    },
+    "realized_note": "run05：批次目标仍为 20（18 候选 + 2 对照），但**实测最大可行批次为 19（17 候选 + 2 对照）**。原因（算术必然，非脚本缺陷）：资格集 25 个候选按化学型为 16/5/4，而批次化学型帽 = 8 （round(8×20/20)，按设计目标 20 定）→ 可选中上限 = 8+5+4 = 17 < 18。帽值 8/3 保持按设计目标不动（不随实测规模重算）；规模由池与约束共同决定。产物文件名沿用 tables/md_batch20.csv（历史标签，本批实为 19 行）。备选口径（未采用）：把批次化学型帽放宽到 9 可回到 18+2=20，属约束口径变更。"
+  }
+}

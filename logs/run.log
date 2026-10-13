@@ -1,0 +1,78 @@
+== [1/5] 环境自检 ==
+python 3.12.2
+  numpy        2.4.6  OK
+  pandas       2.3.3  OK
+  scipy        1.15.3  OK
+  sklearn      1.9.1  OK
+  matplotlib   3.11.1  OK
+  rdkit        2025.09.5  OK
+  openpyxl     3.1.5  OK
+== [2/5] 复跑 SOP_5 目录化合物链 · MD 候选选择层 ==
+
+==== === 15_md_batch_select === ====
+[15_md_batch_select] 名单：48 候选 + 2 对照（主口径 QED0.50_anchor4（主口径））
+[15_md_batch_select] 资格①（保留+标注，不再剔除）：第二模型不过门候选 2 个 （ZINC000008706207, ZINC000092920989）继续参与抽选；机时代价 +0.20 卡日量级
+[15_md_batch_select] 资格集：42 个候选（通用骨架去重再剔除 6 个）
+[15_md_batch_select] 批次 20 = 18 候选 + 2 对照；化学型 ≤8、风险档 ≤3、骨架 ≤1、成对 Tc <0.65；CNN_VS 中位（相对 48 候选）=7.4140，下半区下限 5 个
+[15_md_batch_select] 目标 v1.7.0（信息量/设计优先（v0，2026-09-23 批准并进链））：字典序 阶段1 分层覆盖下限 t → 阶段2 CNN_VS 跨度 → 阶段3 Σ CNN_VS → 阶段4 规范并列打破；分位 3 轴 × 4 层（参照 eligible_pool — 按资格池自身分布的 25/50/75 分位（线性插值）切 4 层；空层自动跳过并记入证书）
+[15_md_batch_select] 分位边界（资格池自分布）：CNN_VS [7.3227, 7.414, 7.6665]；cLogP [1.9183, 2.498, 3.4757]；CNS MPO [4.1848, 4.669, 5.0892]；有效分位格 12（空格 0）
+[15_md_batch_select] 最优解：t*=4（占据 12/12 个分位格）、CNN_VS 跨度 0.7337、Σ CNN_VS 136.5031；四阶段 status 全 0、mip_gap=0、重解一致
+[15_md_batch_select] 对照（v1.6.0 贪心）：t=0、跨度 0.6234、Σ CNN_VS 138.1033；与最优解重叠 12 席、互换 6 席
+[15_md_batch_select] 席位角色（留一法）：跨度端点 2、覆盖下限 16、质量兜底 0
+[15_md_batch_select] 反事实重解（禁掉该席后仍可达标 ⇒ 可替代）：覆盖不可替代 0、跨度不可替代 2、可替代 16
+[15_md_batch_select] 批次配额：化学型 {'无氨基烟腈母核 + 无碱性胺': 8, '氨基烟腈母核 + 碱性胺': 6, '无氨基烟腈母核 + 碱性胺': 4}、风险档 2、下半区 8；批内成对 Tc 上限 0.4658（ZINC000071738518 × MCULE-5129094733）
+[15_md_batch_select] CNN_VS 跨度 7.2576–7.9914（宽 0.7337）
+[15_md_batch_select] MD 批次 → 07_md_batch/tables/md_batch20.csv（20 个）、MD_BATCH.md、reports/md_batch.json（含最优性证书）、figures/fig_md_batch.png
+== [3/5] 复跑 SOP_ML_run05 生成分子链 · MD 候选选择层 ==
+
+==== === 15_md_batch_select === ====
+[15_md_batch_select] 名单：32 候选 + 2 对照（主口径 QED0.50_anchor4（主口径））
+[15_md_batch_select] 资格①（保留+标注，不再剔除）：第二模型不过门候选 8 个 （SCALE-034760, SCALE-038222, SCALE-056230, SCALE-085022, SCALE-097032, SCALE-111400, SCALE-112545, SCALE-116071）继续参与抽选；机时代价 +0.80 卡日量级
+[15_md_batch_select] 资格集：25 个候选（通用骨架去重再剔除 7 个）
+[15_md_batch_select] 化学型咬合：池内 {'无氨基烟腈母核 + 碱性胺': 16, '氨基烟腈母核 + 碱性胺': 5, '无氨基烟腈母核 + 无碱性胺': 4}、帽 8 ⇒ 可填上限 17 vs 名额 17（冗余 0 席）；**零冗余** ⇒ 9 席被结构性锁定
+[15_md_batch_select] 批次 19 = 17 候选 + 2 对照；化学型 ≤8、风险档 ≤3、骨架 ≤1、成对 Tc <0.65；CNN_VS 中位（相对 32 候选）=7.7024，下半区下限 5 个
+[15_md_batch_select] 目标 v1.7.0（信息量/设计优先（v0，2026-09-23 批准并进链））：字典序 阶段1 分层覆盖下限 t → 阶段2 CNN_VS 跨度 → 阶段3 Σ CNN_VS → 阶段4 规范并列打破；分位 3 轴 × 4 层（参照 eligible_pool — 按资格池自身分布的 25/50/75 分位（线性插值）切 4 层；空层自动跳过并记入证书）
+[15_md_batch_select] 分位边界（资格池自分布）：CNN_VS [7.3639, 7.7762, 7.899]；cLogP [2.2304, 2.7451, 3.5966]；CNS MPO [4.4491, 4.788, 5.207]；有效分位格 12（空格 0）
+[15_md_batch_select] 最优解：t*=3（占据 12/12 个分位格）、CNN_VS 跨度 3.5015、Σ CNN_VS 119.7563；四阶段 status 全 0、mip_gap=0、重解一致
+[15_md_batch_select] 纯 max Σ CNN_VS 口径 = 120.1652；对照贪心 Σ = 119.535 → 贪心不是该口径全局最优
+[15_md_batch_select] 对照（v1.6.0 贪心）：t=0、跨度 3.5015、Σ CNN_VS 119.535；与最优解重叠 12 席、互换 5 席
+[15_md_batch_select] 席位角色（留一法）：跨度端点 2、覆盖下限 10、质量兜底 5
+[15_md_batch_select] 反事实重解（禁掉该席后仍可达标 ⇒ 可替代）：覆盖不可替代 9、跨度不可替代 1、可替代 7；其中可行域为空 9 席（结构性锁定，非求解失败）
+[15_md_batch_select] 批次配额：化学型 {'无氨基烟腈母核 + 碱性胺': 8, '氨基烟腈母核 + 碱性胺': 5, '无氨基烟腈母核 + 无碱性胺': 4}、风险档 3、下半区 8；批内成对 Tc 上限 0.6078（SCALE-011389 × SCALE-047375）
+[15_md_batch_select] CNN_VS 跨度 4.6587–8.1602（宽 3.5015）
+[15_md_batch_select] MD 批次 → 07_md_batch/tables/md_batch20.csv（19 个）、MD_BATCH.md、reports/md_batch.json（含最优性证书）、figures/fig_md_batch.png
+== [4/5] 复跑联立合并层（两来源并池重解 20 席）==
+
+==== === 17_final_md_merge === ====
+[17_final_md_merge] SOP_5（目录 ZINC/MCULE）：MD 一级批次 20 行（候选 18 + 对照 2）
+[17_final_md_merge] SOP_ML_run05（ML 生成 SCALE-）：MD 一级批次 19 行（候选 17 + 对照 2）
+[17_final_md_merge] 合并候选池 35 个（目录 18 + 生成 17）；共用阴性对照 2 个
+[17_final_md_merge] 第二 hERG 模型不过门：5 个 → 保留入池并逐分子标注「模型依赖」
+[17_final_md_merge] 资格池 33 个（通用骨架去重剔除 2 个）
+[17_final_md_merge] 名额 20 候选 + 2 对照 = 22 行；化学型 ≤8、风险档 ≤3、骨架 ≤1、成对 Tc <0.65；CNN_VS 中位（相对合并候选池 35）=7.6359，下半区下限 5 个；分位 3 轴 × 4 层 = 12 格
+[17_final_md_merge] 分位边界（资格池自分布）：CNN_VS [7.3069, 7.6359, 7.8544]；cLogP [1.954, 2.6306, 3.1775]；CNS MPO [4.0779, 4.5, 5.0413]；有效分位格 12（空格 0）
+[17_final_md_merge] 资格池成对 ECFP4 Tc 最大 0.5849；Tc ≥ 0.65 的冲突对 0
+[17_final_md_merge] 最优解：t*=5（占据 12/12 个分位格）、CNN_VS 跨度 3.5015、Σ CNN_VS 150.4726；四阶段 status 全 0、mip_gap=0、重解一致
+[17_final_md_merge] 对照（v1.6.0 贪心）：t=0、跨度 0.7917、Σ CNN_VS 155.5976；与最优解重叠 14 席、互换 6 席
+[17_final_md_merge] 席位角色（留一法）：跨度端点 2、覆盖下限 18、质量兜底 0；反事实重解：覆盖不可替代 0、跨度不可替代 2、可替代 18
+[17_final_md_merge] 敏感性对照（来源池内百分位口径）：t=5、与主名册重叠 13/20 席、互换 7 席
+[17_final_md_merge] 名册来源构成：{'SOP_5（目录 ZINC/MCULE）': 13, 'SOP_ML_run05（ML 生成 SCALE-）': 7}；可合成性分诊：{'绿 常规合成': 16, '黄 需确认路线': 4}
+[17_final_md_merge] 写出 tables/final_md_20.csv（22 行）、tables/final_md_excluded.csv（15 行）、reports/final_md.json、reports/FINAL_MD_20.md
+[18_final_md_figures] 字体 Noto Sans CJK SC · 名册 22 行
+[18_final_md_figures] fig_final_md_cards：{'n_cards': 22, 'n_candidates': 20, 'n_dir': 13, 'n_gen': 7, 'n_cns': 16, 'n_peripheral': 4, 'n_herg_cross_flag': 1, 'n_synth_yellow': 4}
+[18_final_md_figures] fig_final_md_batch：{'t_star': 5, 'span': 3.5015, 'sum': 150.4726, 'sensitivity_overlap': 13, 'source_counts': {'SOP_5（目录 ZINC/MCULE）': 13, 'SOP_ML_run05（ML 生成 SCALE-）': 7}}
+== [5/5] 生成候选清单并核验 ==
+[OK] SOP_5: 20 行（候选 18 + 对照 2）← src/SOP_5/07_md_batch/tables/md_batch20.csv
+[OK] SOP_ML_run05: 19 行（候选 17 + 对照 2）← src/SOP_ML_run05/07_md_batch/tables/md_batch20.csv
+[OK] merged_final_md: 22 行（候选 20 + 对照 2）← src/SOP_5/10_final_md/tables/final_md_20.csv
+[OK] 写出 results/reproduced/results.csv（61 行）与 results/reproduced/results.xlsx
+
+--- 清单摘要 ---
+总行数 61（候选 55 + 对照 6）
+  SOP_5            行 20  候选 18  唯一分子 20
+  SOP_ML_run05     行 19  候选 17  唯一分子 19
+  merged_final_md  行 22  候选 20  唯一分子 22
+三套合计唯一分子 37 个（跨来源结构零重叠，唯二相同的是 2 个共用阴性对照）
+字段：candidate_id、track、source_set、source_branch、molecule_id、role、smiles、cnn_vs … 共 31 列
+[PASS] 两份清单逐行逐字段一致（61 行 × 31 列）
+完成。复跑清单：results/reproduced/results.csv ；冻结清单：results/results.csv

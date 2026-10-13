@@ -1,0 +1,464 @@
+{
+  "herg_status": "applied",
+  "lists": {
+    "main_QED0.50_anchor4": {
+      "arm": "main_QED0.50_anchor4",
+      "qed_min": 0.5,
+      "anchor_min": 4,
+      "pool_n": 751,
+      "n_known_excluded_in_arm": 11,
+      "n_selected_candidates": 32,
+      "n_controls": 2,
+      "list_size": 34,
+      "anchor_all_4": true,
+      "anchor_hits_min": 4,
+      "max_pairwise_tc": 0.62,
+      "pairwise_ok": true,
+      "n_distinct_scaffold": 32,
+      "n_distinct_scaffold_generic": 25,
+      "chemotype_max": 20,
+      "chem_cap": 20,
+      "risk_n": 8,
+      "risk_cap": 8,
+      "scaffold_cap": 1,
+      "CNN_VS_range": [
+        4.6587,
+        8.1602
+      ],
+      "QED_range": [
+        0.5179,
+        0.795
+      ],
+      "maxTc_range": [
+        0.3286,
+        0.7907
+      ],
+      "herg_range": [
+        0.2506,
+        0.4967
+      ],
+      "herg_status": "applied",
+      "known_exact_hits": 0,
+      "head20_cids": [
+        "SCALE-068156",
+        "SCALE-011389",
+        "SCALE-053305",
+        "SCALE-101054",
+        "SCALE-087393",
+        "SCALE-113199",
+        "SCALE-111400",
+        "SCALE-100081",
+        "SCALE-097032",
+        "SCALE-034377",
+        "SCALE-038222",
+        "SCALE-112545",
+        "SCALE-116071",
+        "SCALE-108881",
+        "SCALE-094383",
+        "SCALE-085022",
+        "SCALE-099595",
+        "SCALE-084856",
+        "SCALE-034760",
+        "SCALE-056230"
+      ],
+      "head20_CNN_VS_min": 7.6582,
+      "head20_mean_qed": 0.6094
+    },
+    "sens_QED0.60_anchor4": {
+      "arm": "sens_QED0.60_anchor4",
+      "qed_min": 0.6,
+      "anchor_min": 4,
+      "pool_n": 533,
+      "n_known_excluded_in_arm": 11,
+      "n_selected_candidates": 28,
+      "n_controls": 2,
+      "list_size": 30,
+      "anchor_all_4": true,
+      "anchor_hits_min": 4,
+      "max_pairwise_tc": 0.6038,
+      "pairwise_ok": true,
+      "n_distinct_scaffold": 28,
+      "n_distinct_scaffold_generic": 20,
+      "chemotype_max": 20,
+      "chem_cap": 20,
+      "risk_n": 8,
+      "risk_cap": 8,
+      "scaffold_cap": 1,
+      "CNN_VS_range": [
+        4.709,
+        8.1602
+      ],
+      "QED_range": [
+        0.6013,
+        0.795
+      ],
+      "maxTc_range": [
+        0.3594,
+        0.7907
+      ],
+      "herg_range": [
+        0.2506,
+        0.4991
+      ],
+      "herg_status": "applied",
+      "known_exact_hits": 0,
+      "head20_cids": [
+        "SCALE-068156",
+        "SCALE-087393",
+        "SCALE-042377",
+        "SCALE-100081",
+        "SCALE-097032",
+        "SCALE-034377",
+        "SCALE-112545",
+        "SCALE-037357",
+        "SCALE-085022",
+        "SCALE-034760",
+        "SCALE-115077",
+        "SCALE-032986",
+        "SCALE-056943",
+        "SCALE-008537",
+        "SCALE-071095",
+        "SCALE-019043",
+        "SCALE-022979",
+        "SCALE-108699",
+        "SCALE-070949",
+        "SCALE-112802"
+      ],
+      "head20_CNN_VS_min": 7.5532,
+      "head20_mean_qed": 0.677
+    },
+    "sens_QED0.40_anchor4": {
+      "arm": "sens_QED0.40_anchor4",
+      "qed_min": 0.4,
+      "anchor_min": 4,
+      "pool_n": 777,
+      "n_known_excluded_in_arm": 11,
+      "n_selected_candidates": 32,
+      "n_controls": 2,
+      "list_size": 34,
+      "anchor_all_4": true,
+      "anchor_hits_min": 4,
+      "max_pairwise_tc": 0.62,
+      "pairwise_ok": true,
+      "n_distinct_scaffold": 32,
+      "n_distinct_scaffold_generic": 24,
+      "chemotype_max": 20,
+      "chem_cap": 20,
+      "risk_n": 8,
+      "risk_cap": 8,
+      "scaffold_cap": 1,
+      "CNN_VS_range": [
+        4.6587,
+        8.1602
+      ],
+      "QED_range": [
+        0.409,
+        0.795
+      ],
+      "maxTc_range": [
+        0.3286,
+        0.7907
+      ],
+      "herg_range": [
+        0.2506,
+        0.4967
+      ],
+      "herg_status": "applied",
+      "known_exact_hits": 0,
+      "head20_cids": [
+        "SCALE-068156",
+        "SCALE-011389",
+        "SCALE-053305",
+        "SCALE-101054",
+        "SCALE-087393",
+        "SCALE-113199",
+        "SCALE-111400",
+        "SCALE-100081",
+        "SCALE-097032",
+        "SCALE-034377",
+        "SCALE-038222",
+        "SCALE-112696",
+        "SCALE-112545",
+        "SCALE-116071",
+        "SCALE-099421",
+        "SCALE-108881",
+        "SCALE-094383",
+        "SCALE-085022",
+        "SCALE-099595",
+        "SCALE-084856"
+      ],
+      "head20_CNN_VS_min": 7.686,
+      "head20_mean_qed": 0.5839
+    },
+    "sens_QED0.50_anchor3": {
+      "arm": "sens_QED0.50_anchor3",
+      "qed_min": 0.5,
+      "anchor_min": 3,
+      "pool_n": 966,
+      "n_known_excluded_in_arm": 11,
+      "n_selected_candidates": 39,
+      "n_controls": 2,
+      "list_size": 41,
+      "anchor_all_4": false,
+      "anchor_hits_min": 3,
+      "max_pairwise_tc": 0.6275,
+      "pairwise_ok": true,
+      "n_distinct_scaffold": 39,
+      "n_distinct_scaffold_generic": 27,
+      "chemotype_max": 20,
+      "chem_cap": 20,
+      "risk_n": 8,
+      "risk_cap": 8,
+      "scaffold_cap": 1,
+      "CNN_VS_range": [
+        4.177,
+        8.1602
+      ],
+      "QED_range": [
+        0.5179,
+        0.795
+      ],
+      "maxTc_range": [
+        0.3286,
+        0.7959
+      ],
+      "herg_range": [
+        0.2506,
+        0.4971
+      ],
+      "herg_status": "applied",
+      "known_exact_hits": 0,
+      "head20_cids": [
+        "SCALE-068156",
+        "SCALE-011389",
+        "SCALE-053305",
+        "SCALE-101054",
+        "SCALE-087393",
+        "SCALE-113199",
+        "SCALE-111400",
+        "SCALE-100081",
+        "SCALE-097032",
+        "SCALE-034377",
+        "SCALE-038222",
+        "SCALE-112545",
+        "SCALE-116071",
+        "SCALE-108881",
+        "SCALE-094383",
+        "SCALE-085022",
+        "SCALE-099595",
+        "SCALE-084856",
+        "SCALE-034760",
+        "SCALE-056230"
+      ],
+      "head20_CNN_VS_min": 7.6582,
+      "head20_mean_qed": 0.6094
+    },
+    "sens_QED0.60_anchor3": {
+      "arm": "sens_QED0.60_anchor3",
+      "qed_min": 0.6,
+      "anchor_min": 3,
+      "pool_n": 687,
+      "n_known_excluded_in_arm": 11,
+      "n_selected_candidates": 31,
+      "n_controls": 2,
+      "list_size": 33,
+      "anchor_all_4": false,
+      "anchor_hits_min": 3,
+      "max_pairwise_tc": 0.6038,
+      "pairwise_ok": true,
+      "n_distinct_scaffold": 31,
+      "n_distinct_scaffold_generic": 21,
+      "chemotype_max": 20,
+      "chem_cap": 20,
+      "risk_n": 8,
+      "risk_cap": 8,
+      "scaffold_cap": 1,
+      "CNN_VS_range": [
+        4.177,
+        8.1602
+      ],
+      "QED_range": [
+        0.6013,
+        0.795
+      ],
+      "maxTc_range": [
+        0.3594,
+        0.7959
+      ],
+      "herg_range": [
+        0.2506,
+        0.4991
+      ],
+      "herg_status": "applied",
+      "known_exact_hits": 0,
+      "head20_cids": [
+        "SCALE-068156",
+        "SCALE-087393",
+        "SCALE-042377",
+        "SCALE-100081",
+        "SCALE-097032",
+        "SCALE-034377",
+        "SCALE-112545",
+        "SCALE-037357",
+        "SCALE-085022",
+        "SCALE-034760",
+        "SCALE-115077",
+        "SCALE-032986",
+        "SCALE-056943",
+        "SCALE-008537",
+        "SCALE-071095",
+        "SCALE-019043",
+        "SCALE-022979",
+        "SCALE-108699",
+        "SCALE-070949",
+        "SCALE-112802"
+      ],
+      "head20_CNN_VS_min": 7.5532,
+      "head20_mean_qed": 0.677
+    },
+    "sens_QED0.40_anchor3": {
+      "arm": "sens_QED0.40_anchor3",
+      "qed_min": 0.4,
+      "anchor_min": 3,
+      "pool_n": 1000,
+      "n_known_excluded_in_arm": 11,
+      "n_selected_candidates": 39,
+      "n_controls": 2,
+      "list_size": 41,
+      "anchor_all_4": false,
+      "anchor_hits_min": 3,
+      "max_pairwise_tc": 0.6275,
+      "pairwise_ok": true,
+      "n_distinct_scaffold": 39,
+      "n_distinct_scaffold_generic": 26,
+      "chemotype_max": 20,
+      "chem_cap": 20,
+      "risk_n": 8,
+      "risk_cap": 8,
+      "scaffold_cap": 1,
+      "CNN_VS_range": [
+        4.177,
+        8.1602
+      ],
+      "QED_range": [
+        0.409,
+        0.795
+      ],
+      "maxTc_range": [
+        0.3286,
+        0.7959
+      ],
+      "herg_range": [
+        0.2506,
+        0.4971
+      ],
+      "herg_status": "applied",
+      "known_exact_hits": 0,
+      "head20_cids": [
+        "SCALE-068156",
+        "SCALE-011389",
+        "SCALE-053305",
+        "SCALE-101054",
+        "SCALE-087393",
+        "SCALE-113199",
+        "SCALE-111400",
+        "SCALE-100081",
+        "SCALE-097032",
+        "SCALE-034377",
+        "SCALE-038222",
+        "SCALE-112696",
+        "SCALE-112545",
+        "SCALE-116071",
+        "SCALE-099421",
+        "SCALE-108881",
+        "SCALE-094383",
+        "SCALE-085022",
+        "SCALE-099595",
+        "SCALE-084856"
+      ],
+      "head20_CNN_VS_min": 7.686,
+      "head20_mean_qed": 0.5839
+    },
+    "sens_scaffoldcap3_QED0.50_anchor4": {
+      "arm": "sens_scaffoldcap3_QED0.50_anchor4",
+      "pool_n": 751,
+      "scaffold_cap": 3,
+      "n_selected_candidates": 32,
+      "max_pairwise_tc": 0.62,
+      "n_distinct_scaffold": 32,
+      "herg_status": "applied",
+      "overlap_with_main": 1.0,
+      "note": "骨架封顶敏感性档（主口径池）"
+    },
+    "sens_scaffoldcap5_QED0.50_anchor4": {
+      "arm": "sens_scaffoldcap5_QED0.50_anchor4",
+      "pool_n": 751,
+      "scaffold_cap": 5,
+      "n_selected_candidates": 32,
+      "max_pairwise_tc": 0.62,
+      "n_distinct_scaffold": 32,
+      "herg_status": "applied",
+      "overlap_with_main": 1.0,
+      "note": "骨架封顶敏感性档（主口径池）"
+    },
+    "unconstrained_top48": {
+      "pool_n": 751,
+      "chemotype_max": 47,
+      "n_distinct_scaffold": 44,
+      "note": "无任何名单层约束时的 CNN_VS 前 48 名（量化约束咬合度）"
+    }
+  },
+  "novelty_gate": {
+    "n_exact_known_in_base": 11,
+    "excluded_cids": [
+      "SCALE-004769",
+      "SCALE-006591",
+      "SCALE-011569",
+      "SCALE-013451",
+      "SCALE-023658",
+      "SCALE-043463",
+      "SCALE-054729",
+      "SCALE-055397",
+      "SCALE-070808",
+      "SCALE-093429",
+      "SCALE-113626"
+    ],
+    "ungated_diagnostic": {
+      "n_different_from_main": 1,
+      "cids_only_in_ungated": [
+        "SCALE-004769"
+      ],
+      "ungated_rank_of_known": {
+        "SCALE-004769": 29
+      },
+      "n_known_in_ungated_list": 1,
+      "known_molecule_in_ungated": true,
+      "note": "未设 novelty 门时的主口径名单（仅用于诊断，非交付名单）"
+    }
+  },
+  "negative_controls": [
+    {
+      "cid": "C09462894",
+      "control_role": "NEG1",
+      "rule": "诱饵中 CNN_VS 最高且锚点 4/4（高可信假阳性）",
+      "cnn_vs": 8.109,
+      "vina_affinity": -9.9435,
+      "smiles": "Cc1cc(C)cc(OCCCn2cc(/C=N/Nc3nc4ccccc4s3)c3ccccc32)c1",
+      "activity_label": 0,
+      "anchor_hits_4A": 4
+    },
+    {
+      "cid": "C60359994",
+      "control_role": "NEG2",
+      "rule": "诱饵中 Vina 最强且锚点 4/4（两引擎共识诱饵）",
+      "cnn_vs": 6.7758,
+      "vina_affinity": -12.6843,
+      "smiles": "CC(C)[C@H](NC(=O)c1cccc(N2NC(=O)[C@H]3CC=CC[C@H]3C2=O)c1)c1nnc2ccccn12",
+      "activity_label": 0,
+      "anchor_hits_4A": 4
+    }
+  ],
+  "chem_cap_rule": "round(8N/20)，N=名单总数(=50) → 20",
+  "risk_cap_rule": "round(3N/20)，N=50 → 8",
+  "scaffold_cap_primary": 1
+}

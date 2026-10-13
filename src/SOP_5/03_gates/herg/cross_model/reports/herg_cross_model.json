@@ -1,0 +1,226 @@
+{
+  "dataset": {
+    "source": "ChEMBL REST API（EBI）",
+    "target": "CHEMBL240 (KCNH2 / hERG, Homo sapiens)",
+    "fetched_utc": "2026-09-23T06:47:45Z",
+    "raw_sha256": "71b1852e9e5548fc81457ff0f1e677f3a26f676a22bcf6bfa290edd2775fcb8e",
+    "n_raw_records": 13521,
+    "n_labeled": 6057,
+    "n_blocker": 2411,
+    "n_nonblocker": 3646,
+    "label_rule": {
+      "blocker_pchembl_ge": 6.0,
+      "nonblocker_pchembl_le": 5.0,
+      "ambiguous_band": "(5.0, 6.0) 丢弃",
+      "dedup": "InChIKey 取 pChEMBL 中位数"
+    },
+    "features": "ECFP4 2048 bit（RDKit）"
+  },
+  "cv": {
+    "rf_random_5fold": {
+      "roc_auc": 0.9489,
+      "pr_auc": 0.9323,
+      "balanced_accuracy": 0.8747,
+      "accuracy": 0.8889
+    },
+    "lr_random_5fold": {
+      "roc_auc": 0.9155,
+      "pr_auc": 0.8856,
+      "balanced_accuracy": 0.8469,
+      "accuracy": 0.8542
+    },
+    "knn_random_5fold": {
+      "roc_auc": 0.9206,
+      "pr_auc": 0.8681,
+      "balanced_accuracy": 0.8481,
+      "accuracy": 0.8521
+    },
+    "rf_scaffold_5fold": {
+      "roc_auc": 0.8968,
+      "pr_auc": 0.8677,
+      "balanced_accuracy": 0.7923,
+      "accuracy": 0.8214
+    },
+    "lr_scaffold_5fold": {
+      "roc_auc": 0.8429,
+      "pr_auc": 0.7778,
+      "balanced_accuracy": 0.7606,
+      "accuracy": 0.7733
+    },
+    "knn_scaffold_5fold": {
+      "roc_auc": 0.8686,
+      "pr_auc": 0.7886,
+      "balanced_accuracy": 0.7902,
+      "accuracy": 0.7954
+    }
+  },
+  "agreement_vs_admet_ai": [
+    {
+      "model2": "rf",
+      "spearman_rho": 0.1814,
+      "pearson_r": 0.1997,
+      "gate_agreement": 0.3306,
+      "cohen_kappa": 0.0166,
+      "m1_pass_rate": 0.3085,
+      "m2_pass_rate": 0.9718,
+      "m1_median_score": 0.6159,
+      "m2_median_score": 0.278,
+      "both_pass": 995,
+      "both_fail": 82,
+      "m1_pass_m2_fail": 10,
+      "m1_fail_m2_pass": 2171
+    },
+    {
+      "model2": "lr",
+      "spearman_rho": 0.1259,
+      "pearson_r": 0.127,
+      "gate_agreement": 0.4325,
+      "cohen_kappa": 0.0388,
+      "m1_pass_rate": 0.3085,
+      "m2_pass_rate": 0.736,
+      "m1_median_score": 0.6159,
+      "m2_median_score": 0.1525,
+      "both_pass": 777,
+      "both_fail": 632,
+      "m1_pass_m2_fail": 228,
+      "m1_fail_m2_pass": 1621
+    },
+    {
+      "model2": "knn",
+      "spearman_rho": 0.0952,
+      "pearson_r": 0.1122,
+      "gate_agreement": 0.4469,
+      "cohen_kappa": 0.0701,
+      "m1_pass_rate": 0.3085,
+      "m2_pass_rate": 0.7474,
+      "m1_median_score": 0.6159,
+      "m2_median_score": 0.2,
+      "both_pass": 819,
+      "both_fail": 637,
+      "m1_pass_m2_fail": 186,
+      "m1_fail_m2_pass": 1616
+    },
+    {
+      "model2": "ens",
+      "spearman_rho": 0.1419,
+      "pearson_r": 0.1674,
+      "gate_agreement": 0.4015,
+      "cohen_kappa": 0.0574,
+      "m1_pass_rate": 0.3085,
+      "m2_pass_rate": 0.8524,
+      "m1_median_score": 0.6159,
+      "m2_median_score": 0.2704,
+      "both_pass": 916,
+      "both_fail": 392,
+      "m1_pass_m2_fail": 89,
+      "m1_fail_m2_pass": 1861
+    }
+  ],
+  "rank_consistency": [
+    {
+      "model2": "rf",
+      "high_risk_top10pct_jaccard": 0.1319,
+      "matched_pass_rate": 0.3085,
+      "m2_matched_threshold": 0.244,
+      "matched_overlap_jaccard": 0.217,
+      "recall_of_m1_passes": 0.3572
+    },
+    {
+      "model2": "lr",
+      "high_risk_top10pct_jaccard": 0.0958,
+      "matched_pass_rate": 0.3085,
+      "m2_matched_threshold": 0.044,
+      "matched_overlap_jaccard": 0.2174,
+      "recall_of_m1_passes": 0.3572
+    },
+    {
+      "model2": "knn",
+      "high_risk_top10pct_jaccard": 0.1032,
+      "matched_pass_rate": 0.3085,
+      "m2_matched_threshold": 0.2,
+      "matched_overlap_jaccard": 0.2699,
+      "recall_of_m1_passes": 0.5701
+    },
+    {
+      "model2": "ens",
+      "high_risk_top10pct_jaccard": 0.1319,
+      "matched_pass_rate": 0.3085,
+      "m2_matched_threshold": 0.1859,
+      "matched_overlap_jaccard": 0.2072,
+      "recall_of_m1_passes": 0.3433
+    }
+  ],
+  "gate_impact": {
+    "union_recomputed": {
+      "pool_n": 3258,
+      "m1_pass": 1005,
+      "m2_pass": 2777,
+      "m1_and_m2_pass": 916,
+      "m1_only_pass": 89,
+      "m2_only_pass": 1861,
+      "m1_evaluated_n": 3236,
+      "m1_missing_n": 22
+    },
+    "pre_herg_main_pool": {
+      "pool_n": 1989,
+      "m1_pass": 611,
+      "m2_pass": 1701,
+      "m1_and_m2_pass": 553,
+      "m1_only_pass": 58,
+      "m2_only_pass": 1148,
+      "m1_evaluated_n": 1974,
+      "m1_missing_n": 15,
+      "covered_n": 1989,
+      "uncovered_n": 0,
+      "base_note": "m1_pass/m1_and_m2_pass 只在 m1_evaluated_n 个（两侧都有预测值）分子上计算，不是整个 pool_n；本包 hERG 门在该池上的过门数见 03_gates/reports/gate_stack.json → gate_chain 与 04_selection 的主臂池规模，二者不可互换"
+    },
+    "delivered_list_48": {
+      "pool_n": 48,
+      "m1_pass": 46,
+      "m2_pass": 46,
+      "m1_and_m2_pass": 44,
+      "m1_only_pass": 2,
+      "m2_only_pass": 2,
+      "m1_evaluated_n": 46,
+      "m1_missing_n": 2
+    },
+    "union_recomputed_rf": {
+      "pool_n": 3258,
+      "m1_pass": 1005,
+      "m2_pass": 3166,
+      "m1_and_m2_pass": 995,
+      "m1_only_pass": 10,
+      "m2_only_pass": 2171,
+      "m1_evaluated_n": 3236,
+      "m1_missing_n": 22
+    },
+    "pre_herg_main_pool_rf": {
+      "pool_n": 1989,
+      "m1_pass": 611,
+      "m2_pass": 1939,
+      "m1_and_m2_pass": 606,
+      "m1_only_pass": 5,
+      "m2_only_pass": 1333,
+      "m1_evaluated_n": 1974,
+      "m1_missing_n": 15
+    },
+    "delivered_list_48_rf": {
+      "pool_n": 48,
+      "m1_pass": 46,
+      "m2_pass": 48,
+      "m1_and_m2_pass": 46,
+      "m1_only_pass": 0,
+      "m2_only_pass": 2,
+      "m1_evaluated_n": 46,
+      "m1_missing_n": 2
+    },
+    "m1_missing_convention": "缺第一模型外部预测值（hERG_admet_ai 为空）的分子在 m1_pass 里按 0（不过门）计入，属保守处理；故 m1_pass / m1_and_m2_pass / 一致性 / κ 的分母是 m1_evaluated_n。本包 hERG 门的落门依据是包内冻结全量表（覆盖 100%），与这些空值无关。",
+    "key_note": "union_recomputed* 为口径重算后的四臂并集（审计件）；键名不再内嵌规模数字，规模一律以 pool_n 为准"
+  },
+  "n_list_flips_ens": 2,
+  "list_flips_cids": [
+    "ZINC000092920989",
+    "ZINC000008706207"
+  ],
+  "independence_caveat": "ADMET-AI 的 hERG 头同样基于公开 hERG 数据（含 TDC hERG 集，多源自 ChEMBL）训练，故本步量化的是算法/训练管道依赖度，不构成数据独立的外部验证"
+}

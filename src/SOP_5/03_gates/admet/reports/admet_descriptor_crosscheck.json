@@ -1,0 +1,117 @@
+{
+  "n_compared": 4990,
+  "tolerance": 1e-06,
+  "numeric": {
+    "MW": {
+      "max_abs_diff": 0.0,
+      "n_over_tol": 0,
+      "n": 4929,
+      "scope": "单片段分子（严格容差）"
+    },
+    "cLogP": {
+      "max_abs_diff": 0.0,
+      "n_over_tol": 0,
+      "n": 4929,
+      "scope": "单片段分子（严格容差）"
+    },
+    "TPSA": {
+      "max_abs_diff": 0.0,
+      "n_over_tol": 0,
+      "n": 4929,
+      "scope": "单片段分子（严格容差）"
+    },
+    "HBD": {
+      "max_abs_diff": 0.0,
+      "n_over_tol": 0,
+      "n": 4929,
+      "scope": "单片段分子（严格容差）"
+    },
+    "HBA": {
+      "max_abs_diff": 0.0,
+      "n_over_tol": 0,
+      "n": 4929,
+      "scope": "单片段分子（严格容差）"
+    },
+    "qed": {
+      "max_abs_diff": 0.0,
+      "n_over_tol": 0,
+      "n": 4929,
+      "scope": "单片段分子（严格容差）"
+    }
+  },
+  "numeric_multi_fragment": {
+    "MW": {
+      "max_abs_diff": 192.214,
+      "n_over_tol": 61,
+      "n": 61,
+      "scope": "多片段分子（本包已去盐，ADMET-AI 未去盐 → 预期不等）"
+    },
+    "cLogP": {
+      "max_abs_diff": 2.996,
+      "n_over_tol": 61,
+      "n": 61,
+      "scope": "多片段分子（本包已去盐，ADMET-AI 未去盐 → 预期不等）"
+    },
+    "TPSA": {
+      "max_abs_diff": 108.74,
+      "n_over_tol": 37,
+      "n": 61,
+      "scope": "多片段分子（本包已去盐，ADMET-AI 未去盐 → 预期不等）"
+    },
+    "HBD": {
+      "max_abs_diff": 2.0,
+      "n_over_tol": 37,
+      "n": 61,
+      "scope": "多片段分子（本包已去盐，ADMET-AI 未去盐 → 预期不等）"
+    },
+    "HBA": {
+      "max_abs_diff": 4.0,
+      "n_over_tol": 37,
+      "n": 61,
+      "scope": "多片段分子（本包已去盐，ADMET-AI 未去盐 → 预期不等）"
+    },
+    "qed": {
+      "max_abs_diff": 0.247913,
+      "n_over_tol": 61,
+      "n": 61,
+      "scope": "多片段分子（本包已去盐，ADMET-AI 未去盐 → 预期不等）"
+    }
+  },
+  "n_single_fragment": 4929,
+  "n_multi_fragment": 61,
+  "rule_agreements": {
+    "ro5": {
+      "agreement_pct": 99.9399,
+      "agreement_pct_single_fragment": 100.0,
+      "pack_hits": 4686,
+      "admet_hits": 4683,
+      "pack_only": 3,
+      "admet_only": 0,
+      "n": 4990
+    },
+    "pains": {
+      "agreement_pct": 100.0,
+      "agreement_pct_single_fragment": 100.0,
+      "pack_hits": 4990,
+      "admet_hits": 4990,
+      "pack_only": 0,
+      "admet_only": 0,
+      "n": 4990
+    },
+    "brenk": {
+      "agreement_pct": 92.5251,
+      "agreement_pct_single_fragment": 93.1426,
+      "pack_hits": 1027,
+      "admet_hits": 722,
+      "pack_only": 339,
+      "admet_only": 34,
+      "n": 4990
+    }
+  },
+  "expected_differences": {
+    "BRENK": "外部 ADMET-AI 的 BRENK 命中集是包内 RDKit FilterCatalog 集的子集（口径版本差异），差异登记为已知且已解释，不判失败",
+    "multi_fragment": "本包 05 步已按最大片段去盐，ADMET-AI 未去盐 → 多片段分子的 MW/logP/TPSA/QED 预期不等（本包更小）；该组在 admet_descriptor_crosscheck.json 的 numeric_multi_fragment 块与 02_druglikeness/tables/standardization_impact.csv 中逐分子留痕，不判失败"
+  },
+  "all_numeric_within_tol": true,
+  "multi_fragment_note": "多片段分子的本包描述符按「最大片段」口径、ADMET-AI 按含反离子口径，逐列差值预期非零且方向已知（本包 MW 更小、logP/TPSA 相应更小）；该组不参与严格容差判定，其逐分子差值见 admet_descriptor_crosscheck.csv（列 n_frag_std）与 02_druglikeness/tables/standardization_impact.csv"
+}

@@ -1,0 +1,5 @@
+model2,high_risk_top10pct_jaccard,matched_pass_rate,m2_matched_threshold,matched_overlap_jaccard,recall_of_m1_passes
+rf,0.1564,0.286,0.258,0.228,0.3737
+lr,0.0948,0.286,0.1207,0.2378,0.3843
+knn,0.1229,0.286,0.2,0.2126,0.4225
+ens,0.1524,0.286,0.2678,0.2226,0.3641

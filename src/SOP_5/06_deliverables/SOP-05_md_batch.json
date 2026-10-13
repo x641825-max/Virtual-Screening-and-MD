@@ -1,0 +1,435 @@
+{
+  "rule_version": "1.7.0",
+  "batch_size": 20,
+  "n_candidates": 18,
+  "n_controls": 2,
+  "source_list": "04_selection/tables/list_main_QED0.50_anchor4.csv",
+  "source_list_sha256": "513520c9832635029eb8ae06e566aec6fee01bfa43155464bcc2c0b0b280fd19",
+  "hERG_cross_model_table_sha256": "ce3f0d22d584975c8db5d65d76beb1da4bb63f0c7d5637328466907e8345040d",
+  "pool": {
+    "n_listed_candidates": 48,
+    "n_excluded_hERG_cross_model_fail": 0,
+    "n_retained_hERG_cross_model_fail": 2,
+    "hERG_cross_model_policy": "retain_and_annotate",
+    "n_excluded_generic_scaffold_dup": 6,
+    "n_eligible": 42
+  },
+  "caps": {
+    "pairwise_tc_max": 0.65,
+    "chem_cap": 8,
+    "risk_cap": 3,
+    "scaffold_cap": 1,
+    "chemotype_counts": {
+      "无氨基烟腈母核 + 无碱性胺": 8,
+      "氨基烟腈母核 + 碱性胺": 6,
+      "无氨基烟腈母核 + 碱性胺": 4
+    },
+    "risk_count": 2
+  },
+  "stratification": {
+    "reference_median_CNN_VS": 7.414,
+    "min_below_median": 5,
+    "n_below_median_selected": 8
+  },
+  "diversity": {
+    "n_unique_scaffold": 18,
+    "n_unique_generic_scaffold": 18,
+    "max_pairwise_tc": 0.4658,
+    "max_pairwise_tc_pair": [
+      "ZINC000071738518",
+      "MCULE-5129094733"
+    ]
+  },
+  "spans": {
+    "CNN_VS_min": 7.2576,
+    "CNN_VS_max": 7.9914,
+    "CNN_VS_span": 0.7337,
+    "cLogP_min": 1.0792,
+    "cLogP_max": 4.9892,
+    "cns_mpo_min": 3.5472,
+    "cns_mpo_max": 5.835,
+    "maxTc_min": 0.25,
+    "maxTc_max": 0.5439
+  },
+  "objective": {
+    "kind": "信息量/设计优先（v0，2026-09-23 批准并进链）",
+    "solver": "scipy.optimize.milp（HiGHS 后端）",
+    "scipy_version": "1.15.3",
+    "coverage_axes": [
+      {
+        "column": "CNN_VS",
+        "label": "CNN_VS"
+      },
+      {
+        "column": "cLogP",
+        "label": "cLogP"
+      },
+      {
+        "column": "cns_mpo",
+        "label": "CNS MPO"
+      }
+    ],
+    "n_bins_per_axis": 4,
+    "n_bins": 12,
+    "empty_bins": [],
+    "bin_reference": "eligible_pool — 按资格池自身分布的 25/50/75 分位（线性插值）切 4 层；空层自动跳过并记入证书",
+    "bin_edges": {
+      "CNN_VS": [
+        7.322667,
+        7.41404,
+        7.666498
+      ],
+      "cLogP": [
+        1.918295,
+        2.49795,
+        3.475725
+      ],
+      "CNS MPO": [
+        4.1848,
+        4.669,
+        5.089175
+      ]
+    },
+    "objective_convention": "各阶段 objective 为求解器返回的最小化形式（fun）；实际最大化目标 = −objective",
+    "lexicographic": [
+      {
+        "stage": 1,
+        "name": "分层覆盖下限 t",
+        "objective": -4.0,
+        "status": 0,
+        "mip_gap": 0.0,
+        "nodes": 1
+      },
+      {
+        "stage": 2,
+        "name": "CNN_VS 跨度",
+        "objective": -0.73373,
+        "status": 0,
+        "mip_gap": 0.0,
+        "nodes": 1
+      },
+      {
+        "stage": 3,
+        "name": "Σ CNN_VS",
+        "objective": -136.50312,
+        "status": 0,
+        "mip_gap": 0.0,
+        "nodes": 1
+      },
+      {
+        "stage": 4,
+        "name": "规范并列打破",
+        "objective": -453.0,
+        "status": 0,
+        "mip_gap": 0.0,
+        "nodes": 1
+      }
+    ],
+    "reference_impl": "heuristic_reference（v1.6.0 贪心填充，fill_order 见规则）——它不驱动选批，仅作对照"
+  },
+  "optimality": {
+    "certificate": true,
+    "t_star": 4,
+    "span": 0.73373,
+    "sum_CNN_VS": 136.50312,
+    "n_occupied_bins": 12,
+    "n_bins": 12,
+    "bin_counts": {
+      "CNN_VS|Q1": {
+        "pool_n": 11,
+        "optimal": 4,
+        "heuristic": 0
+      },
+      "CNN_VS|Q2": {
+        "pool_n": 10,
+        "optimal": 4,
+        "heuristic": 5
+      },
+      "CNN_VS|Q3": {
+        "pool_n": 10,
+        "optimal": 4,
+        "heuristic": 2
+      },
+      "CNN_VS|Q4": {
+        "pool_n": 11,
+        "optimal": 6,
+        "heuristic": 11
+      },
+      "cLogP|Q1": {
+        "pool_n": 11,
+        "optimal": 4,
+        "heuristic": 6
+      },
+      "cLogP|Q2": {
+        "pool_n": 10,
+        "optimal": 6,
+        "heuristic": 3
+      },
+      "cLogP|Q3": {
+        "pool_n": 10,
+        "optimal": 4,
+        "heuristic": 4
+      },
+      "cLogP|Q4": {
+        "pool_n": 11,
+        "optimal": 4,
+        "heuristic": 5
+      },
+      "CNS MPO|Q1": {
+        "pool_n": 11,
+        "optimal": 6,
+        "heuristic": 7
+      },
+      "CNS MPO|Q2": {
+        "pool_n": 10,
+        "optimal": 4,
+        "heuristic": 5
+      },
+      "CNS MPO|Q3": {
+        "pool_n": 10,
+        "optimal": 4,
+        "heuristic": 4
+      },
+      "CNS MPO|Q4": {
+        "pool_n": 11,
+        "optimal": 4,
+        "heuristic": 2
+      }
+    },
+    "roster": [
+      "ZINC000071721614",
+      "MCULE-6739389520",
+      "ZINC002384414275",
+      "ZINC000005271235",
+      "ZINC000067458904",
+      "ZINC000079108700",
+      "ZINC000012607437",
+      "ZINC000057520614",
+      "ZINC000071738518",
+      "ZINC000002782221",
+      "ZINC000008706207",
+      "MCULE-5129094733",
+      "ZINC000575414237",
+      "ZINC000092920989",
+      "ZINC000013731712",
+      "ZINC000199480719",
+      "ZINC000019874364",
+      "ZINC000097680017"
+    ],
+    "resolved_roster_consistent": true,
+    "selection_role_counts": {
+      "跨度端点席位（移除此席跨度收窄）": 2,
+      "覆盖下限约束席位（移除此席 t 会下降）": 16,
+      "质量兜底填充（移除后 t 与跨度均不变）": 0
+    },
+    "counterfactual_resolve": {
+      "n_irreplaceable_for_coverage": 0,
+      "n_irreplaceable_for_span": 2,
+      "n_replaceable": 16,
+      "note": "留一法说明该席在名册内承担什么；本块说明「禁掉该席后是否仍可达标」。实测覆盖下限有富余（无单一席位不可替代），仅 CNN_VS 全量程的两个端点席不可替代——即覆盖是**配额**约束，跨度是**端点**约束"
+    },
+    "compliance": {
+      "n_selected": 18,
+      "chemotype_counts": {
+        "无氨基烟腈母核 + 无碱性胺": 8,
+        "氨基烟腈母核 + 碱性胺": 6,
+        "无氨基烟腈母核 + 碱性胺": 4
+      },
+      "risk_count": 2,
+      "below_median_48_count": 8,
+      "max_pairwise_tc": 0.465753,
+      "min_bin_count": 4,
+      "n_occupied_bins": 12,
+      "slope_info_sum_sq_dev": 1.101922,
+      "sigma_CNN_VS": 0.254596,
+      "pass": {
+        "n_selected": true,
+        "chem_cap": true,
+        "risk_cap": true,
+        "below_median_min": true,
+        "pairwise_tc": true
+      }
+    }
+  },
+  "heuristic_reference": {
+    "role": "v1.6.0 贪心填充（对照实现，不驱动选批）",
+    "fill_order_used": [
+      "每个化学型类的最高分者（化学型覆盖锚点）",
+      "分数分层：补齐至 ≥ min_below_median_candidates 个下半区候选",
+      "CNN_VS 降序填满，受 caps 限制"
+    ],
+    "t": 0,
+    "span": 0.62343,
+    "sum_CNN_VS": 138.10333,
+    "n_occupied_bins": 11,
+    "roster": [
+      "ZINC000005271235",
+      "MCULE-6739389520",
+      "ZINC000071721614",
+      "ZINC000008706207",
+      "ZINC000006158656",
+      "MCULE-5129094733",
+      "ZINC000575414237",
+      "ZINC000092920989",
+      "ZINC002384414275",
+      "ZINC000067458904",
+      "ZINC000079108700",
+      "ZINC000097636624",
+      "ZINC000097115238",
+      "MCULE-6579907902",
+      "ZINC002384416952",
+      "ZINC000024760279",
+      "ZINC000012607437",
+      "ZINC000057520614"
+    ],
+    "overlap_with_optimal": 12,
+    "n_swaps": 6,
+    "roster_diff": [
+      {
+        "direction": "被替换（对照贪心）",
+        "cid": "ZINC000006158656",
+        "CNN_VS": 7.3972,
+        "bin_CNN_VS": "Q2",
+        "cLogP": 4.9742,
+        "cns_mpo": 3.8955,
+        "chemotype": "无氨基烟腈母核 + 无碱性胺"
+      },
+      {
+        "direction": "被替换（对照贪心）",
+        "cid": "ZINC000097636624",
+        "CNN_VS": 7.747,
+        "bin_CNN_VS": "Q4",
+        "cLogP": 1.094,
+        "cns_mpo": 4.828,
+        "chemotype": "无氨基烟腈母核 + 碱性胺"
+      },
+      {
+        "direction": "被替换（对照贪心）",
+        "cid": "ZINC000097115238",
+        "CNN_VS": 7.7281,
+        "bin_CNN_VS": "Q4",
+        "cLogP": 0.9553,
+        "cns_mpo": 4.7547,
+        "chemotype": "无氨基烟腈母核 + 碱性胺"
+      },
+      {
+        "direction": "被替换（对照贪心）",
+        "cid": "MCULE-6579907902",
+        "CNN_VS": 7.7202,
+        "bin_CNN_VS": "Q4",
+        "cLogP": 2.7508,
+        "cns_mpo": 4.1787,
+        "chemotype": "氨基烟腈母核 + 碱性胺"
+      },
+      {
+        "direction": "被替换（对照贪心）",
+        "cid": "ZINC002384416952",
+        "CNN_VS": 7.7071,
+        "bin_CNN_VS": "Q4",
+        "cLogP": 3.7105,
+        "cns_mpo": 4.6158,
+        "chemotype": "氨基烟腈母核 + 碱性胺"
+      },
+      {
+        "direction": "被替换（对照贪心）",
+        "cid": "ZINC000024760279",
+        "CNN_VS": 7.6689,
+        "bin_CNN_VS": "Q4",
+        "cLogP": 2.7966,
+        "cns_mpo": 5.3458,
+        "chemotype": "无氨基烟腈母核 + 无碱性胺"
+      },
+      {
+        "direction": "新增（v1.7.0 最优解）",
+        "cid": "ZINC000071738518",
+        "CNN_VS": 7.6359,
+        "bin_CNN_VS": "Q3",
+        "cLogP": 2.1834,
+        "cns_mpo": 3.6574,
+        "chemotype": "氨基烟腈母核 + 碱性胺"
+      },
+      {
+        "direction": "新增（v1.7.0 最优解）",
+        "cid": "ZINC000002782221",
+        "CNN_VS": 7.5602,
+        "bin_CNN_VS": "Q3",
+        "cLogP": 3.5099,
+        "cns_mpo": 5.3872,
+        "chemotype": "无氨基烟腈母核 + 无碱性胺"
+      },
+      {
+        "direction": "新增（v1.7.0 最优解）",
+        "cid": "ZINC000013731712",
+        "CNN_VS": 7.3069,
+        "bin_CNN_VS": "Q1",
+        "cLogP": 2.9279,
+        "cns_mpo": 5.4525,
+        "chemotype": "无氨基烟腈母核 + 无碱性胺"
+      },
+      {
+        "direction": "新增（v1.7.0 最优解）",
+        "cid": "ZINC000199480719",
+        "CNN_VS": 7.3068,
+        "bin_CNN_VS": "Q1",
+        "cLogP": 2.8579,
+        "cns_mpo": 4.8333,
+        "chemotype": "无氨基烟腈母核 + 碱性胺"
+      },
+      {
+        "direction": "新增（v1.7.0 最优解）",
+        "cid": "ZINC000019874364",
+        "CNN_VS": 7.3011,
+        "bin_CNN_VS": "Q1",
+        "cLogP": 2.4337,
+        "cns_mpo": 5.0945,
+        "chemotype": "氨基烟腈母核 + 碱性胺"
+      },
+      {
+        "direction": "新增（v1.7.0 最优解）",
+        "cid": "ZINC000097680017",
+        "CNN_VS": 7.2576,
+        "bin_CNN_VS": "Q1",
+        "cLogP": 2.4495,
+        "cns_mpo": 4.9295,
+        "chemotype": "无氨基烟腈母核 + 碱性胺"
+      }
+    ],
+    "compliance": {
+      "n_selected": 18,
+      "chemotype_counts": {
+        "无氨基烟腈母核 + 无碱性胺": 8,
+        "氨基烟腈母核 + 碱性胺": 6,
+        "无氨基烟腈母核 + 碱性胺": 4
+      },
+      "risk_count": 2,
+      "below_median_48_count": 5,
+      "max_pairwise_tc": 0.567164,
+      "min_bin_count": 0,
+      "n_occupied_bins": 11,
+      "slope_info_sum_sq_dev": 0.740962,
+      "sigma_CNN_VS": 0.208773,
+      "pass": {
+        "n_selected": true,
+        "chem_cap": true,
+        "risk_cap": true,
+        "below_median_min": true,
+        "pairwise_tc": true
+      }
+    },
+    "note": "精确求解显示该贪心恰是「max Σ CNN_VS」口径的全局最优解——本版修的是目标函数，不是算法"
+  },
+  "md_cost_estimate": {
+    "note": "按 06_deliverables/SOP-05_downstream_MD_plan.md §3 的单分子卡时口径线性外推，仅供预算参考",
+    "level1_cardday": 2.0,
+    "level2_cardday_if_all_pass": 30.0,
+    "level2_cardday_at_65pct_pass": 19.5,
+    "level1_assumption": "0.1 卡日/分子/10 ns",
+    "level2_assumption": "1.5 卡日/分子/150 ns（通过率按 60–70% 估计）"
+  },
+  "selection_reason_counts": {
+    "覆盖下限约束席位（移除此席 t 会下降）": 16,
+    "跨度端点席位（移除此席跨度收窄）": 2,
+    "质量兜底填充（移除后 t 与跨度均不变）": 0
+  },
+  "note": "分析步：只做机时分配与留痕；不改名单、不改门。「最优」的限定口径是 step6_md_batch.objective（信息量/设计优先，v1.7.0）：Σ CNN_VS 反而略低于质量口径，价值在于让一级 MD 能检验分数-稳定性关系并覆盖性质空间；低分位分子失败概率更高，这是要测量的量，不得事后解读为「选坏了」。MD 后若换人须改规则并重跑整链"
+}

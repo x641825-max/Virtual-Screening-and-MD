@@ -1,0 +1,9 @@
+cid,smiles,arm_membership,hERG_admet_ai,hERG_cross_rf,hERG_cross_lr,hERG_cross_knn,m1_pass,m2_pass_rf,m2_pass_lr,m2_pass_knn,hERG_cross_ens,m2_pass_ens
+SCALE-097032,Cc1nc(N)nc(-c2ccco2)c1-c1cnn(Cc2ccon2)c1,QED0.60_anchor4;QED0.50_anchor4;QED0.40_anchor4;QED0.60_anchor3,0.296957,0.524,0.982874,1,1,0,0,0,0.835625,0
+SCALE-111400,N#Cc1ccc(-c2c(-c3ccco3)nc(N)nc2-c2nnc(F)nc2F)cc1,QED0.50_anchor4;QED0.40_anchor4,0.354856,0.478,0.994243,1,1,1,0,0,0.824081,0
+SCALE-038222,Nc1nc(Sc2ncco2)c(Nc2ccncc2)c(-c2ccco2)n1,QED0.50_anchor4;QED0.40_anchor4,0.495713,0.444,0.998336,1,1,1,0,0,0.814112,0
+SCALE-085022,CCCCc1nc(N)nc(-c2ccco2)c1OCc1ccccn1,QED0.60_anchor4;QED0.50_anchor4;QED0.40_anchor4;QED0.60_anchor3,0.496697,0.536,0.994817,0.4,1,0,0,1,0.643606,0
+SCALE-056230,N#Cc1c(-c2ccnc(Oc3ccccc3)c2)nc(N)nc1-c1ccco1,QED0.50_anchor4;QED0.40_anchor4,0.430913,0.352,0.970725,0.6,1,1,0,0,0.640908,0
+SCALE-034760,Cc1cccc(Cc2nc(N)nc(-c3ccco3)c2C#N)n1,QED0.60_anchor4;QED0.50_anchor4;QED0.40_anchor4;QED0.60_anchor3,0.435206,0.308,0.944554,0.6,1,1,0,0,0.617518,0
+SCALE-112545,Cc1cc(-c2cnc(N)nc2-c2ccco2)n(Cc2noc(C)n2)n1,QED0.60_anchor4;QED0.50_anchor4;QED0.40_anchor4;QED0.60_anchor3,0.445537,0.298,0.890548,0.6,1,1,0,0,0.596183,0
+SCALE-116071,Nc1nc(F)c(-c2ccco2)c(-c2cc(Br)nc(-c3ccco3)n2)n1,QED0.50_anchor4;QED0.40_anchor4,0.487245,0.334,0.977956,0.4,1,1,0,1,0.570652,0

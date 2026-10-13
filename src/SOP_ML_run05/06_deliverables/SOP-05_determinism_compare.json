@@ -1,0 +1,12 @@
+{
+  "mode": "compared",
+  "n_files_current": 186,
+  "n_files_baseline": 186,
+  "n_diff": 0,
+  "baseline_sha256": "cdbb436379f1931368414f7b404c8e46516843248ff12280877630e1ff9f6d13",
+  "determinism_verified": true,
+  "identical": true,
+  "diff": [],
+  "missing_in_current": [],
+  "new_in_current": []
+}

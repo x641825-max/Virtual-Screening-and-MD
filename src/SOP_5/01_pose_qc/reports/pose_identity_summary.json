@@ -1,0 +1,47 @@
+{
+  "n_poses": 5000,
+  "identity_class_counts": {
+    "identical": 4861,
+    "protonation_diff": 4,
+    "stereo_only": 135
+  },
+  "qc_class_counts_technical": {
+    "identical_fixed": 4861,
+    "protonation_diff": 4,
+    "stereo_only_fixed": 135
+  },
+  "stereo_source_counts": {
+    "pose3D(修正键级后)": 4996,
+    "pose3D(未在输入中指定)": 4
+  },
+  "n_multifragment_template": 61,
+  "n_fragments_template_dist": {
+    "1": 4939,
+    "2": 53,
+    "3": 7,
+    "4": 1
+  },
+  "cnn_vs_x_affinity_violations": 0,
+  "cnn_vs_x_affinity_tolerance": 0.0005,
+  "coord_max_dev_max": 0.0,
+  "prop_max_abs_diff_vs_upstream": {
+    "CNN_VS": 0.0,
+    "CNNscore": 0.0,
+    "CNNaffinity": 0.0,
+    "CNNaffinity_variance": 0.0,
+    "minimizedAffinity": 0.0,
+    "rank_score": 0.0,
+    "n_fragments": null
+  },
+  "heavy_atom_delta_counts": {
+    "0": 5000
+  },
+  "protonation_diff_cids": [
+    "ZINC000100674263",
+    "ZINC000100707402",
+    "ZINC002383293628",
+    "ZINC002383311131"
+  ],
+  "graph_mismatch_cids": [],
+  "pass": true
+}

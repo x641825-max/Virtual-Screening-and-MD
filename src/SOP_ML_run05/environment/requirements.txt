@@ -1,0 +1,9 @@
+# SOP_5 依赖（版本为冻结快照；不得用于 pip 安装，仅作环境对照）
+rdkit==2025.9.5
+pandas==2.3.3
+numpy==2.4.6
+scikit-learn==1.9.1
+scipy==1.15.3
+matplotlib==3.11.1
+pillow==12.3.0
+# 说明：本工程禁止在包内 pip/conda 安装；环境不含 admet_ai/chemprop/torch（hERG 门外部接口化）

@@ -1,0 +1,447 @@
+{
+  "extract_large": true,
+  "n_files": 55,
+  "total_bytes": 141893886,
+  "files": [
+    {
+      "archive": "redocking.zip",
+      "member": "A2A_redocking/00_3EML_structure/3EML_crystal_zma.pdb",
+      "extracted": "00_inputs/extracted/redocking/00_3EML_structure/3EML_crystal_zma.pdb",
+      "size": 3285,
+      "md5": "69f65162f26514e4be1365f46cc9b010",
+      "sha256": "109d89f93670aaf17ebb1532b543901c7ea9a7527b37811f756cd283585f5e83"
+    },
+    {
+      "archive": "redocking.zip",
+      "member": "A2A_redocking/00_3EML_structure/3EML_redock.log",
+      "extracted": "00_inputs/extracted/redocking/00_3EML_structure/3EML_redock.log",
+      "size": 1607,
+      "md5": "ed34f1cffc3ec5f10d043a2399a36b18",
+      "sha256": "b7931f985f9f4396f7bd08eff2feaaa7e39b8ddc98e8f12015df1e83c0a4569a"
+    },
+    {
+      "archive": "redocking.zip",
+      "member": "A2A_redocking/00_3EML_structure/redocking_report_summary.md",
+      "extracted": "00_inputs/extracted/redocking/00_3EML_structure/redocking_report_summary.md",
+      "size": 2015,
+      "md5": "542b1149a9c90939fea2ec53ce26afae",
+      "sha256": "d2a2b29d2a673657b82f2a2b5bd02ede0ee246d161b348c48f8ff6283cd8d7c1"
+    },
+    {
+      "archive": "redocking.zip",
+      "member": "A2A_redocking/SOP-02/01_raw_data/actives_final.ism",
+      "extracted": "00_inputs/extracted/redocking/SOP-02/01_raw_data/actives_final.ism",
+      "size": 34372,
+      "md5": "dacbab441851a5978582d68458fce575",
+      "sha256": "690845896b1f1c0b4a41623c9f9c9e0a5a973cf972513aa33bad2749f59e1e63"
+    },
+    {
+      "archive": "redocking.zip",
+      "member": "A2A_redocking/SOP-02/01_raw_data/decoys_final.ism",
+      "extracted": "00_inputs/extracted/redocking/SOP-02/01_raw_data/decoys_final.ism",
+      "size": 2199907,
+      "md5": "2d116b5067696b88ed0ed9ba7b84bbe4",
+      "sha256": "b572781d1316c3b13b955ddc8f1cc111b4773009a1bcc3d3940db9f37835bbd8"
+    },
+    {
+      "archive": "redocking.zip",
+      "member": "A2A_redocking/SOP-02/02_cleaned_benchmark/actives_cleaned.csv",
+      "extracted": "00_inputs/extracted/redocking/SOP-02/02_cleaned_benchmark/actives_cleaned.csv",
+      "size": 45801,
+      "md5": "0c51f432452c88fe5819df8975af271e",
+      "sha256": "834d18addade3c79ffb6566ea8e5cc6a023c28d9a3e8b74a8ac40f089f60c8d0"
+    },
+    {
+      "archive": "redocking.zip",
+      "member": "A2A_redocking/SOP-02/02_cleaned_benchmark/benchmark_sample_5100_eval.csv",
+      "extracted": "00_inputs/extracted/redocking/SOP-02/02_cleaned_benchmark/benchmark_sample_5100_eval.csv",
+      "size": 476315,
+      "md5": "9c2c4908c907308d244f4fb6a901489f",
+      "sha256": "0708a6b5296086ecc2aa6e3d3c59347719339b769e337d262cef9e06e7509c3f"
+    },
+    {
+      "archive": "redocking.zip",
+      "member": "A2A_redocking/SOP-02/02_cleaned_benchmark/decoys_cleaned.csv",
+      "extracted": "00_inputs/extracted/redocking/SOP-02/02_cleaned_benchmark/decoys_cleaned.csv",
+      "size": 2892539,
+      "md5": "b3208de2846e5ac389ed66556af19630",
+      "sha256": "3026c8bef3eb00b4b35ee3b539f3b334250a03e25f82601c5813fbea56110414"
+    },
+    {
+      "archive": "redocking.zip",
+      "member": "A2A_redocking/SOP-02/02_cleaned_benchmark/property_matching_validation.csv",
+      "extracted": "00_inputs/extracted/redocking/SOP-02/02_cleaned_benchmark/property_matching_validation.csv",
+      "size": 269,
+      "md5": "0c7e7194bcc648035491b68b65e8fcff",
+      "sha256": "1a1419cee86a42ced11be2dd596deb38dfbb875b3930bbf960b7174c73332d3e"
+    },
+    {
+      "archive": "redocking.zip",
+      "member": "A2A_redocking/SOP-02/04_docking_results/docked_molecules.csv",
+      "extracted": "00_inputs/extracted/redocking/SOP-02/04_docking_results/docked_molecules.csv",
+      "size": 550253,
+      "md5": "b278bdb76f538bc9259179f24e2dbf61",
+      "sha256": "f94e969acb8f2ed8517187a7c72d57db02f4d57d6f46481a574c5244bc67d90e"
+    },
+    {
+      "archive": "redocking.zip",
+      "member": "A2A_redocking/SOP-02/04_docking_results/undocked_molecules.csv",
+      "extracted": "00_inputs/extracted/redocking/SOP-02/04_docking_results/undocked_molecules.csv",
+      "size": 460,
+      "md5": "0b636b73b2ae67a07f6227f84c761dae",
+      "sha256": "c7abb381231dc5628884ea9dacf4f3fab66e39c45118056b7540cad62a3e6ce8"
+    },
+    {
+      "archive": "redocking.zip",
+      "member": "A2A_redocking/SOP-02/05_evaluation_metrics/docking_scores_ranked.csv",
+      "extracted": "00_inputs/extracted/redocking/SOP-02/05_evaluation_metrics/docking_scores_ranked.csv",
+      "size": 802780,
+      "md5": "ab587f4b22e25c1777e7aaf1b82916ef",
+      "sha256": "e0b02a43711ee86bdd8e8af4700041fdde5f73d809e809116a98f9e33f06bd69"
+    },
+    {
+      "archive": "redocking.zip",
+      "member": "A2A_redocking/SOP-02/05_evaluation_metrics/qc_gate2_results.csv",
+      "extracted": "00_inputs/extracted/redocking/SOP-02/05_evaluation_metrics/qc_gate2_results.csv",
+      "size": 443,
+      "md5": "8384ec3969875b0155af77fe018a17a3",
+      "sha256": "612c51457be4f26a18e04262548da295cb532f3eab994953ab4229e856d4442e"
+    },
+    {
+      "archive": "redocking.zip",
+      "member": "A2A_redocking/SOP-02/README.md",
+      "extracted": "00_inputs/extracted/redocking/SOP-02/README.md",
+      "size": 3123,
+      "md5": "5f1760bb9f29e459c3ee90b72bc566e4",
+      "sha256": "9ebcddc49890ddcfa21b32803e3ed69698983a73e20ac1b507e058f7dda4447c"
+    },
+    {
+      "archive": "redocking.zip",
+      "member": "A2A_redocking/SOP-02/SOP-02_final_summary_report.md",
+      "extracted": "00_inputs/extracted/redocking/SOP-02/SOP-02_final_summary_report.md",
+      "size": 9537,
+      "md5": "85e19387c3ad45b0ce41ca4f28b92f73",
+      "sha256": "d8316982e37e73e537dc6b8dbaac15ca0f1bac325667d1e999f7529fdf5f5879"
+    },
+    {
+      "archive": "run01_redock_enrichment.zip",
+      "member": "VS_run01_archive_redock_enrichment/01_redocking/receptor/4EIY_ligand.pdb",
+      "extracted": "00_inputs/extracted/run01/01_redocking/receptor/4EIY_ligand.pdb",
+      "size": 2029,
+      "md5": "78856396b8ea68bf8c6b0e754ce89799",
+      "sha256": "22caeec8f05089892a324ab69b4ddfe040d318a7c30fd59d8b61ec4802afa181"
+    },
+    {
+      "archive": "run01_redock_enrichment.zip",
+      "member": "VS_run01_archive_redock_enrichment/01_redocking/receptor/4EIY_protein.pdb",
+      "extracted": "00_inputs/extracted/run01/01_redocking/receptor/4EIY_protein.pdb",
+      "size": 251509,
+      "md5": "aef775ee83735af8a878d42ca1e5fa85",
+      "sha256": "f99fa728691229d40a1f251909c93ec2a0891634224c2d045f8a8778284f6a06"
+    },
+    {
+      "archive": "run01_redock_enrichment.zip",
+      "member": "VS_run01_archive_redock_enrichment/01_redocking/receptor/ZMA.cif",
+      "extracted": "00_inputs/extracted/run01/01_redocking/receptor/ZMA.cif",
+      "size": 8972,
+      "md5": "4517ba860e17e20e54f8cfe221571d6b",
+      "sha256": "115fe216cd99b21ce6a642f922dd27e5b20b030e73a6ccc51cf2f67b610e1731"
+    },
+    {
+      "archive": "run01_redock_enrichment.zip",
+      "member": "VS_run01_archive_redock_enrichment/01_redocking/receptor/docking_box_rule_23.042.json",
+      "extracted": "00_inputs/extracted/run01/01_redocking/receptor/docking_box_rule_23.042.json",
+      "size": 234,
+      "md5": "28d79b93ce52e3ab57890fc140371956",
+      "sha256": "f2be67e14c5e096e1aa74972d493f4d40f50b79f5152959933133faf7482fec4"
+    },
+    {
+      "archive": "run01_redock_enrichment.zip",
+      "member": "VS_run01_archive_redock_enrichment/01_redocking/receptor/receptor_meta.json",
+      "extracted": "00_inputs/extracted/run01/01_redocking/receptor/receptor_meta.json",
+      "size": 288,
+      "md5": "088566a11fced709db62938493d0d6ac",
+      "sha256": "6af3ba6afd3d6a95559a3abeb099b3ecbfb52fcab321ae1bce88be756c4d8c4a"
+    },
+    {
+      "archive": "run01_redock_enrichment.zip",
+      "member": "VS_run01_archive_redock_enrichment/01_redocking/results/redock_summary.json",
+      "extracted": "00_inputs/extracted/run01/01_redocking/results/redock_summary.json",
+      "size": 1499,
+      "md5": "400627643e96ef40a4acac135ab96bc4",
+      "sha256": "08e1d422ed2b94e31dea0e4c31d32fffdfe2c7c532b2c178cc8812b3868f62e6"
+    },
+    {
+      "archive": "run01_redock_enrichment.zip",
+      "member": "VS_run01_archive_redock_enrichment/01_redocking/results/redock_validation.json",
+      "extracted": "00_inputs/extracted/run01/01_redocking/results/redock_validation.json",
+      "size": 705,
+      "md5": "3d500cb3b516ee4fb7c32ad2f6c62d45",
+      "sha256": "24c40cc4d8b69f0014111cca5786675ba0d5c8c5fd4667c2d36b613acd1de177"
+    },
+    {
+      "archive": "run01_redock_enrichment.zip",
+      "member": "VS_run01_archive_redock_enrichment/02_enrichment_5098/enrichment/enrichment_multi.json",
+      "extracted": "00_inputs/extracted/run01/02_enrichment_5098/enrichment/enrichment_multi.json",
+      "size": 2106,
+      "md5": "3491b7ca90d2744a3d73d40bde2556fe",
+      "sha256": "fad0048da1e54592985e1928e039396e77bc7678fab6a59b326b410ba55f5121"
+    },
+    {
+      "archive": "run01_redock_enrichment.zip",
+      "member": "VS_run01_archive_redock_enrichment/02_enrichment_5098/enrichment/funnel_backtest.json",
+      "extracted": "00_inputs/extracted/run01/02_enrichment_5098/enrichment/funnel_backtest.json",
+      "size": 1454,
+      "md5": "0608b0852231e03899ad5d527eb46603",
+      "sha256": "e81a79cf3d002b52d8aac3bd68a3c300a48b1b2eb0843a0e5faf0f5cd259f750"
+    },
+    {
+      "archive": "run01_redock_enrichment.zip",
+      "member": "VS_run01_archive_redock_enrichment/02_enrichment_5098/library/library_meta.json",
+      "extracted": "00_inputs/extracted/run01/02_enrichment_5098/library/library_meta.json",
+      "size": 217,
+      "md5": "639ae62e9d0c5dac47d6e47f648bc0d0",
+      "sha256": "cf6b9f713e43e58bc6bd0a465a3461d882c1bad018f655fa2f8b6da27fe488b8"
+    },
+    {
+      "archive": "run01_redock_enrichment.zip",
+      "member": "VS_run01_archive_redock_enrichment/02_enrichment_5098/library/quick_5100_library.csv",
+      "extracted": "00_inputs/extracted/run01/02_enrichment_5098/library/quick_5100_library.csv",
+      "size": 397389,
+      "md5": "01db94851210673676ec375186b11e81",
+      "sha256": "58d3d5f8259a44a86dfd5e2e7ef0d7eb678dc5dca30aa3b30b341187603069cf"
+    },
+    {
+      "archive": "run01_redock_enrichment.zip",
+      "member": "VS_run01_archive_redock_enrichment/02_enrichment_5098/poses_raw/poses.sdf",
+      "extracted": "00_inputs/extracted/run01/02_enrichment_5098/poses_raw/poses.sdf",
+      "size": 129621097,
+      "md5": "4f720e4223a5d3dab7e384ea30eba85c",
+      "sha256": "a2df15d0270ed50ea7b0c1f9a527a588151042541a74b25354d16850198e14a1"
+    },
+    {
+      "archive": "run01_redock_enrichment.zip",
+      "member": "VS_run01_archive_redock_enrichment/02_enrichment_5098/scores/gnina_all_poses.csv",
+      "extracted": "00_inputs/extracted/run01/02_enrichment_5098/scores/gnina_all_poses.csv",
+      "size": 2858672,
+      "md5": "7675dca492f1cc049340f8f731afb333",
+      "sha256": "6ae9ce5a4280f926a6b6bd448c6ca62735d5ffaf9e79044ac2fa79255dec66b7"
+    },
+    {
+      "archive": "run01_redock_enrichment.zip",
+      "member": "VS_run01_archive_redock_enrichment/02_enrichment_5098/scores/gnina_ranking.csv",
+      "extracted": "00_inputs/extracted/run01/02_enrichment_5098/scores/gnina_ranking.csv",
+      "size": 609465,
+      "md5": "d8e08da4b488746a9dabd592631a6e77",
+      "sha256": "0235d72d4ee5422bf3db08453be9242e57916e95aed05f6bf6fbe47df84d0253"
+    },
+    {
+      "archive": "run01_redock_enrichment.zip",
+      "member": "VS_run01_archive_redock_enrichment/02_enrichment_5098/scripts/contact_fp.py",
+      "extracted": "00_inputs/extracted/run01/02_enrichment_5098/scripts/contact_fp.py",
+      "size": 4458,
+      "md5": "c0e585b22ee5fb7a6fe532452fbf8822",
+      "sha256": "e18ef90a85b153cf576433d2f36068056a31262905d96d557af328c0e94cce7a"
+    },
+    {
+      "archive": "run01_redock_enrichment.zip",
+      "member": "VS_run01_archive_redock_enrichment/02_enrichment_5098/triage/contact_fingerprint_top200.csv",
+      "extracted": "00_inputs/extracted/run01/02_enrichment_5098/triage/contact_fingerprint_top200.csv",
+      "size": 35212,
+      "md5": "c222a05d0c2921e1773ee73f8e432a55",
+      "sha256": "95b802895e24416fb4c329bec046a490f22e4073d972331e31b386551eb766ac"
+    },
+    {
+      "archive": "run01_redock_enrichment.zip",
+      "member": "VS_run01_archive_redock_enrichment/02_enrichment_5098/triage/scaffold_clusters.csv",
+      "extracted": "00_inputs/extracted/run01/02_enrichment_5098/triage/scaffold_clusters.csv",
+      "size": 11596,
+      "md5": "86fc301b25f2428773a2448876dcb6d2",
+      "sha256": "d3b154e977592c786b0cd02cbb16dbd325202893b20acdf6649900761540ef7e"
+    },
+    {
+      "archive": "run01_redock_enrichment.zip",
+      "member": "VS_run01_archive_redock_enrichment/02_enrichment_5098/triage/top_hits.csv",
+      "extracted": "00_inputs/extracted/run01/02_enrichment_5098/triage/top_hits.csv",
+      "size": 37109,
+      "md5": "040ea06bc3ea26ef9ef7d0898ac61fb7",
+      "sha256": "805c28046124b2f76e02ed712ff02cf006efb50d7ff0bd01aece5d80b8218c6c"
+    },
+    {
+      "archive": "run01_redock_enrichment.zip",
+      "member": "VS_run01_archive_redock_enrichment/02_enrichment_5098/triage/triage_summary.json",
+      "extracted": "00_inputs/extracted/run01/02_enrichment_5098/triage/triage_summary.json",
+      "size": 4573,
+      "md5": "4a2b9d3c209cc243f59ee85ea2c64da1",
+      "sha256": "b8d06888c4cfa4208724c6ad6aba9e0cbfc5c44ba12394e6d178ef226a5f83b4"
+    },
+    {
+      "archive": "run01_redock_enrichment.zip",
+      "member": "VS_run01_archive_redock_enrichment/MANIFEST.md5",
+      "extracted": "00_inputs/extracted/run01/MANIFEST.md5",
+      "size": 6543,
+      "md5": "70d99f6ca9f244f185e0c49eb2ac0566",
+      "sha256": "ed8678026945c7a443fe0856fcb9f61839139b9a56273bdf214b70d829966625"
+    },
+    {
+      "archive": "run01_redock_enrichment.zip",
+      "member": "VS_run01_archive_redock_enrichment/README.md",
+      "extracted": "00_inputs/extracted/run01/README.md",
+      "size": 10255,
+      "md5": "f9deb18e030ee614d92ff4b0dc2d1bb5",
+      "sha256": "c16947e8cbca5e387ed8f77c89d2b10dcb147db544bbf249fa6444fa4c49e0f2"
+    },
+    {
+      "archive": "run01_redock_enrichment.zip",
+      "member": "VS_run01_archive_redock_enrichment/run_config.json",
+      "extracted": "00_inputs/extracted/run01/run_config.json",
+      "size": 2435,
+      "md5": "c0ca7ad6afbfd3fd756768b95f88905d",
+      "sha256": "6db7fc2136b58ec7dd56f560280cd86fdd82f8dd22e2bffedf20677374b5bb1a"
+    },
+    {
+      "archive": "screening_kit.zip",
+      "member": "A2A_screening_kit/01_external_screen/README_step1.md",
+      "extracted": "00_inputs/extracted/screening_kit/01_external_screen/README_step1.md",
+      "size": 4928,
+      "md5": "0c134aaeef6056fe11c87b2e1becf87d",
+      "sha256": "a7a87e1af01a179752433fb69824c3e08a0890db4dc4ea2518a81f2fd461cb7d"
+    },
+    {
+      "archive": "screening_kit.zip",
+      "member": "A2A_screening_kit/01_external_screen/example_input.csv",
+      "extracted": "00_inputs/extracted/screening_kit/01_external_screen/example_input.csv",
+      "size": 1255,
+      "md5": "47b3d0ffc18bfe610cbda067eb9bbe4d",
+      "sha256": "86eb70dfd20ad8758f66aee4b1e0ee424ca01d198b9ff443748cad59d20f6415"
+    },
+    {
+      "archive": "screening_kit.zip",
+      "member": "A2A_screening_kit/01_external_screen/requirements.txt",
+      "extracted": "00_inputs/extracted/screening_kit/01_external_screen/requirements.txt",
+      "size": 385,
+      "md5": "9075d5ff2da13393c91a06289ed5c513",
+      "sha256": "4dbfbf3e797823c50920329a15b0861ab851f6586923a6b702764721c43ff66f"
+    },
+    {
+      "archive": "screening_kit.zip",
+      "member": "A2A_screening_kit/02_return_to_platform/README_step2.md",
+      "extracted": "00_inputs/extracted/screening_kit/02_return_to_platform/README_step2.md",
+      "size": 3367,
+      "md5": "3bfa572c2e39015e737c58a0405d7c43",
+      "sha256": "0197387b9ad53a5cc6697ac1de1ab460ddf174c7202fada72813755b9a14c822"
+    },
+    {
+      "archive": "screening_kit.zip",
+      "member": "A2A_screening_kit/02_return_to_platform/docking_protocol.md",
+      "extracted": "00_inputs/extracted/screening_kit/02_return_to_platform/docking_protocol.md",
+      "size": 3973,
+      "md5": "05fc7416e09c98757a832d9539e2e089",
+      "sha256": "6852628734269434ddaec5892ec944f7236bf73749a6f0eba63e35a721f6f81f"
+    },
+    {
+      "archive": "screening_kit.zip",
+      "member": "A2A_screening_kit/02_return_to_platform/receptor/4EIY_protein.pdb",
+      "extracted": "00_inputs/extracted/screening_kit/02_return_to_platform/receptor/4EIY_protein.pdb",
+      "size": 251509,
+      "md5": "aef775ee83735af8a878d42ca1e5fa85",
+      "sha256": "f99fa728691229d40a1f251909c93ec2a0891634224c2d045f8a8778284f6a06"
+    },
+    {
+      "archive": "screening_kit.zip",
+      "member": "A2A_screening_kit/03_model_card/dataset_summary.json",
+      "extracted": "00_inputs/extracted/screening_kit/03_model_card/dataset_summary.json",
+      "size": 919,
+      "md5": "723bf2f2027882932d2b88c581ce5b1f",
+      "sha256": "ca13f4ca6ff67787b0e4c6f44642a942802a7b2b738f4b87d1f0a060f717ff2a"
+    },
+    {
+      "archive": "screening_kit.zip",
+      "member": "A2A_screening_kit/03_model_card/model_card.md",
+      "extracted": "00_inputs/extracted/screening_kit/03_model_card/model_card.md",
+      "size": 5082,
+      "md5": "4cdc9cd84bd26b30c321c52111629d94",
+      "sha256": "c07530e0e06c63d98a70d22a80a50095f1b37275a86bac39f9608ed2949500e6"
+    },
+    {
+      "archive": "screening_kit.zip",
+      "member": "A2A_screening_kit/03_model_card/portable_check.json",
+      "extracted": "00_inputs/extracted/screening_kit/03_model_card/portable_check.json",
+      "size": 205,
+      "md5": "05cd43931369544d0924701f7c7a498e",
+      "sha256": "99682bb45da299c3c70f2f4747b8f6aea911f251cf5d4f48a174a38dbdc85085"
+    },
+    {
+      "archive": "screening_kit.zip",
+      "member": "A2A_screening_kit/03_model_card/training_summary.json",
+      "extracted": "00_inputs/extracted/screening_kit/03_model_card/training_summary.json",
+      "size": 5640,
+      "md5": "ad1f30baf516229520e8d9012aac6dfa",
+      "sha256": "734645842cd7fa9bfdecd999fd6247169f396dd324610c8ddc11ec6619541c6c"
+    },
+    {
+      "archive": "screening_kit.zip",
+      "member": "A2A_screening_kit/05_screen_test/README_test.md",
+      "extracted": "00_inputs/extracted/screening_kit/05_screen_test/README_test.md",
+      "size": 2515,
+      "md5": "874026a8c71622a4ed71a3497e72dead",
+      "sha256": "226257d49601c83c20ce614c16845dd6032ee0014eae55fa3455a825cf01dda3"
+    },
+    {
+      "archive": "screening_kit.zip",
+      "member": "A2A_screening_kit/07_independent_validation/README_independent.md",
+      "extracted": "00_inputs/extracted/screening_kit/07_independent_validation/README_independent.md",
+      "size": 3567,
+      "md5": "8dab94434ec820c639e23cabf0a74e3c",
+      "sha256": "0fdc98f6a1ef318cf2b274780d61b055b229b7ed8c6497e7c04ee93262a08ed8"
+    },
+    {
+      "archive": "screening_kit.zip",
+      "member": "A2A_screening_kit/07_independent_validation/independent_a2a_chembl.csv",
+      "extracted": "00_inputs/extracted/screening_kit/07_independent_validation/independent_a2a_chembl.csv",
+      "size": 690979,
+      "md5": "c41e24ce35f6c9b9d14510fa195ce76c",
+      "sha256": "a56a3f9bbd5ef10cffdda525100b01dcf68f975acf095ea1bdadccf9dcc5428f"
+    },
+    {
+      "archive": "screening_kit.zip",
+      "member": "A2A_screening_kit/08_split_for_retrain/README_split.md",
+      "extracted": "00_inputs/extracted/screening_kit/08_split_for_retrain/README_split.md",
+      "size": 3574,
+      "md5": "5d0a5438b4fbf4c621f5b2f63a45a2de",
+      "sha256": "dd5a791319a2ed310e9c5b127bac2bcfed8c570a18a11dd6f782e3dd3ebf6e9e"
+    },
+    {
+      "archive": "screening_kit.zip",
+      "member": "A2A_screening_kit/10_full_pipeline_test/README_full_test.md",
+      "extracted": "00_inputs/extracted/screening_kit/10_full_pipeline_test/README_full_test.md",
+      "size": 5212,
+      "md5": "755e5fe5c3b45be3826745ccb306c6bf",
+      "sha256": "e69a057cf7c52d9302a905f53c2ddc0c4b2fca576a5bf3acf3495164fc6a089e"
+    },
+    {
+      "archive": "screening_kit.zip",
+      "member": "A2A_screening_kit/12_docking_validation/README_docking_validation.md",
+      "extracted": "00_inputs/extracted/screening_kit/12_docking_validation/README_docking_validation.md",
+      "size": 3774,
+      "md5": "c0b847fa7cb274af1b74ee376dbdcc18",
+      "sha256": "4e9385e7b59d04e4ee1c996ee278cb958854bb55d8f01c59ecfbb0b212265c40"
+    },
+    {
+      "archive": "screening_kit.zip",
+      "member": "A2A_screening_kit/README.md",
+      "extracted": "00_inputs/extracted/screening_kit/README.md",
+      "size": 5984,
+      "md5": "58f380c8ea6515b4e070c621a03aa3d9",
+      "sha256": "028ceb6b2be59f59cba61a6ac8608c2a7e49266a77a5793418a7a28d0189e0af"
+    },
+    {
+      "archive": "screening_kit.zip",
+      "member": "A2A_screening_kit/SOP_report.md",
+      "extracted": "00_inputs/extracted/screening_kit/SOP_report.md",
+      "size": 10495,
+      "md5": "2e09bdb294e227e33753906af2785950",
+      "sha256": "7db298540f77a76dedaee103175619ff36209a1c4d62d30ff61a2f475e6a55e3"
+    }
+  ]
+}

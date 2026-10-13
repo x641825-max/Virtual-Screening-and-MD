@@ -1,0 +1,226 @@
+{
+ "step": "16_synth_access",
+ "layer": "派生分析层（零侵入：不改门、不改名单、不改规则版本；不在 12_determinism 的 INCLUDE_DIRS 内）",
+ "scope": "主口径 32 人名单 = 32 候选 + 2 阴性对照（04_selection/tables/list_main_QED0.50_anchor4.csv，run05 实测）",
+ "caliber_note": "口径与 SOP_5 步骤 16 逐条一致（SA 分带 4.0/6.0、8 条难点线、分诊带阈值均未改）；随数据变化的只有实测统计量。相对 SOP_5 的唯一新增是 catalog_source 的 SCALE- 分支（run05 名单 cid 为生成模型输出，无目录来源可标）。",
+ "method": {
+  "sascore": {
+   "impl": "RDKit Contrib/SA_Score/sascorer.py（随本机 RDKit 分发）",
+   "reference": "Ertl P, Schuffenhauer A. J Cheminform 1:8 (2009)；本地 README：<RDKit>/Contrib/SA_Score/README",
+   "range": "1（易）→ 10（难），连续复杂度分；官方未给分档"
+  },
+  "sa_bands": [
+   {
+    "lo": 0.0,
+    "hi": 4.0,
+    "name": "易（SA ≤ 4.0）"
+   },
+   {
+    "lo": 4.0,
+    "hi": 6.0,
+    "name": "中（4.0 < SA ≤ 6.0）"
+   },
+   {
+    "lo": 6.0,
+    "hi": null,
+    "name": "难（SA > 6.0）"
+   }
+  ],
+  "flag_defs": {
+   "stereo_ge4": {
+    "desc": "立体中心 ≥ 4（含未指定手性中心）",
+    "hard": true
+   },
+   "bridgehead": {
+    "desc": "存在桥环原子（CalcNumBridgeheadAtoms > 0）",
+    "hard": true
+   },
+   "macrocycle": {
+    "desc": "存在环大小 ≥ 12 的大环",
+    "hard": true
+   },
+   "rare_element": {
+    "desc": "含 C/N/O/S/F/Cl/Br/I/P 之外的元素",
+    "hard": true
+   },
+   "stereo_2_3": {
+    "desc": "立体中心 2–3（手性合成/拆分负担）",
+    "hard": false
+   },
+   "fused_tricyclic": {
+    "desc": "最大稠合环系 ≥ 3 环（三环及以上稠合）",
+    "hard": false
+   },
+   "spiro": {
+    "desc": "螺环原子 ≥ 2",
+    "hard": false
+   },
+   "ring_rich": {
+    "desc": "环总数 ≥ 5",
+    "hard": false
+   }
+  },
+  "hard_flags": [
+   "stereo_ge4",
+   "bridgehead",
+   "macrocycle",
+   "rare_element"
+  ],
+  "triage_rule": {
+   "橙 优先人工评估": "SA > 6.0 或 命中任一硬旗标 或 软旗标 ≥ 3",
+   "黄 需确认路线": "4.0 < SA ≤ 6.0 或 软旗标 1–2",
+   "绿 常规合成": "SA ≤ 4.0 且 无旗标",
+   "note": "本层自定分诊带（经验），不是论文判据；定义随本报告落盘以便复核"
+  },
+  "catalog_note": "cid 前缀只表示来源：ZINC / MCULE 为可按需合成目录，PubChem CID 为实体化合物，SCALE- 为生成模型输出（run05：**无目录来源可标**）；**不等于现货可得**——本层无法离线核验库存或报价"
+ },
+ "toolchain": {
+  "rdkit": "2025.09.5",
+  "font": "Noto Sans CJK SC",
+  "sascorer_py_sha256": "8c191920cb9d011994e5f77a0b54924d20d92967052bf6f6903f6f40c0a6e3a2",
+  "fpscores_sha256": "10dcef9340c873e7b987924461b0af5365eb8dd96be607203debe8ddf80c1e73",
+  "input_list_sha256": "44f725d5fd10363da8bed0486545fa23a4bdc0d61a7d6d4233f2766b6eb49aee",
+  "input_batch_sha256": "cf31fbe80152e9b9d7e966c10b98148bee5e4985fcc70a7344f296237018b05d",
+  "timestamp_policy": "不写时间戳，保证同一份输入两次运行输出逐字节一致"
+ },
+ "stats": {
+  "n_rows": 34,
+  "n_candidates": 32,
+  "n_controls": 2,
+  "sa_candidates": {
+   "mean": 2.812,
+   "median": 2.825,
+   "min": 2.213,
+   "max": 3.145,
+   "std": 0.224,
+   "p90": 3.083
+  },
+  "sa_band_counts": {
+   "易（SA ≤ 4.0）": 32,
+   "中（4.0 < SA ≤ 6.0）": 0,
+   "难（SA > 6.0）": 0
+  },
+  "sa_band_degenerate": true,
+  "n_candidates_sa_gt4": 0,
+  "n_candidates_sa_gt6": 0,
+  "triage_counts": {
+   "绿 常规合成": 32,
+   "黄 需确认路线": 0,
+   "橙 优先人工评估": 0
+  },
+  "flag_counts": {
+   "stereo_ge4": 0,
+   "bridgehead": 0,
+   "macrocycle": 0,
+   "rare_element": 0,
+   "stereo_2_3": 0,
+   "fused_tricyclic": 0,
+   "spiro": 0,
+   "ring_rich": 0
+  },
+  "n_flags_hit": 0,
+  "n_candidates_with_any_flag": 0,
+  "n_candidates_with_hard_flag": 0,
+  "md_batch": {
+   "n": 17,
+   "n_rows_in_file": 19,
+   "sa_mean": 2.85,
+   "sa_max": 3.145,
+   "n_flagged": 0,
+   "triage_counts": {
+    "绿 常规合成": 17,
+    "黄 需确认路线": 0,
+    "橙 优先人工评估": 0
+   }
+  },
+  "controls": [
+   {
+    "cid": "C09462894",
+    "sa_score": 2.454,
+    "sa_band": "易（SA ≤ 4.0）",
+    "complex_flags": "ring_rich",
+    "catalog_source": "PubChem CID（实体已知化合物）"
+   },
+   {
+    "cid": "C60359994",
+    "sa_score": 3.776,
+    "sa_band": "易（SA ≤ 4.0）",
+    "complex_flags": "stereo_2_3;ring_rich",
+    "catalog_source": "PubChem CID（实体已知化合物）"
+   }
+  ],
+  "hardest5": [
+   {
+    "cid": "SCALE-108881",
+    "sa_score": 3.145,
+    "sa_band": "易（SA ≤ 4.0）",
+    "complex_flags": "",
+    "triage_band": "绿 常规合成",
+    "CNN_VS": 7.73225
+   },
+   {
+    "cid": "SCALE-101054",
+    "sa_score": 3.143,
+    "sa_band": "易（SA ≤ 4.0）",
+    "complex_flags": "",
+    "triage_band": "绿 常规合成",
+    "CNN_VS": 7.97679
+   },
+   {
+    "cid": "SCALE-116071",
+    "sa_score": 3.093,
+    "sa_band": "易（SA ≤ 4.0）",
+    "complex_flags": "",
+    "triage_band": "绿 常规合成",
+    "CNN_VS": 7.77621
+   },
+   {
+    "cid": "SCALE-111400",
+    "sa_score": 3.084,
+    "sa_band": "易（SA ≤ 4.0）",
+    "complex_flags": "",
+    "triage_band": "绿 常规合成",
+    "CNN_VS": 7.89897
+   },
+   {
+    "cid": "SCALE-032087",
+    "sa_score": 3.07,
+    "sa_band": "易（SA ≤ 4.0）",
+    "complex_flags": "",
+    "triage_band": "绿 常规合成",
+    "CNN_VS": 7.27982
+   }
+  ],
+  "sa_spearman_within_list": {
+   "n_heavy": 0.147,
+   "n_rings": 0.472,
+   "MW": 0.276,
+   "CNN_VS": 0.095,
+   "qed": -0.429,
+   "cns_mpo": -0.292
+  },
+  "observation": {
+   "sa_top2_cids": [
+    "SCALE-108881",
+    "SCALE-101054"
+   ],
+   "sa_top2_have_flags": false,
+   "flagged_sa_range": null,
+   "controls_above_all_candidates": [
+    "C60359994"
+   ],
+   "note": "SA 与结构旗标两套口径不重合（run05 实测：旗标全 0 命中，旗标口径无信息；SA 口径给出排序，但见 sa_spearman_within_list 与对照位置——该窄区间内SA 排序不具可合成性含义）"
+  },
+  "catalog_source_counts": {
+   "生成模型输出（无目录来源）": 32,
+   "PubChem CID（实体已知化合物）": 2
+  }
+ },
+ "caveats": [
+  "SA 是启发式复杂度分：不含路线、原料可得性、保护基策略与手性拆分代价；SA ≤ 4 不等于「立刻可买」",
+  "旗标是确定性结构规则，命中的分子并非「不可合成」，只表示需要人工看路线",
+  "8 条难点线中 8 条在本名单上零命中——这本身是读数（该名单未触及那些难点），不是漏检",
+  "目录来源不等于现货可得；本名单为 ML 生成分子，**无目录来源可标**（SCALE- 前缀），2 个阴性对照是 DUD-E 诱饵（PubChem CID，已有实体），SA 分只作参照",
+  "本层不进交付 MANIFEST 与确定性哈希范围；重跑整链不会改变本目录产物，反之亦然"
+ ]
+}

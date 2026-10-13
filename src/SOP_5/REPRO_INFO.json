@@ -1,0 +1,96 @@
+{
+  "package": "SOP_5",
+  "title": "A2A 腺苷受体拮抗剂 · MD 候选名单 SOP（自包含可复现工程包）",
+  "version": "1.0.0",
+  "created_on": "2026-09-23",
+  "marker": "本文件是包根标记：所有脚本通过向上查找 REPRO_INFO.json 定位包根，不引用包外路径",
+  "rule_set": {
+    "id": "SOP-05-A2A-antagonist-shortlist",
+    "version": "1.7.0",
+    "file": "config/frozen_rule.json",
+    "sha256_field": "rules_sha256",
+    "note": "规则当前版本见 config/frozen_rule.json 的 rule_version 与 rules_sha256；1.1.0 增 novelty 门，1.2.0 增 hERG 外部预测表登记、CNS MPO 区间标注列与 08b 第二模型交叉验证步，1.3.0 增 ADMET-AI f3 库冻结表、10b 注释层与 10c hERG 阈值锚定，1.4.0 增执行序第 16 步 15_md_batch_select（MD 批次选择层）；1.5.0 描述符规范化；1.6.0 第二 hERG 模型分歧分子改为保留+标注；1.7.0 MD 批次改为 MILP 可证明最优（step6_md_batch.objective 字典序，旧贪心降为对照）"
+  },
+  "entry": "run_all.py",
+  "steps": 19,
+  "counts": {
+    "raw_inputs": 5,
+    "archives": 3,
+    "declared_extra_inputs": 3
+  },
+  "environment": {
+    "python": "3.12.2",
+    "rdkit": "2025.09.5",
+    "pandas": "2.3.3",
+    "numpy": "2.4.6",
+    "scikit_learn": "1.9.1",
+    "scipy": "1.15.3",
+    "matplotlib": "3.11.1",
+    "external_tools_not_bundled": [
+      "hERG 预测运行时（ADMET-AI/chemprop/torch 与权重；本包以外部预测表接口接入，表已登记）",
+      "gmx_MMPBSA（下游判据降级项）",
+      "gnina / AutoDock Vina（姿态已由上游提供，本包不重跑对接）"
+    ]
+  },
+  "runtime_expectation": "全链实测 ≈300 秒（19 步 + 自检；重冻轮 297.4 s、比较轮 300.3/319.6 s）：主链 ≈120 秒（05_descriptors 约 50 s、11_robustness 约 18 s、10b/10c/15 合计约 5 s），08b 第二模型交叉验证 ≈175–235 秒（RF 500 树单核）",
+  "deliverables": {
+    "main_list": "06_deliverables/SOP-05_MD_shortlist_main.csv",
+    "decision_cards": "06_deliverables/SOP-05_decision_cards_main.csv",
+    "poses": "06_deliverables/SOP-05_poses_main_list.sdf",
+    "acceptance": "06_deliverables/acceptance_report.json",
+    "report": "06_deliverables/SOP-05_report.md",
+    "downstream": "06_deliverables/SOP-05_downstream_MD_plan.md",
+    "admet_annotation_pool": "03_gates/admet/tables/admet_annotation_pool.csv（池级注释全表，4,990 行）",
+    "admet_annotation_main": "06_deliverables/SOP-05_admet_annotation_main.csv（交付名单注释全表）",
+    "admet_layer_doc": "06_deliverables/SOP-05_admet_layer.md",
+    "herg_threshold_sop": "03_gates/admet/HERG_THRESHOLD_SOP.md（阈值三锚定与保留曲线，分析步）",
+    "admet_md_precheck": "06_deliverables/SOP-05_admet_md_precheck.csv（MD 前置复核清单，13 个）",
+    "admet_crosscheck": "06_deliverables/SOP-05_admet_descriptor_crosscheck.csv / .json（描述符独立复算交叉核验）",
+    "herg_retention_curve": "06_deliverables/SOP-05_herg_retention_curve.csv（0.01 步长保留曲线，9 个头部）",
+    "herg_threshold_analysis": "06_deliverables/SOP-05_herg_threshold_analysis.json（含输入 sha256、复现核对与门作用域缺口）"
+  },
+  "known_gaps": [
+    "hERG 门为外部接口：外部表已落门（规则 1.2.0），残余不确定性＝并集外分子无预测值、外部模型适用域、权重哈希不可得",
+    "CNS MPO 依赖上游 MolGpKa pKa 与 cpLogD7.4（第三方预测）；cLogD 附 80% 区间 → cns_mpo_lo80/hi80 已作为标注列给出，pKa 无区间",
+    "富集评价参考集为 DUD-E 诱饵，存在已知诱饵偏置，不作为验收判据",
+    "稳健性 σ=0.10 名单平均重叠贴线（0.8046 ≥ 0.80）；σ=0.15 降至 0.7202",
+    "载体（报告/索引/验收/MANIFEST）需「冻结后再跑 2–3 轮」才逐字节收敛，判据取连续两轮一致",
+    "hERG 判定强依赖模型：第二模型交叉验证显示门决策一致率仅 33.3%–45.0%（κ 0.017–0.073），且与阈值无关的排序交集同样低（高风险前 10% Jaccard 0.09–0.13）——「hERG 过门」须转述为「在 ADMET-AI 下过门」",
+    "ADMET 预测层不在包内重算（无 ADMET-AI/chemprop/权重运行时）：包内复现的是「冻结预测值 → 标注列 / 阈值锚定 / 保留曲线 / 交叉核验」的确定性计算；再生成路径见 03_gates/scripts/10b0_admet_regenerate.py（手工执行、不入链）",
+    "ADMET 注释层为**非判据**：不改 hERG<0.5 门、不改池、不改名单；注释列在交付物中以追加列形式出现（列追加、行序与成员不变）",
+    "本包 hERG 与外部 ADMET-AI run 的 hERG **同源同值**（两次独立作业数值一致到 6 位小数舍入）：不能当作 08b 意义上的第二模型/独立验证",
+    "2 个阴性对照来自 run01 的 5,098 富集库，不在 ADMET 冻结表覆盖范围内 → admet_coverage=not_covered（不写空值）",
+    "库内相对锚定（A1）以本包 f3 49,963 行为口径，外部 run 报告用的是 54,932 去重并集，数字允许小差异（不影响 A2/A3）",
+    "门作用域缺口已量化（非判据）：落门表只覆盖四臂并集 3,236；池内并集外 1,754 个按规则保守判不过门，而冻结全量表显示其中 480 个（27.37%）ADMET-AI hERG 实际 <0.5；落门表与冻结表在同源交集逐值一致（max|Δ|=1e-6）。改作用域属口径变更（需重跑选名单与验收基线），本包不改门不改名单",
+    "ADMET 注释层沿用本包池概率分位重标定切点（hERG P79.8 / DILI P88.2 / 溶解度 P10），不照搬外部 54,932 库的 0.80/0.99/-6.0；外部原值仅在报告表中作对照（口径差异已登记）",
+    "MD 批次（20 = 18 候选 + 2 对照）只覆盖主口径名单的一小部分且是机时分配层：未做 MD 前不能把批次解释为「比其余 30 个更优」；批次内 3 个 hERG 第二模型分歧分子被排除，其安全性需正交方法解决后才能回到候选池",
+    "MD 批次的「最优」限定在 step6_md_batch.objective 口径内（信息量/设计优先）：最优解 t*=4、CNN_VS 跨度 0.7337（池内全量程），但 Σ CNN_VS 比质量口径低 1.16%（名册 6 换 6）；本层仍是机时分配层，不产生安全性/有效性结论，低分位分子失败概率更高正是要测量的量"
+  ],
+  "extra_inputs": [
+    {
+      "name": "hERG 预测表（外部模型产出，登记为冻结输入）",
+      "path": "03_gates/herg/herg_predictions.csv",
+      "md5": "41d15798e766be4389c43388877bacc6",
+      "sha256": "e52533d8aca3e1f1fd2ab25b4afec4b1b49ae8f6645607293ff78d2401dfa498",
+      "producer": "HPC 目录应用 admet-ai（job_id 3d9634dd50304d3db84b1f675fb209fc，2026-09-23）",
+      "registered_in": "config/frozen_rule.json → step3_gates.herg"
+    },
+    {
+      "name": "hERG 活性数据（第二模型交叉验证的训练/标注集，ChEMBL REST 抓取）",
+      "path": "03_gates/herg/cross_model/raw/chembl_herg_kcnh2_activities.csv",
+      "md5": "b7b3b959b228a732afb312c7e8291275",
+      "sha256": "71b1852e9e5548fc81457ff0f1e677f3a26f676a22bcf6bfa290edd2775fcb8e",
+      "producer": "ATLAS 手工执行联网抓取脚本 03_gates/scripts/08b0_herg_cross_model_fetch.py（不入链；EBI/ChEMBL，2026-09-23）",
+      "registered_in": "config/frozen_rule.json → step3_gates.herg.cross_model"
+    },
+    {
+      "name": "ADMET-AI 全量预测表（f3 库，外部模型产出，登记为冻结输入）",
+      "path": "03_gates/admet/raw/CNN_VS_ranking_49963_ADMET.csv",
+      "md5": "e19ab1f7c5aafc3267d95f1aeb588c52",
+      "sha256": "5d693ea7d9d06e29375f7b73fc496911ce514444ef2e243e3b2feb4703a67476",
+      "bytes": 81141352,
+      "producer": "HPC 目录应用 admet-ai（job_id f610251d9cdb473aa346a94c0e7c4331，2026-09-22）；输入 molecules_admet.csv（md5 0f84b5b5aaf7de43b62b85eac3f2ae31），原始输出 predictions.csv（sha256 a8c952d642445926bb4b1b323a1ba591eb4158d7a9af4cfe16063ed79d6a85e3）",
+      "registered_in": "config/frozen_rule.json → step3_gates.admet_layer"
+    }
+  ]
+}

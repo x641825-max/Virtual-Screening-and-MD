@@ -1,0 +1,667 @@
+{
+  "step": "17_final_md_merge",
+  "layer": "派生分析层（零侵入：不改门、不改名单、不改规则版本；不在 12_determinism 的 INCLUDE_DIRS 内）",
+  "rule_version": "1.7.0",
+  "purpose": "把 SOP_5（目录）与 SOP_ML_run05（ML 生成）两条链的 MD 一级批次候选并成 35 个池，在合并池上重解名额 20 的 MD 批次",
+  "inputs": {
+    "SOP_5（目录 ZINC/MCULE）": {
+      "batch": "07_md_batch/tables/md_batch20.csv",
+      "batch_sha256": "df926faaa35423b4886ad74790d48348f56cbcf61ed140a2fbf0ea86cd79d33b",
+      "pool": "03_gates/tables/candidate_universe.csv",
+      "pool_sha256": "4a85fea05f8ff4ed76af8a7c44c2a51b6f764b38ed031e15d3767b64bad0b5d2",
+      "synth_access": "09_synth_access/tables/synth_access_list.csv",
+      "synth_access_sha256": "bea2b40691526cf846105f9a1d7a3a746d6aec4930f9d3a947618f76b96981cd",
+      "n_batch_rows": 20
+    },
+    "SOP_ML_run05（ML 生成 SCALE-）": {
+      "batch": "../SOP_ML_run05/07_md_batch/tables/md_batch20.csv",
+      "batch_sha256": "cf31fbe80152e9b9d7e966c10b98148bee5e4985fcc70a7344f296237018b05d",
+      "pool": "../SOP_ML_run05/03_gates/tables/candidate_universe.csv",
+      "pool_sha256": "4ee6d6130f40cf1f9c76ae793308ece6e0124f3bc01da4e4cf116f01d12b2c7e",
+      "synth_access": "../SOP_ML_run05/09_synth_access/tables/synth_access_list.csv",
+      "synth_access_sha256": "50c69401c25580da538b98d192650aca73c21c487bf1d2ceb658be33b6879870",
+      "n_batch_rows": 19
+    }
+  },
+  "frozen_rule_sha256": "9f829432aae5ba4edd1f8d3f628f012f0034e3e9b0ca5fa38de3403e8e9fa16e",
+  "merge": {
+    "n_candidates": 35,
+    "n_controls": 2,
+    "n_controls_dedupe": "两个共用阴性对照（C09462894 / C60359994）只留一份",
+    "structural_overlap_between_branches": 0,
+    "overlap_note": "两份名册按 InChIKey 结构零重叠；唯二相同的两个就是共用对照",
+    "source_counts": {
+      "SOP_5（目录 ZINC/MCULE）": 18,
+      "SOP_ML_run05（ML 生成 SCALE-）": 17
+    }
+  },
+  "eligibility": {
+    "hERG_cross_model_policy": "retain_and_annotate（保留入池 + 逐分子标注）",
+    "n_hERG_cross_model_fail": 5,
+    "n_hERG_cross_model_fail_ids": [
+      "ZINC000008706207",
+      "ZINC000092920989",
+      "SCALE-111400",
+      "SCALE-097032",
+      "SCALE-116071"
+    ],
+    "dedupe_generic_scaffold": "scaffold_generic ≤1，重复时保留 CNN_VS 高者",
+    "n_deduped": 2,
+    "n_pool": 33,
+    "pool_source_counts": {
+      "SOP_5（目录 ZINC/MCULE）": 18,
+      "SOP_ML_run05（ML 生成 SCALE-）": 15
+    }
+  },
+  "parameters": {
+    "n_slots": 20,
+    "n_controls": 2,
+    "batch_rows": 22,
+    "chem_cap": 8,
+    "risk_cap": 3,
+    "pairwise_tc_max": 0.65,
+    "scaffold_cap": 1,
+    "min_below_median_candidates": 5,
+    "median_reference": "合并候选池（35）的 CNN_VS 中位数 = 7.6359",
+    "median_reference_note": "原链参照 48 候选的 7.414；本层按规则「用本层候选名单自身中位」的行为取合并池中位",
+    "chem_cap_note": "冻结登记值为 8（对应 20 行批次）。规则自带的按席位缩放式round(8N/20) 在 N=22 下给出 9，本层取**更严**的 8，不新增登记值",
+    "risk_cap_note": "round(3N/20)：N=20 与 N=22 均得 3，两种取法一致",
+    "objective": "frozen_rule.step6_md_batch.objective（字典序四阶段，逐字沿用）"
+  },
+  "bins": {
+    "axes": [
+      "CNN_VS",
+      "cLogP",
+      "CNS MPO"
+    ],
+    "n_bins_per_axis": 4,
+    "n_live_bins": 12,
+    "empty_bins": [],
+    "bin_edges": {
+      "CNN_VS": [
+        7.3069,
+        7.6359,
+        7.8544
+      ],
+      "cLogP": [
+        1.954,
+        2.6306,
+        3.1775
+      ],
+      "CNS MPO": [
+        4.0779,
+        4.5,
+        5.0413
+      ]
+    },
+    "bin_members": {
+      "CNN_VS|Q1": [
+        "ZINC000013731712",
+        "ZINC000199480719",
+        "ZINC000019874364",
+        "SCALE-032087",
+        "ZINC000097680017",
+        "SCALE-101764",
+        "SCALE-094272",
+        "SCALE-111230",
+        "SCALE-103966"
+      ],
+      "CNN_VS|Q2": [
+        "ZINC000071738518",
+        "ZINC000002782221",
+        "SCALE-017223",
+        "ZINC000008706207",
+        "MCULE-5129094733",
+        "ZINC000575414237",
+        "ZINC000092920989",
+        "SCALE-053529"
+      ],
+      "CNN_VS|Q3": [
+        "ZINC000005271235",
+        "ZINC000067458904",
+        "SCALE-097032",
+        "SCALE-116071",
+        "ZINC000079108700",
+        "SCALE-108881",
+        "ZINC000012607437",
+        "ZINC000057520614"
+      ],
+      "CNN_VS|Q4": [
+        "SCALE-068156",
+        "SCALE-011389",
+        "ZINC000071721614",
+        "MCULE-6739389520",
+        "SCALE-053305",
+        "SCALE-087393",
+        "SCALE-111400",
+        "ZINC002384414275"
+      ],
+      "cLogP|Q1": [
+        "SCALE-087393",
+        "ZINC000005271235",
+        "ZINC000067458904",
+        "SCALE-108881",
+        "ZINC000057520614",
+        "ZINC000575414237",
+        "ZINC000092920989",
+        "SCALE-101764",
+        "SCALE-094272"
+      ],
+      "cLogP|Q2": [
+        "MCULE-6739389520",
+        "SCALE-097032",
+        "ZINC000071738518",
+        "ZINC000008706207",
+        "SCALE-053529",
+        "ZINC000019874364",
+        "SCALE-032087",
+        "ZINC000097680017"
+      ],
+      "cLogP|Q3": [
+        "SCALE-068156",
+        "SCALE-053305",
+        "SCALE-111400",
+        "MCULE-5129094733",
+        "ZINC000013731712",
+        "ZINC000199480719",
+        "SCALE-111230",
+        "SCALE-103966"
+      ],
+      "cLogP|Q4": [
+        "SCALE-011389",
+        "ZINC000071721614",
+        "ZINC002384414275",
+        "SCALE-116071",
+        "ZINC000079108700",
+        "ZINC000012607437",
+        "ZINC000002782221",
+        "SCALE-017223"
+      ],
+      "CNS MPO|Q1": [
+        "SCALE-011389",
+        "ZINC000071721614",
+        "SCALE-111400",
+        "ZINC002384414275",
+        "ZINC000005271235",
+        "SCALE-116071",
+        "ZINC000012607437",
+        "ZINC000071738518",
+        "MCULE-5129094733"
+      ],
+      "CNS MPO|Q2": [
+        "MCULE-6739389520",
+        "SCALE-053305",
+        "SCALE-087393",
+        "ZINC000067458904",
+        "SCALE-017223",
+        "ZINC000575414237",
+        "ZINC000092920989",
+        "SCALE-032087"
+      ],
+      "CNS MPO|Q3": [
+        "ZINC000079108700",
+        "SCALE-108881",
+        "ZINC000057520614",
+        "SCALE-053529",
+        "ZINC000199480719",
+        "ZINC000097680017",
+        "SCALE-101764",
+        "SCALE-103966"
+      ],
+      "CNS MPO|Q4": [
+        "SCALE-068156",
+        "SCALE-097032",
+        "ZINC000002782221",
+        "ZINC000008706207",
+        "ZINC000013731712",
+        "ZINC000019874364",
+        "SCALE-094272",
+        "SCALE-111230"
+      ]
+    },
+    "bin_reference": "eligible_pool 自分布（25/50/75 分位，线性插值）"
+  },
+  "optimality": {
+    "journal": [
+      {
+        "stage": 1,
+        "name": "分层覆盖下限 t",
+        "objective": -5.0,
+        "status": 0,
+        "mip_gap": 0.0,
+        "nodes": 1
+      },
+      {
+        "stage": 2,
+        "name": "CNN_VS 跨度",
+        "objective": -3.5014900000000004,
+        "status": 0,
+        "mip_gap": 0.0,
+        "nodes": 1
+      },
+      {
+        "stage": 3,
+        "name": "Σ CNN_VS",
+        "objective": -150.47257,
+        "status": 0,
+        "mip_gap": 0.0,
+        "nodes": 1
+      },
+      {
+        "stage": 4,
+        "name": "规范并列打破",
+        "objective": -370.00000000000006,
+        "status": 0,
+        "mip_gap": 0.0,
+        "nodes": 1
+      }
+    ],
+    "t_star": 5,
+    "span": 3.5015,
+    "sum_CNN_VS": 150.4726,
+    "n_occupied_bins": 12,
+    "bin_counts": {
+      "CNN_VS|Q1": 5,
+      "CNN_VS|Q2": 5,
+      "CNN_VS|Q3": 5,
+      "CNN_VS|Q4": 5,
+      "cLogP|Q1": 5,
+      "cLogP|Q2": 5,
+      "cLogP|Q3": 5,
+      "cLogP|Q4": 5,
+      "CNS MPO|Q1": 5,
+      "CNS MPO|Q2": 5,
+      "CNS MPO|Q3": 5,
+      "CNS MPO|Q4": 5
+    },
+    "resolved_consistent": true,
+    "all_status_optimal": true,
+    "mip_gap": 0.0,
+    "compliance": {
+      "n_selected": 20,
+      "chemotype_counts": {
+        "无氨基烟腈母核 + 碱性胺": 7,
+        "氨基烟腈母核 + 碱性胺": 7,
+        "无氨基烟腈母核 + 无碱性胺": 6
+      },
+      "risk_count": 3,
+      "below_median_count": 9,
+      "median_reference": 7.6359,
+      "max_pairwise_tc": 0.52381,
+      "max_pairwise_tc_pair": [
+        "SCALE-011389",
+        "ZINC000071721614"
+      ],
+      "min_bin_count": 5,
+      "n_occupied_bins": 12,
+      "sigma_CNN_VS": 0.733685,
+      "pass": {
+        "n_selected": true,
+        "chem_cap": true,
+        "risk_cap": true,
+        "below_median_min": true,
+        "pairwise_tc": true,
+        "scaffold_unique": true
+      }
+    }
+  },
+  "roles": {
+    "leave_one_out": {
+      "覆盖下限约束席位（移除此席 t 会下降）": 18,
+      "跨度端点席位（移除后跨度收窄）": 2,
+      "质量兜底填充（移除后 t 与跨度均不变）": 0
+    },
+    "counterfactual": {
+      "cover_irreplaceable": 0,
+      "span_irreplaceable": 2,
+      "replaceable": 18
+    },
+    "definition": "留一法说明该席在已定名册里承担什么；反事实重解说明该席是否不可替代"
+  },
+  "heuristic_reference": {
+    "kind": "v1.6.0 贪心填充（化学型锚点 → 下半区补齐 → 高分填充）",
+    "t": 0,
+    "span": 0.7917,
+    "sum_CNN_VS": 155.5976,
+    "n_swaps": 6,
+    "compliance": {
+      "t": 0,
+      "span": 0.7917,
+      "sum": 155.5976,
+      "source_counts": {
+        "SOP_5（目录 ZINC/MCULE）": 11,
+        "SOP_ML_run05（ML 生成 SCALE-）": 9
+      }
+    },
+    "swapped_out": [
+      "ZINC000008706207",
+      "SCALE-053305",
+      "SCALE-111400",
+      "ZINC002384414275",
+      "SCALE-116071",
+      "ZINC000012607437"
+    ],
+    "swapped_in": [
+      "ZINC000071738518",
+      "ZINC000013731712",
+      "ZINC000199480719",
+      "ZINC000019874364",
+      "ZINC000097680017",
+      "SCALE-103966"
+    ]
+  },
+  "sensitivity": {
+    "axis": "CNN_VS → 该分子在**自己来源池**内的 CNN_VS 百分位（目录池 4,990 / 生成池 4,979）",
+    "why": "SOP_5 的池是目录池按 CNN_VS 截断出的 top-4,990（下限 6.554），ML 池是生成库全范围（0.963–8.536）；原始 CNN_VS 跨来源不可直接比，本对照把尺度差异中性化",
+    "n_bins": 12,
+    "bin_edges": {
+      "来源池百分位": [
+        85.9319,
+        95.3307,
+        98.4736
+      ],
+      "cLogP": [
+        1.954,
+        2.6306,
+        3.1775
+      ],
+      "CNS MPO": [
+        4.0779,
+        4.5,
+        5.0413
+      ]
+    },
+    "median_pct": 95.3307,
+    "journal": [
+      {
+        "stage": 1,
+        "name": "分层覆盖下限 t",
+        "objective": -5.0,
+        "status": 0,
+        "mip_gap": 0.0
+      },
+      {
+        "stage": 2,
+        "name": "来源池百分位跨度",
+        "objective": -90.15928623666292,
+        "status": 0,
+        "mip_gap": 0.0
+      },
+      {
+        "stage": 3,
+        "name": "Σ 来源池百分位",
+        "objective": -1790.9791102590802,
+        "status": 0,
+        "mip_gap": 0.0
+      },
+      {
+        "stage": 4,
+        "name": "规范并列打破",
+        "objective": -370.0000000000008,
+        "status": 0,
+        "mip_gap": 0.0
+      }
+    ],
+    "roster": [
+      "SCALE-068156",
+      "SCALE-011389",
+      "ZINC000071721614",
+      "SCALE-053305",
+      "SCALE-087393",
+      "ZINC002384414275",
+      "ZINC000067458904",
+      "SCALE-097032",
+      "SCALE-108881",
+      "ZINC000012607437",
+      "ZINC000057520614",
+      "ZINC000002782221",
+      "ZINC000008706207",
+      "MCULE-5129094733",
+      "ZINC000575414237",
+      "SCALE-053529",
+      "ZINC000199480719",
+      "ZINC000019874364",
+      "SCALE-032087",
+      "SCALE-103966"
+    ],
+    "roster_ordered": [
+      "ZINC000071721614",
+      "SCALE-068156",
+      "ZINC002384414275",
+      "ZINC000067458904",
+      "SCALE-011389",
+      "SCALE-053305",
+      "SCALE-087393",
+      "ZINC000012607437",
+      "SCALE-097032",
+      "ZINC000057520614",
+      "ZINC000002782221",
+      "SCALE-108881",
+      "ZINC000008706207",
+      "MCULE-5129094733",
+      "ZINC000575414237",
+      "ZINC000199480719",
+      "ZINC000019874364",
+      "SCALE-053529",
+      "SCALE-032087",
+      "SCALE-103966"
+    ],
+    "source_counts": {
+      "SOP_5（目录 ZINC/MCULE）": 11,
+      "SOP_ML_run05（ML 生成 SCALE-）": 9
+    },
+    "overlap_with_main": 13,
+    "swapped": {
+      "out_of_sensitivity": [
+        "MCULE-6739389520",
+        "ZINC000005271235",
+        "ZINC000079108700",
+        "ZINC000071738518",
+        "SCALE-017223",
+        "ZINC000013731712",
+        "ZINC000097680017"
+      ],
+      "in_of_sensitivity": [
+        "SCALE-053305",
+        "ZINC002384414275",
+        "ZINC000012607437",
+        "ZINC000057520614",
+        "ZINC000008706207",
+        "SCALE-053529",
+        "SCALE-032087"
+      ]
+    },
+    "note": "本对照只作留痕，**不改主名册**。重叠度低说明主名册的来源构成确实受原始CNN_VS 尺度影响；重叠度高说明结论对尺度不敏感。"
+  },
+  "roster": {
+    "n": 22,
+    "order": [
+      {
+        "md_card_id": "A2AR-MD-01",
+        "cid": "SCALE-068156",
+        "source_short": "生成",
+        "CNN_VS": 8.1602,
+        "selection_reason": "跨度端点席位（移除后跨度收窄）"
+      },
+      {
+        "md_card_id": "A2AR-MD-02",
+        "cid": "SCALE-011389",
+        "source_short": "生成",
+        "CNN_VS": 8.0703,
+        "selection_reason": "覆盖下限约束席位（移除此席 t 会下降）"
+      },
+      {
+        "md_card_id": "A2AR-MD-03",
+        "cid": "ZINC000071721614",
+        "source_short": "目录",
+        "CNN_VS": 7.9914,
+        "selection_reason": "覆盖下限约束席位（移除此席 t 会下降）"
+      },
+      {
+        "md_card_id": "A2AR-MD-04",
+        "cid": "MCULE-6739389520",
+        "source_short": "目录",
+        "CNN_VS": 7.9894,
+        "selection_reason": "覆盖下限约束席位（移除此席 t 会下降）"
+      },
+      {
+        "md_card_id": "A2AR-MD-05",
+        "cid": "SCALE-087393",
+        "source_short": "生成",
+        "CNN_VS": 7.9707,
+        "selection_reason": "覆盖下限约束席位（移除此席 t 会下降）"
+      },
+      {
+        "md_card_id": "A2AR-MD-06",
+        "cid": "ZINC000005271235",
+        "source_short": "目录",
+        "CNN_VS": 7.8544,
+        "selection_reason": "覆盖下限约束席位（移除此席 t 会下降）"
+      },
+      {
+        "md_card_id": "A2AR-MD-07",
+        "cid": "ZINC000067458904",
+        "source_short": "目录",
+        "CNN_VS": 7.8416,
+        "selection_reason": "覆盖下限约束席位（移除此席 t 会下降）"
+      },
+      {
+        "md_card_id": "A2AR-MD-08",
+        "cid": "SCALE-097032",
+        "source_short": "生成",
+        "CNN_VS": 7.8377,
+        "selection_reason": "覆盖下限约束席位（移除此席 t 会下降）"
+      },
+      {
+        "md_card_id": "A2AR-MD-09",
+        "cid": "ZINC000079108700",
+        "source_short": "目录",
+        "CNN_VS": 7.755,
+        "selection_reason": "覆盖下限约束席位（移除此席 t 会下降）"
+      },
+      {
+        "md_card_id": "A2AR-MD-10",
+        "cid": "SCALE-108881",
+        "source_short": "生成",
+        "CNN_VS": 7.7322,
+        "selection_reason": "覆盖下限约束席位（移除此席 t 会下降）"
+      },
+      {
+        "md_card_id": "A2AR-MD-11",
+        "cid": "ZINC000071738518",
+        "source_short": "目录",
+        "CNN_VS": 7.6359,
+        "selection_reason": "覆盖下限约束席位（移除此席 t 会下降）"
+      },
+      {
+        "md_card_id": "A2AR-MD-12",
+        "cid": "ZINC000002782221",
+        "source_short": "目录",
+        "CNN_VS": 7.5602,
+        "selection_reason": "覆盖下限约束席位（移除此席 t 会下降）"
+      },
+      {
+        "md_card_id": "A2AR-MD-13",
+        "cid": "SCALE-017223",
+        "source_short": "生成",
+        "CNN_VS": 7.4944,
+        "selection_reason": "覆盖下限约束席位（移除此席 t 会下降）"
+      },
+      {
+        "md_card_id": "A2AR-MD-14",
+        "cid": "MCULE-5129094733",
+        "source_short": "目录",
+        "CNN_VS": 7.3796,
+        "selection_reason": "覆盖下限约束席位（移除此席 t 会下降）"
+      },
+      {
+        "md_card_id": "A2AR-MD-15",
+        "cid": "ZINC000575414237",
+        "source_short": "目录",
+        "CNN_VS": 7.3685,
+        "selection_reason": "覆盖下限约束席位（移除此席 t 会下降）"
+      },
+      {
+        "md_card_id": "A2AR-MD-16",
+        "cid": "ZINC000013731712",
+        "source_short": "目录",
+        "CNN_VS": 7.3069,
+        "selection_reason": "覆盖下限约束席位（移除此席 t 会下降）"
+      },
+      {
+        "md_card_id": "A2AR-MD-17",
+        "cid": "ZINC000199480719",
+        "source_short": "目录",
+        "CNN_VS": 7.3068,
+        "selection_reason": "覆盖下限约束席位（移除此席 t 会下降）"
+      },
+      {
+        "md_card_id": "A2AR-MD-18",
+        "cid": "ZINC000019874364",
+        "source_short": "目录",
+        "CNN_VS": 7.3011,
+        "selection_reason": "覆盖下限约束席位（移除此席 t 会下降）"
+      },
+      {
+        "md_card_id": "A2AR-MD-19",
+        "cid": "ZINC000097680017",
+        "source_short": "目录",
+        "CNN_VS": 7.2576,
+        "selection_reason": "覆盖下限约束席位（移除此席 t 会下降）"
+      },
+      {
+        "md_card_id": "A2AR-MD-20",
+        "cid": "SCALE-103966",
+        "source_short": "生成",
+        "CNN_VS": 4.6587,
+        "selection_reason": "跨度端点席位（移除后跨度收窄）"
+      },
+      {
+        "md_card_id": "A2AR-MD-21",
+        "cid": "C09462894",
+        "source_short": "对照",
+        "CNN_VS": null,
+        "selection_reason": "阴性对照（固定 2 位，不占候选名额）"
+      },
+      {
+        "md_card_id": "A2AR-MD-22",
+        "cid": "C60359994",
+        "source_short": "对照",
+        "CNN_VS": null,
+        "selection_reason": "阴性对照（固定 2 位，不占候选名额）"
+      }
+    ],
+    "source_counts": {
+      "SOP_5（目录 ZINC/MCULE）": 13,
+      "SOP_ML_run05（ML 生成 SCALE-）": 7
+    },
+    "md_cost": {
+      "level1_10ns_cardday_per_molecule": 0.1,
+      "level2_150ns_cardday_per_molecule": 1.5,
+      "level1_total_cardday": 2.0
+    }
+  },
+  "synth_access": {
+    "policy": "只作标注列，不参与筛选或加权",
+    "triage_counts": {
+      "绿 常规合成": 16,
+      "黄 需确认路线": 4
+    },
+    "note": "两分支的 09_synth_access 口径与 SOP_5 步骤 16 逐条一致；绿带是「启发式未报警」，不是「确认好合成」"
+  },
+  "caveats": [
+    "跨来源 CNN_VS 不可直接比：SOP_5 池是目录池按 CNN_VS 截断出的 top-4,990（下限 6.554），ML 池是生成库全范围（0.963–8.536）——见 sensitivity 对照",
+    "名册排序是「合并池内按本层目标函数最优」，不是「这 20 个比落选的 13 个更好」",
+    "合并后的 CNN_VS 跨度 3.5015 远大于 SOP_5 单链登记值 0.7337，差量全部来自生成侧池未被截断（最小 CNN_VS 4.659 的 SCALE-103966 是跨度端点席位）；这不是「更好的批次」，是合并把两条链的量程差异带进来了",
+    "hERG 只是单一模型的分类线，只能说「在 ADMET-AI 口径下过门」；第二模型不过门者已保留并标注「模型依赖」，本层不产生安全性结论",
+    "ML 生成分子无实验数据；目录来源不等于现货可得",
+    "2 个共用阴性对照是 DUD-E 诱饵，只作参照，不占候选名额",
+    "本层是机时分配层，不产生有效性结论；MD 后若需换人须改规则并重跑整链"
+  ],
+  "toolchain": {
+    "scipy": "1.15.3",
+    "numpy": "2.4.6",
+    "pandas": "2.3.3",
+    "timestamp_policy": "不写时间戳，保证同一份输入两次运行输出逐字节一致"
+  }
+}

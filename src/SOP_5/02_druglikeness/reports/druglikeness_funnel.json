@@ -1,0 +1,46 @@
+{
+  "funnel": {
+    "0_去重后池": 4990,
+    "1_硬门剔除": 390,
+    "2_PAINS0_Ro5Veber零违规": 4600,
+    "3_QED>=0.50": 3228,
+    "3_QED>=0.60": 2120,
+    "3_QED>=0.40": 4011
+  },
+  "attribution": {
+    "pains_fail": 0,
+    "ro5_fail": 304,
+    "veber_fail": 107,
+    "ro5_fail_only": 283,
+    "veber_fail_only": 86,
+    "pains_fail_only": 0
+  },
+  "violation_count_distribution": {
+    "Ro5": {
+      "1": 267,
+      "2": 37
+    },
+    "Veber": {
+      "1": 107
+    }
+  },
+  "annotation_columns_on_druglike_pool": {
+    "CNS MPO>=4": 3437,
+    "TPSA in [90,140]": 2461,
+    "CNS MPO>=4 且 TPSA∈[90,140]": 1608,
+    "Brenk 命中": 896,
+    "CNS MPO>=4（点估计）": 3437,
+    "CNS MPO>=4（80% 区间悲观界）": 3355,
+    "CNS MPO>=4（80% 区间乐观界）": 3505,
+    "cLogD 区间宽度中位": 0.375,
+    "cLogD 区间使 CNS MPO 变动>=0.1 的分子": 2700
+  },
+  "primary_qed": 0.5,
+  "coverage": {
+    "1_硬门剔除": 0.0782,
+    "2_PAINS0_Ro5Veber零违规": 0.9218,
+    "3_QED>=0.50": 0.6469,
+    "3_QED>=0.60": 0.4248,
+    "3_QED>=0.40": 0.8038
+  }
+}
